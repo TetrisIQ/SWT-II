@@ -1,0 +1,13 @@
+/bin/
+.classpath
+.project
+/.git/
+
+#IntelliJ IDEA
+/.idea/*
+.idea*
+*.iml
+
+*.class
+
+backup\.tar\.gz
