@@ -1,56 +1,48 @@
 package de.swt.inf.model;
 
 
-import com.j256.ormlite.field.DatabaseField;
-import com.j256.ormlite.table.DatabaseTable;
-import de.swt.inf.controler.Main;
 import de.swt.inf.database.TerminDao;
 
 import java.io.File;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
 
 public class Termin {
 
+    private int TERMIN_ID; //read only
 
-	private int TERMIN_ID; //read only
+    private String name;
 
-	private String name;
+    private Location location;
 
-	private Location location;
+    private String start;
 
-	private String start;
+    private String startTime;
 
-	private String startTime;
+    private String end;
 
-	private String end;
+    private String endTime;
 
-	private String endTime;
+    private boolean repeat;
 
-	private boolean repeat;
+    private String repeatTime;
 
-	private String repeatTime;
-
-	private boolean cancel;
+    private boolean cancel;
 
     private String CancelMsg;
 
     private String ort;
 
-	private File attachment;
+    private File attachment;
 
-	private boolean allDay;
+    private boolean allDay;
 
-	private String note;
+    private String note;
 
-	private int priority;
+    private int priority;
 
-	private boolean reminder;
+    private boolean reminder;
 
     private String reminderDate;
 
@@ -88,7 +80,9 @@ public class Termin {
     }
 
     //All SETTERS
-    public void setId(int id) {this.TERMIN_ID = id;}
+    public void setId(int id) {
+        this.TERMIN_ID = id;
+    }
 
     public void setName(String name) {
         this.name = name;
@@ -114,7 +108,9 @@ public class Termin {
         this.endTime = endTime;
     }
 
-    public void setRepeat(boolean repeat){this.repeat = repeat;}
+    public void setRepeat(boolean repeat) {
+        this.repeat = repeat;
+    }
 
     public void setRepeatTime(String repeatTime) {
         this.repeatTime = repeatTime;
@@ -128,7 +124,9 @@ public class Termin {
         CancelMsg = cancelMsg;
     }
 
-    public void setOrt(String ort){this.ort = ort;}
+    public void setOrt(String ort) {
+        this.ort = ort;
+    }
 
     public void setAttachment(File attachment) {
         this.attachment = attachment;
@@ -164,7 +162,9 @@ public class Termin {
 
 
     //ALL GETTER
-    public int getId() {return TERMIN_ID;}
+    public int getId() {
+        return TERMIN_ID;
+    }
 
     public String getName() {
         return name;
@@ -190,7 +190,9 @@ public class Termin {
         return endTime;
     }
 
-    public boolean getRepeat(){return repeat;}
+    public boolean getRepeat() {
+        return repeat;
+    }
 
     public String getRepeatTime() {
         return repeatTime;
@@ -204,7 +206,9 @@ public class Termin {
         return CancelMsg;
     }
 
-    public String getOrt(){ return ort;}
+    public String getOrt() {
+        return ort;
+    }
 
     public File getAttachment() {
         return attachment;
@@ -277,25 +281,40 @@ public class Termin {
      * @return true if valid - false if not valid
      */
     public static boolean isValid(String startString, String endString, String startTime, String endTime) {
-        boolean valid = true;
-        // 2018-01-18
-        // date format and compate works not so well
-        String[] start = startString.split("-");
-        String[] end = endString.split("-");
-        //test if year is eqals
-        if (start[0].equalsIgnoreCase(end[0])) {
-            if (start[1].equalsIgnoreCase(end[1])) {
-                if (start[2].equalsIgnoreCase(end[2])) {
-                    //test time
-                }
-            }
-        } else {
-            //year is not eqals
+        String[] s = startString.split("-");
+        String[] e = endString.split("-");
+        Integer[] i1 = new Integer[3];
+        Integer[] i2 = new Integer[3];
+        for (int i = 0; i < 3; i++) {
+            i1[i] = Integer.parseInt(s[i]);
+            i2[i] = Integer.parseInt(e[i]);
+            //System.err.println(i1[i] + " " + i2[i]);
         }
 
+        for (int i = 0; i < 3; i++) {
+            if (i1[i] < i2[i]) {
+                return true;
+            }
+        }
+        if (startString.equalsIgnoreCase(endString)) {
 
+            String[] sT = startTime.split(":");
+            String[] eT = endTime.split(":");
+            for (int i = 0; i < 2; i++) {
+                i1[i] = Integer.parseInt(sT[i]);
+                i2[i] = Integer.parseInt(eT[i]);
+                //System.err.println(i1[i] + " " + i2[i]);
+            }
 
-        return valid;
+            for (int i = 0; i < 2; i++) {
+                if (i1[i] < i2[i]) {
+                    return true;
+                }
+            }
+
+        }
+
+        return false;
     }
 
     /**

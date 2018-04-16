@@ -1,6 +1,5 @@
 package de.swt.inf.controler;
 
-import com.j256.ormlite.stmt.query.In;
 import de.swt.inf.database.*;
 import de.swt.inf.model.*;
 import org.springframework.stereotype.Controller;
@@ -9,11 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Controller

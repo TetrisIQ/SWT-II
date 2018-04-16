@@ -1,7 +1,5 @@
 package de.swt.inf.model;
 
-import com.j256.ormlite.field.DatabaseField;
-import com.j256.ormlite.table.DatabaseTable;
 import de.swt.inf.database.VCardDao;
 
 public class VCard {
