@@ -1,17 +1,11 @@
 package de.swt.inf.controler;
 
-import com.j256.ormlite.dao.Dao;
-import com.j256.ormlite.dao.DaoManager;
-import com.j256.ormlite.jdbc.JdbcConnectionSource;
-import de.swt.inf.database.*;
 import de.swt.inf.model.VCard;
 import de.swt.inf.model.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 

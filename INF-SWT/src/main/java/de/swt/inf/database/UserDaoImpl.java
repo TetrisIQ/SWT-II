@@ -26,7 +26,7 @@ public class UserDaoImpl implements UserDao {
 
 
     /**
-     * @see de.swt..inf.database.DaoUser#getUser(int)
+     *  de.swt..inf.database.DaoUser#getUser(int)
      */
     public User getUser(int USER_ID) {
         return null;
