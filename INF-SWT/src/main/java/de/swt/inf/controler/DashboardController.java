@@ -2,19 +2,13 @@ package de.swt.inf.controler;
 
 import de.swt.inf.database.DaoFactory;
 import de.swt.inf.database.TerminDao;
-import de.swt.inf.model.Termin;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import sun.util.calendar.BaseCalendar;
 
 import javax.servlet.http.HttpServletRequest;
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
 
 @Controller
 public class DashboardController {
