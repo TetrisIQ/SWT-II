@@ -14,9 +14,15 @@ public class TestTermin {
     public void TestIsValid(final String sD, final String eD, final String sT, final String eT) {
         //Test Day
         assertTrue(Termin.isValid(sD, eD, sT, eT));
-        if (!sD.equals(eD)) assertFalse(Termin.isValid(eD, sD, sT, eT));
+        if (!sD.equals(eD)) {
+            assertFalse(Termin.isValid(eD, sD, sT, eT));
+        }
 
         //Test Time
+        assertTrue(Termin.isValid(sD, eD, sT, eT));
+        if (!sT.equals(eT)  && sD.equals(eD))  {
+            assertFalse(Termin.isValid(sD, eD, eT, sT));
+        }
     }
 
 }

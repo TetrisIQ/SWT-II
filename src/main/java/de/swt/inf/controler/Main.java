@@ -1,5 +1,6 @@
 package de.swt.inf.controler;
 
+import de.swt.inf.database.Connector;
 import de.swt.inf.model.VCard;
 import de.swt.inf.model.*;
 import org.springframework.boot.SpringApplication;
@@ -59,7 +60,6 @@ public class Main {
         catch(SQLException ex){
             System.out.println(ex);
         }**/
-
         SpringApplication.run(Main.class, args);
     }
 
