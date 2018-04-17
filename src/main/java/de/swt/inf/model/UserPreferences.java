@@ -24,40 +24,40 @@ public class UserPreferences {
 
     }
 
-    public void setProvince(ProvinceEnum province) {
-        this.provinceEnum = province;
-    }
+    public void setUser (User user) { this.user = user;}
 
-    public void setUniversity(UniversityEnum university) {
-        this.universityEnum = university;
-    }
+    public void setProvince(ProvinceEnum province) { this.provinceEnum = province; }
 
-    public void setCourse(CourseEnum course) {
-        this.courseEnum = course;
-    }
+    public void setUniversity(UniversityEnum university) { this.universityEnum = university; }
+
+    public void setCourse(CourseEnum course) { this.courseEnum = course; }
 
     public void setSemester(int semester) {
         this.semester = semester;
     }
 
-    public void setMusic(MusicPreferencesEnum music) {
-        this.musicPreferencesEnum = music;
-    }
+    public void setMusic(MusicPreferencesEnum music) { this.musicPreferencesEnum = music; }
 
-    public void setGender(GenderEnum gender) {
-        this.genderEnum = gender;
-    }
+    public void setGender(GenderEnum gender) { this.genderEnum = gender; }
 
     public void setAge(int age) {
         this.age = age;
     }
 
+    public User getUser() { return user; }
+
     public ProvinceEnum getProvince() { return this.provinceEnum;}
 
     public UniversityEnum getUniversityEnum() { return this.universityEnum;}
 
-    public CourseEnum getCourseEnum() {
-        return this.courseEnum;
-    }
+    public CourseEnum getCourseEnum() { return this.courseEnum; }
+
+    public int getSemester(){ return this.semester;}
+
+    public MusicPreferencesEnum getMusicPreferencesEnum() { return this.musicPreferencesEnum; }
+
+    public GenderEnum getGenderEnum() { return this.genderEnum; }
+
+    public int getAge() { return this.age; }
 }
 
