@@ -25,15 +25,15 @@ public class UserPreferences {
     }
 
     public void setProvince(ProvinceEnum province) {
-        //TO DO
+        this.provinceEnum = province;
     }
 
     public void setUniversity(UniversityEnum university) {
-        //TO DO
+        this.universityEnum = university;
     }
 
     public void setCourse(CourseEnum course) {
-        //TO DO
+        this.courseEnum = course;
     }
 
     public void setSemester(int semester) {
@@ -41,11 +41,11 @@ public class UserPreferences {
     }
 
     public void setMusic(MusicPreferencesEnum music) {
-        //TO DO
+        this.musicPreferencesEnum = music;
     }
 
     public void setGender(GenderEnum gender) {
-        //TO DO
+        this.genderEnum = gender;
     }
 
     public void setAge(int age) {
