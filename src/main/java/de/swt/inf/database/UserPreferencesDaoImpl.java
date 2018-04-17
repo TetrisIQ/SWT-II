@@ -39,25 +39,45 @@ public class UserPreferencesDaoImpl implements UserPreferencesDao{
 
     @Override
     public boolean updateUserPreferences(UserPreferences userPreferences) {
-       /* try{
-            String query = "UPDATE userpreferences SET Province = '" + userPreferences.getProvince() + "', Color ='" + category.getColor() +
-                    "' WHERE CATEGORY_ID = '" + category.getId() + "'";
+      try{
+            String query = "UPDATE userpreferences SET Province = '" + userPreferences.getProvince() + "', University ='" + userPreferences.getUniversityEnum() +
+                "', Course = '" + userPreferences.getCourseEnum() + "' , Semester = '" + userPreferences.getSemester() + "', Music = '"
+                    + userPreferences.getMusicPreferencesEnum() + "' , Gender = '" + userPreferences.getGenderEnum() + "', Age = '" + userPreferences.getAge() +
+                    "' WHERE USER_PREFERENCES_ID = '" + userPreferences.getId() + "'";
             Statement statement = connection.createStatement();
             statement.executeQuery(query);
             return true;
         }catch (SQLException e){
             System.err.println(e);
-        }*/
+        }
         return false;
     }
 
-    @Override
-    public boolean deleteUserPreferences(UserPreferences userPreferences) {
+
+    public boolean deleteUserPreferences(int id) {
+        try{
+            String query = "DELETE FROM userpreferences WHERE USER_PREFERENCES_ID = " + id;
+            Statement statement = connection.createStatement();
+            statement.executeQuery(query);
+            return true;
+        }catch (SQLException e){
+            System.err.println(e);
+        }
         return false;
     }
 
     @Override
     public boolean addUserPreferences(UserPreferences userPreferences) {
-        return false;
-    }
+        try {
+            String query = "INSERT INTO userpreferences VALUES ('" + userPreferences.getProvince() + "', '" + userPreferences.getUniversityEnum() + "', '" +
+                    userPreferences.getCourseEnum() + "', '" + userPreferences.getSemester() + "', '" + userPreferences.getMusicPreferencesEnum() + "', '" +
+                    userPreferences.getGenderEnum() + "', '" + userPreferences.getAge() + "')";
+            Statement statement = connection.createStatement();
+            statement.executeQuery(query);
+            return true;
+        }catch(SQLException e){
+            System.err.println(e);
+        }
+            return false;
+        }
 }
