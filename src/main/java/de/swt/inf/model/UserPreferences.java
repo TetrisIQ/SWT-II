@@ -52,4 +52,12 @@ public class UserPreferences {
         this.age = age;
     }
 
+    public ProvinceEnum getProvince() { return this.provinceEnum;}
+
+    public UniversityEnum getUniversityEnum() { return this.universityEnum;}
+
+    public CourseEnum getCourseEnum() {
+        return this.courseEnum;
+    }
 }
+
