@@ -8,7 +8,7 @@ public interface UserPreferencesDao {
 
     public boolean updateUserPreferences(UserPreferences userPreferences);
 
-    public boolean deleteUserPreferences(UserPreferences userPreferences);
+    public boolean deleteUserPreferences(int id);
 
     public boolean addUserPreferences(UserPreferences userPreferences);
 }
