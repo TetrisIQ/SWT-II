@@ -1,6 +1,5 @@
 package de.swt.inf.model;
 
-import de.swt.inf.model.Termin;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
 import org.junit.Test;
@@ -11,10 +10,13 @@ import static org.junit.Assert.*;
 public class TestTermin {
 
     @Test
-    @Parameters({"22-10-17, 22-10-17, 10:00, 11:00"})
+    @Parameters({"22-10-17, 23-10-17, 10:00, 11:00", "22-10-17, 22-10-17, 10:00, 11:00"})
     public void TestIsValid(final String sD, final String eD, final String sT, final String eT) {
-        assertFalse(Termin.isValid(eD,sD,sT,eT));
+        //Test Day
         assertTrue(Termin.isValid(sD, eD, sT, eT));
+        if (!sD.equals(eD)) assertFalse(Termin.isValid(eD, sD, sT, eT));
+
+        //Test Time
     }
 
 }
