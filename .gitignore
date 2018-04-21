@@ -1,4 +1,3 @@
-
 # Created by https://www.gitignore.io/api/intellij+all
 
 ### Intellij+all ###
@@ -36,7 +35,7 @@ cmake-build-debug/
 
 # IntelliJ
 /out/
-/target/
+/target/*
 # mpeltonen/sbt-idea plugin
 .idea_modules/
 
