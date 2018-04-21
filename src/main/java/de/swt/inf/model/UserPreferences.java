@@ -59,5 +59,7 @@ public class UserPreferences {
     public GenderEnum getGenderEnum() { return this.genderEnum; }
 
     public int getAge() { return this.age; }
+
+    public int getId() { return this.USER_PREFERENCES_ID;}
 }
 
