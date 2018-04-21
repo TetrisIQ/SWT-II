@@ -162,6 +162,21 @@ CREATE TABLE `vcard` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
+-- Tabellenstruktur für Tabelle `UserPreferences`
+--
+
+CREATE TABLE `UserPreferences` (
+  `User_Preferences_ID` int(11) NOT NULL,
+  `province` varchar(45) NOT NULL,
+  `university` varchar(45) NOT NULL,
+  `course` varchar(45) NOT NULL,
+  `semester` int(11) NOT NULL,
+  `gender` varchar(45) NOT NULL,
+  `age` int(11) NOT NULL,
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+--
 -- Daten für Tabelle `vcard`
 --
 
