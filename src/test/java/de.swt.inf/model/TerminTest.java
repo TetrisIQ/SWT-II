@@ -7,7 +7,7 @@ import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
 
 @RunWith(JUnitParamsRunner.class)
-public class TestTermin {
+public class TerminTest {
 
     @Test
     @Parameters({"22-10-17, 23-10-17, 10:00, 11:00", "22-10-17, 22-10-17, 10:00, 11:00"})
