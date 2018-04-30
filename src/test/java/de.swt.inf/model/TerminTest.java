@@ -17,7 +17,7 @@ public class TerminTest {
         if (!sD.equals(eD)) {
             assertFalse(Termin.isValid(eD, sD, sT, eT));
         }
-        assertFalse(true);
+        //assertFalse(true);
 
         //Test Time
         assertTrue(Termin.isValid(sD, eD, sT, eT));
