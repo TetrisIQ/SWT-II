@@ -1,8 +1,9 @@
 # Karlender
 
-Stable:
 [![Travis branch](https://img.shields.io/travis/TetrisIQ/SWT-II.svg?branch=stable.svg&style=for-the-badge)](https://travis-ci.org/TetrisIQ/SWT-II)
-Dev: [![Travis branch](https://img.shields.io/travis/TetrisIQ/SWT-II.svg?branch=dev.svg&style=for-the-badge)](https://travis-ci.org/TetrisIQ/SWT-II)
+[![license](https://img.shields.io/github/license/mashape/apistatus.svg?style=for-the-badge)](http://github.com/tetrisiq/swt-II)
+
+# Karlender
 
 Karlender ist ein Kalender der Studenten der Fachhochschule Lübeck und der Uni Lübeck das Leben erleichtern sollte. Im Rahmen unseres Softwaretechnikprojekt ist die Idee und das Grundgerüst entstanden.
 
@@ -23,5 +24,5 @@ Siehe Projekt Reiter.
 
 ## About
 - Autoren: Siehe `AUTHORS` File
-- License: none
+- License: MIT
 - Website: none
