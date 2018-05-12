@@ -3,7 +3,7 @@
 
 ## Description
 
-Eine kurze beschreibung aller commits die in dem PR enthalten sind. Sowie welche änderungen sie mit diesem PR vorgenommen haben / welches featcher dazu gekommen ist.
+Eine kurze Beschreibung aller Commits die in dem PR enthalten sind, sowie welche Änderungen Sie mit diesem PR vorgenommen haben bzw. welcher Featcher dazu gekommen ist.
 
 
 ## Before & After Screenshots (optional)
@@ -27,10 +27,10 @@ Beschreibung der Hauptänderungen
 
 ## Todos
 
-Todos für einen erfolgreichen merge
+Todos für einen erfolgreichen Merge
 
 - [ ] Tests (J-Unit/Selenium)
-- [ ] Documentation
+- [ ] DoKumentation
 - [ ] Ich habe mich an den Richtlichen in der `Contrubute.md` und an den `Code of conduct` gehalten
 <!-- 
 - [X] Checked Box 
@@ -39,4 +39,4 @@ Todos für einen erfolgreichen merge
 
 ## Notes
 
-Möglerweise weitere hinweise oder Notizen
+Möglicherweise weitere Hinweise oder Notizen
