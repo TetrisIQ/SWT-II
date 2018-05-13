@@ -6,6 +6,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.Select;
 
 import static org.junit.Assert.assertEquals;
@@ -16,10 +18,24 @@ public class SeleniumTest {
     @Test
     public void SeleniumTest() {
 
-        //Pfad zum Chrome Driver
+        final ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.setBinary("/path/to/google-chrome-stable");
+        chromeOptions.addArguments("--headless");
+        chromeOptions.addArguments("--disable-gpu");
+
+        final DesiredCapabilities dc = new DesiredCapabilities();
+        dc.setJavascriptEnabled(true);
+        dc.setCapability(
+                ChromeOptions.CAPABILITY, chromeOptions
+        );
+
+        WebDriver driver = new ChromeDriver(dc);
+
+        /* //Pfad zum Chrome Driver
         System.setProperty("webdriver.chrome.driver", "C:/Users/Nina/Downloads/chromedriver_win32/chromedriver.exe");
 
         WebDriver driver = new ChromeDriver();
+       */
         //URL zum Kalender
         driver.get("localhost:8080/termin");
         //Browserfenster maximieren
