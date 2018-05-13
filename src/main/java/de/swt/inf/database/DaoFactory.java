@@ -6,9 +6,15 @@ import java.sql.SQLException;
 
 public class DaoFactory {
 
-    private static String dbDriver = "org.mariadb.jdbc.Driver";
-    private static String dbUrl = "jdbc:mysql://localhost:3306/infswt";
-    private static String username = "root";
+    /*  private static String dbDriver = "org.mariadb.jdbc.Driver";
+        private static String dbUrl = "jdbc:mysql://localhost:3306/infswt";
+        private static String username = "root";
+        private static String password = "";
+    */
+
+    private static String dbDriver = "org.h2.Driver";
+    private static String dbUrl = "jdbc:h2:mem:testdb";
+    private static String username = "sa";
     private static String password = "";
 
 
