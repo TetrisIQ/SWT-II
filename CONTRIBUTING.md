@@ -41,6 +41,6 @@ Beispiele für inakzeptables Verhalten
 
 Um ein erfolgreichen einen PullRequest zu stellen, müssen folgende Punkte beachtet werden. 
 * [J-Unit](https://junit.org/junit4/) Tests (in der Version 4) für die neuen Komponenten nach dem Verfahren der Grenzwertanalyse müssen vorhanden [about Grenzwertanalyse](https://de.wikipedia.org/wiki/Dynamisches_Software-Testverfahren#Grenzwertanalyse) 
-* Für neu implementierte Userstorys muss ein UI Test in [Selenium](https://www.seleniumhq.org/) geschrieben werden. 
+* Für neu implementierte Userstorys müssen UI Test in [Selenium](https://www.seleniumhq.org/) geschrieben werden. 
 * Es muss immer der Normalablauf und alle im Lastenheft behandelten Atlernativabläufe getestet werden.
 * alle Tests müssen auf einem HeadlessCI über [Maven](https://maven.apache.org/) ausführbar sein!  
