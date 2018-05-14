@@ -36,17 +36,24 @@ public class SeleniumTest {
 
         WebDriver driver = new ChromeDriver();
        */
-        
+
         //Browserfenster maximieren
         driver.manage().window().maximize();
         //Termin automatisch erstellen
-        driver.findElement(By.name("name")).sendKeys("Vorlesung");
-        driver.findElement(By.name("startT")).sendKeys("13:00");
-        driver.findElement(By.name("start")).sendKeys("20.05.2018");
-        driver.findElement(By.name("ort")).sendKeys("Lübeck");
-        driver.findElement(By.name("endT")).sendKeys("20:00");
-        driver.findElement(By.name("end")).sendKeys("20.05.2018");
-        WebElement element = driver.findElement(By.name("speichern"));
+        WebElement element = driver.findElement(By.name("name"));
+        element = driver.findElement(By.name("name"));
+        element.sendKeys("Vorlesung");
+        element = driver.findElement(By.name("startT"));
+        element.sendKeys("13:00");
+        element = driver.findElement(By.name("start"));
+        element.sendKeys("20.05.2018");
+        element = driver.findElement(By.name("ort"));
+        element.sendKeys("Lübeck");
+        element = driver.findElement(By.name("endT"));
+        element.sendKeys("20:00");
+        element = driver.findElement(By.name("end"));
+        element.sendKeys("20.05.2018");
+        element = driver.findElement(By.name("speichern"));
         element.click();
 
         //jUnit Tests
