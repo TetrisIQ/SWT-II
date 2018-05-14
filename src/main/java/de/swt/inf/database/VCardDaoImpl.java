@@ -94,7 +94,7 @@ public class VCardDaoImpl implements VCardDao {
                     + "', TelNr ='" + vCard.getTelNr() + "', Office ='" + vCard.getOffice() + "', Title ='" + vCard.getTitle()
                     + "', Email ='" + vCard.getEmail() + "', Note ='" + vCard.getNote() + "' WHERE VCARD_ID ='" + vCard.getId() +"'";
             Statement statement = connection.createStatement();
-            statement.executeQuery(query);
+            statement.executeUpdate(query);
             return true;
         }catch (SQLException e){
             System.err.println(e);
@@ -106,7 +106,7 @@ public class VCardDaoImpl implements VCardDao {
         try{
             String query = "DELETE FROM vcard WHERE VCARD_ID = " + vCard.getId();
             Statement statement = connection.createStatement();
-            statement.executeQuery(query);
+            statement.execute(query);
             return true;
         }catch (SQLException e){
             System.err.println(e);
@@ -118,7 +118,7 @@ public class VCardDaoImpl implements VCardDao {
         try{
             String query = "DELETE FROM VCard WHERE VCARD_ID = " + id;
             Statement statement = connection.createStatement();
-            statement.executeQuery(query);
+            statement.execute(query);
             return true;
         }catch (SQLException e){
             System.err.println(e);
@@ -132,7 +132,7 @@ public class VCardDaoImpl implements VCardDao {
                     vCard.getLastname() + "', '" + vCard.getTelNr() + "', '" + vCard.getOffice() + "', '" +
                     vCard.getTitle() + "', '" + vCard.getEmail() + "', '" + vCard.getNote() + "')";
             Statement statement = connection.createStatement();
-            statement.executeQuery(query);
+            statement.execute(query);
             return true;
         }catch (SQLException e){
             System.err.println(e);

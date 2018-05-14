@@ -45,7 +45,7 @@ public class UserPreferencesDaoImpl implements UserPreferencesDao{
                     + userPreferences.getMusicPreferencesEnum() + "' , Gender = '" + userPreferences.getGenderEnum() + "', Age = '" + userPreferences.getAge() +
                     "' WHERE USER_PREFERENCES_ID = '" + userPreferences.getId() + "'";
             Statement statement = connection.createStatement();
-            statement.executeQuery(query);
+            statement.executeUpdate(query);
             return true;
         }catch (SQLException e){
             System.err.println(e);
@@ -58,7 +58,7 @@ public class UserPreferencesDaoImpl implements UserPreferencesDao{
         try{
             String query = "DELETE FROM userpreferences WHERE USER_PREFERENCES_ID = " + id;
             Statement statement = connection.createStatement();
-            statement.executeQuery(query);
+            statement.execute(query);
             return true;
         }catch (SQLException e){
             System.err.println(e);
@@ -73,7 +73,7 @@ public class UserPreferencesDaoImpl implements UserPreferencesDao{
                     userPreferences.getCourseEnum() + "', '" + userPreferences.getSemester() + "', '" + userPreferences.getMusicPreferencesEnum() + "', '" +
                     userPreferences.getGenderEnum() + "', '" + userPreferences.getAge() + "')";
             Statement statement = connection.createStatement();
-            statement.executeQuery(query);
+            statement.execute(query);
             return true;
         }catch(SQLException e){
             System.err.println(e);

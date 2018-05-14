@@ -27,13 +27,14 @@ public class TerminDaoImpl implements TerminDao {
             int reminder = termin.getReminder() == true ? 1 : 0;
 
             String query = "UPDATE termin SET Name = '" + termin.getName() +"', Start = '" + termin.getStart() +
-                    "', StartZeit = '" + termin.getStartTime() + "', Ende = '" + termin.getEnd() +"', EndeZeit ='"+
-                    termin.getEndTime() + "', allDay = '" + allDay + "', Ort = '" + termin.getOrt() +
+                    "', StartZeit = '" + termin.getStartTime() + ":00', Ende = '" + termin.getEnd() +"', EndeZeit ='"+
+                    termin.getEndTime() + ":00', allDay = '" + allDay + "', Ort = '" + termin.getOrt() +
                     "', RepeatBool = '" + repeat + "',RepeatTime = '" + termin.getRepeatTime() + "', Cancel = '" + cancel + "', Attachement = '" +
                     termin.getAttachment() + "', Note = '" + termin.getNote() + "', Priority = '" + termin.getPriority() +
                     "', Reminder = '" + reminder + "', VCard = '1', CancelMsg = '" +
                     termin.getCancelMsg() + "', ReminderDate = '" + termin.getReminderDate() + "', ReminderTime = '" + termin.getReminderTime() + "' WHERE TERMIN_ID = '" +
                     termin.getId() + "'";
+            query = query.replaceAll("'null'", "NULL");
             Statement statement  = connection.createStatement();
             statement.executeUpdate(query);
             return true;
@@ -49,13 +50,11 @@ public class TerminDaoImpl implements TerminDao {
         try{
             String query = "DELETE FROM termin WHERE TERMIN_ID = "+ termin.getId();
             Statement statement = connection.createStatement();
-            statement.executeUpdate(query);
+            statement.execute(query);
             return true;
         }catch(SQLException ex){
             System.err.println(ex);
         }
-
-
         return false;
     }
 
@@ -63,12 +62,11 @@ public class TerminDaoImpl implements TerminDao {
         try{
             String query = "DELETE FROM termin WHERE TERMIN_ID = "+ id;
             Statement statement = connection.createStatement();
-            statement.executeUpdate(query);
+            statement.execute(query);
             return true;
         }catch(SQLException ex){
             System.err.println(ex);
         }
-
 
         return false;
     }
@@ -82,13 +80,14 @@ public class TerminDaoImpl implements TerminDao {
             int reminder = termin.getReminder() == true ? 1 : 0;
 
 			String query = "INSERT INTO termin VALUES ('" + termin.getId() + "', '"+ termin.getName() + "', '" +
-                    termin.getStart() + "', '" + termin.getStartTime() + "', '" + termin.getEnd() + "', '" +
-                    termin.getEndTime() + "', '" + allDay + "', '" + termin.getOrt() + "', '" +
+                    termin.getStart() + "', '" + termin.getStartTime() + ":00', '" + termin.getEnd() + "', '" +
+                    termin.getEndTime() + ":00', '" + allDay + "', '" + termin.getOrt() + "', '" +
                     repeat + "', '" + termin.getRepeatTime() +"', '" + cancel + "', '" +
                     termin.getAttachment() + "', '" + termin.getNote() + "', '" + termin.getPriority() + "', '" +
                     reminder + "',' 1','" + termin.getCancelMsg() + "', '" + termin.getReminderDate() + "', '" + termin.getReminderTime() + "')";
+			query = query.replaceAll("'null'", "NULL");
 			Statement statement = this.connection.createStatement();
-			statement.executeQuery(query);
+			statement.execute(query);
 		}
 		catch(SQLException ex){
             System.err.println(ex);
@@ -125,7 +124,15 @@ public class TerminDaoImpl implements TerminDao {
             //tempTermin.setVcard(rs.getInt("VCard"));
             tempTermin.setCancelMsg(rs.getString("CancelMsg"));
             tempTermin.setReminderDate(String.valueOf(rs.getDate("ReminderDate")));
-            tempTermin.setReminderTime(rs.getTime("ReminderTime").toString().substring(0,5));
+
+            String rtime = "";
+            try {
+                rtime = rs.getTime("ReminderTime").toString().substring(0, 5);
+            }
+            catch (NullPointerException ex) {
+                rtime = "NULL";
+            }
+            tempTermin.setReminderTime(rtime);
 
 			return tempTermin;
 		}
@@ -164,7 +171,16 @@ public class TerminDaoImpl implements TerminDao {
             //tempTermin.setVcard(rs.getInt("VCard"));
             tempTermin.setCancelMsg(rs.getString("CancelMsg"));
             tempTermin.setReminderDate(String.valueOf(rs.getDate("ReminderDate")));
-            tempTermin.setReminderTime(rs.getTime("ReminderTime").toString().substring(0,5));
+
+
+            String rtime = "";
+            try {
+                rtime = rs.getTime("ReminderTime").toString().substring(0, 5);
+            }
+            catch (NullPointerException ex) {
+                rtime = "NULL";
+            }
+            tempTermin.setReminderTime(rtime);
 
             return tempTermin;
         }
@@ -204,7 +220,17 @@ public class TerminDaoImpl implements TerminDao {
                 //tempTermin.setVcard(rs.getInt("VCard"));
                 tempTermin.setCancelMsg(rs.getString("CancelMsg"));
                 tempTermin.setReminderDate(String.valueOf(rs.getDate("ReminderDate")));
-                tempTermin.setReminderTime(rs.getTime("ReminderTime").toString().substring(0,5));
+
+                String rtime = "";
+                try {
+                    rtime = rs.getTime("ReminderTime").toString().substring(0, 5);
+                }
+                catch (NullPointerException ex) {
+                    rtime = "NULL";
+                }
+
+                tempTermin.setReminderTime(rtime);
+
                 alleTermine.add(tempTermin);
             }
             return alleTermine;

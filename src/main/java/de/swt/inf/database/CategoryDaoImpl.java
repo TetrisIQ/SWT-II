@@ -95,7 +95,7 @@ public class CategoryDaoImpl implements CategoryDao {
             String query = "UPDATE category SET Name = '" + category.getName() + "', Color ='" + category.getColor() +
                     "' WHERE CATEGORY_ID = '" + category.getId() + "'";
             Statement statement = connection.createStatement();
-            statement.executeQuery(query);
+            statement.executeUpdate(query);
             return true;
         }catch (SQLException e){
             System.err.println(e);
@@ -108,7 +108,7 @@ public class CategoryDaoImpl implements CategoryDao {
         try{
             String query = "DELETE FROM category WHERE CATEGORY_ID = " + id;
             Statement statement = connection.createStatement();
-            statement.executeQuery(query);
+            statement.execute(query);
             return true;
         }catch (SQLException e){
             System.err.println(e);
@@ -120,7 +120,7 @@ public class CategoryDaoImpl implements CategoryDao {
         try{
             String query = "DELETE FROM category WHERE CATEGORY_ID = " + category.getId();
             Statement statement = connection.createStatement();
-            statement.executeQuery(query);
+            statement.execute(query);
             return true;
         }catch (SQLException e){
             System.err.println(e);
@@ -133,7 +133,7 @@ public class CategoryDaoImpl implements CategoryDao {
             String query = "INSERT INTO category VALUES ('" + category.getId() + "', '" + category.getName() + "', '" +
                     category.getColor() + "', '" + category.getIcon() + "')";
             Statement statement = connection.createStatement();
-            statement.executeQuery(query);
+            statement.execute(query);
             return true;
         }catch(SQLException e){
             System.err.println(e);
