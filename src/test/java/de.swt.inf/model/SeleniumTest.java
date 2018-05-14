@@ -36,8 +36,7 @@ public class SeleniumTest {
 
         WebDriver driver = new ChromeDriver();
        */
-        //URL zum Kalender
-        driver.get("localhost:8080/termin");
+        
         //Browserfenster maximieren
         driver.manage().window().maximize();
         //Termin automatisch erstellen
