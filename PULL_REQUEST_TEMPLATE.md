@@ -30,7 +30,7 @@ Beschreibung der Hauptänderungen
 Todos für einen erfolgreichen Merge
 
 - [ ] Tests (J-Unit/Selenium)
-- [ ] DoKumentation
+- [ ] Dokumentation
 - [ ] Ich habe mich an den Richtlichen in der `Contrubute.md` und an den `Code of conduct` gehalten
 <!-- 
 - [X] Checked Box 
