@@ -5,20 +5,26 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DaoFactory {
+    public static boolean test = false;
 
-    /*  private static String dbDriver = "org.mariadb.jdbc.Driver";
-        private static String dbUrl = "jdbc:mysql://localhost:3306/infswt";
-        private static String username = "root";
-        private static String password = "";
-    */
-
-    private static String dbDriver = "org.h2.Driver";
-    private static String dbUrl = "jdbc:h2:mem:testdb";
-    private static String username = "sa";
+    private static String dbDriver = "";
+    private static String dbUrl = "";
+    private static String username = "";
     private static String password = "";
 
 
     public static Connection getConnection(){
+        if (test) {
+            dbDriver = "org.h2.Driver";
+            dbUrl = "jdbc:h2:mem:testdb";
+            username = "sa";
+            password = "";
+        } else {
+            dbDriver = "org.mariadb.jdbc.Driver";
+            dbUrl = "jdbc:mysql://localhost:3306/infswt";
+            username = "root";
+            password = "";
+        }
         try{
             Class.forName(dbDriver);
             Connection dbConnection = DriverManager.getConnection(dbUrl,username,password);

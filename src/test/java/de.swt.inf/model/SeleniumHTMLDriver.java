@@ -1,5 +1,8 @@
 package de.swt.inf.model;
 
+import de.swt.inf.database.DaoFactory;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -10,6 +13,16 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import static org.junit.Assert.assertEquals;
 
 public class SeleniumHTMLDriver {
+
+    @BeforeClass
+    public static void beforeClass() {
+        DaoFactory.test = true;
+    }
+
+    @AfterClass
+    public static void afterClass() {
+        DaoFactory.test = false;
+    }
 
     @Test
     public void SeleniumTest() {
