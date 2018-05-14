@@ -20,10 +20,10 @@ public class DaoFactory {
             username = "sa";
             password = "";
         } else {
-            dbDriver = "org.mariadb.jdbc.Driver";
-            dbUrl = "jdbc:mysql://localhost:3306/infswt";
-            username = "root";
-            password = "";
+            dbDriver= "org.h2.Driver";
+            dbUrl = "jdbc:h2:file:./src/main/resources/test";
+            username = "sa";
+            password = "sa";
         }
         try{
             Class.forName(dbDriver);
