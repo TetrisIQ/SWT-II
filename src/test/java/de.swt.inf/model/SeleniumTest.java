@@ -1,35 +1,35 @@
 package de.swt.inf.model;
 
 
+import de.swt.inf.database.DaoFactory;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import static org.junit.Assert.assertEquals;
 
 public class SeleniumTest {
 
+    @BeforeClass
+    public static void beforeClass() {
+        DaoFactory.test = true;
+    }
+
+    @AfterClass
+    public static void afterClass() {
+        DaoFactory.test = false;
+    }
 
     @Test
     public void SeleniumTest() {
 
-        final ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.setBinary("/path/to/google-chrome-stable");
-        chromeOptions.addArguments("--headless");
-        chromeOptions.addArguments("--disable-gpu");
+        WebDriver driver = new HtmlUnitDriver();
 
-        final DesiredCapabilities dc = new DesiredCapabilities();
-        dc.setJavascriptEnabled(true);
-        dc.setCapability(
-                ChromeOptions.CAPABILITY, chromeOptions
-        );
-
-        WebDriver driver = new ChromeDriver(dc);
+        driver.navigate().to("http://localhost:8080/termin");
 
         /* //Pfad zum Chrome Driver
         System.setProperty("webdriver.chrome.driver", "C:/Users/Nina/Downloads/chromedriver_win32/chromedriver.exe");
@@ -47,10 +47,8 @@ public class SeleniumTest {
         driver.findElement(By.name("ort")).sendKeys("Lübeck");
         driver.findElement(By.name("endT")).sendKeys("20:00");
         driver.findElement(By.name("end")).sendKeys("20.05.2018");
-        driver.findElement(By.name("repeat")).click();
-        Select sel = new Select(driver.findElement(By.name("repeatTime")));
-        sel.selectByIndex(2);
-        driver.findElement(By.name("speichern")).sendKeys(Keys.ENTER);
+        WebElement element = driver.findElement(By.name("speichern"));
+        element.click();
 
         //jUnit Tests
         assertEquals("Dashboard", driver.getTitle());
