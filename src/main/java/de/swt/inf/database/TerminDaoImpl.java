@@ -79,7 +79,7 @@ public class TerminDaoImpl implements TerminDao {
             int cancel = termin.getCancel() == true ? 1 : 0;
             int reminder = termin.getReminder() == true ? 1 : 0;
 
-			String query = "INSERT INTO termin VALUES ('" + termin.getId() + "', '"+ termin.getName() + "', '" +
+			String query = "INSERT INTO termin VALUES ('null', '"+ termin.getName() + "', '" +
                     termin.getStart() + "', '" + termin.getStartTime() + ":00', '" + termin.getEnd() + "', '" +
                     termin.getEndTime() + ":00', '" + allDay + "', '" + termin.getOrt() + "', '" +
                     repeat + "', '" + termin.getRepeatTime() +"', '" + cancel + "', '" +
