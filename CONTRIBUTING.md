@@ -44,3 +44,11 @@ Um ein erfolgreichen einen PullRequest zu stellen, müssen folgende Punkte beach
 * Für neu implementierte Userstorys müssen UI Test in [Selenium](https://www.seleniumhq.org/) geschrieben werden. 
 * Es muss immer der Normalablauf und alle im Lastenheft behandelten Atlernativabläufe getestet werden.
 * alle Tests müssen auf einem HeadlessCI über [Maven](https://maven.apache.org/) ausführbar sein!  
+
+### Definition of Done
+* Die Akzeptanzkriterien der User Story sind erfüllt
+* Alle Tests sind geschrieben und laufen grün
+* Der Code ist im Repository erfolgreich eingecheckt
+* Ein Code Review wurde durchgeführt 
+* Coding Guidelines und Standards wurden eingehalten
+* Es sind keine kritischen Bugs offen
