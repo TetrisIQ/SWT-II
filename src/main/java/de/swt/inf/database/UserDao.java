@@ -11,4 +11,10 @@ public interface UserDao {
     public abstract boolean deleteUser(int USER_ID);
 
     public abstract boolean addUser(User user);
+
+    public User getUserByName(String username);
+
+    public boolean isEmailInUse(String Email);
+
+
 }

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8"/>
+    <title>Benutzer Registrierung</title>
+</head>
+<body>
+<form method="post">
+
+    <p>Vornamen: <input th:value="${Vname}" title="Name" type="text" name="Vname" required="required" class="form-control"
+                    aria-describedby="txtName"/>
+    </p>
+    <p>Nachname: <input th:value="${Nname}" title="Name" type="text" name="Nname" required="required" class="form-control"
+                        aria-describedby="txtName"/>
+    </p>
+    <p>Benutzername: <input th:value="${username}" title="Username" type="text" name="username" required="required" class="form-control"
+                    aria-describedby="txtName"/>
+        <b th:text="${userW}"></b>
+    </p>
+    <p>Email Adresse: <input th:value="${email}" title="Email" type="text" name="email" required="required" class="form-control"
+                    aria-describedby="txtName"/>
+        <b th:text="${emailW}"></b>
+    </p>
+    <p>Passwort: <input title="Passwort" type="password" name="password" required="required" class="form-control"
+                    aria-describedby="txtName"/>
+        <b th:text="${passwordW}"></b>
+
+    </p>
+    <p>Passwort bestätigen: <input title="PasswordConfirm" type="password" name="passwordconfirm" required="required" class="form-control"
+                    aria-describedby="txtName"/>
+    </p>
+
+    <button type="submit">Daten absenden</button>
+</form>
+
+</body>
+</html>

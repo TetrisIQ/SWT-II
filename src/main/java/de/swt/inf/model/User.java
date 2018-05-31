@@ -4,6 +4,10 @@ import de.swt.inf.database.UserDao;
 
 public class User {
 
+    public static final String passwordRegex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[,.!%$#_&@])(?=\\S+$).{6,}$";
+
+    public static final String userNameRegex = ".{6,}"; //TODO: Richtign Regex für Username
+
     private int USER_ID;
 
     private String username;

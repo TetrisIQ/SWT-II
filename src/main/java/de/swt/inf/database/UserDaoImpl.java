@@ -24,12 +24,18 @@ public class UserDaoImpl implements UserDao {
         return false;
     }
 
-
     /**
      *  de.swt..inf.database.DaoUser#getUser(int)
      */
     public User getUser(int USER_ID) {
         return null;
+    }
+
+    public User getUserByName(String username) {return null;}
+
+    @Override
+    public boolean isEmailInUse(String Email) {
+        return false;
     }
 
 }
