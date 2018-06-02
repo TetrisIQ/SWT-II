@@ -4,10 +4,121 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Benutzer Registrierung</title>
+
+    <!-- Bootstrap -->
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <style>
+        body {
+            padding-top: 80px; /* 60px to make the container go all the way to the bottom of the topbar */
+            padding-left: 80px;
+            padding-right: 80px;
+            padding-bottom: 80px;
+        }
+
+        .mt-50 {
+            margin-top: 50px;
+        }
+
+        .mt-10 {
+            margin-top: 10px;
+        }
+
+        .mb-10 {
+            margin-bottom: 10px;
+        }
+
+        .in-height {
+            height: 100px;
+        }
+
+    </style>
 </head>
 <body>
-<form method="post">
 
+
+<form method="post">
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-7">
+            <div class="panel panel-default">
+                <div class="panel-heading text-center"><h4>Benutzerregistrierung</h4></div>
+                <div class="row mt-10">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8">
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-addon" id="txtVorname">Vorname</span>
+                            <input title="Vorname" name="Vname" required="required" class="form-control" aria-describedby="txtVorname"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-10">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8">
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-addon" id="txtNachname">Nachname</span>
+                            <input title="Nachname" name="Nname" required="required" class="form-control" aria-describedby="txtNachname"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-10">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8">
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-addon" id="txtUsername">Benutzername</span>
+                            <input title="Benutzername" name="username" required="required" class="form-control" aria-describedby="txtUsername"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-10">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8">
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-addon" id="txtEmail">Email-Adresse</span>
+                            <input title="Email" name="email" required="required" class="form-control" aria-describedby="txtEmail"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-10">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8">
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-addon" id="txtPassword">Passwort</span>
+                            <input title="Passwort" name="password" required="required" class="form-control" aria-describedby="txtPassword"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-10">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8">
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-addon" id="txtPasswordConfirm">Passwort bestätigen</span>
+                            <input title="PasswortConfirm" name="passwordconfirm" required="required" class="form-control" aria-describedby="txtPasswordConfirm"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-10 mb-10">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-4">
+                        <a href="#" class="btn btn-default btn-block" role="button">Abbrechen</a>
+                    </div>
+                    <!--<div class="col-md-1"></div>-->
+                    <div class="col-md-4">
+                        <input type="submit" class="btn btn-default btn-block" value="Registrierung abschicken"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+<!--
     <p>Vornamen: <input th:value="${Vname}" title="Name" type="text" name="Vname" required="required" class="form-control"
                     aria-describedby="txtName"/>
     </p>
@@ -31,7 +142,7 @@
                     aria-describedby="txtName"/>
     </p>
 
-    <button type="submit">Daten absenden</button>
+    <button type="submit">Daten absenden</button> -->
 </form>
 
 </body>
