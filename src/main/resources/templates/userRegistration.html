@@ -51,7 +51,7 @@
                     <div class="col-md-8">
                         <div class="input-group input-group-lg">
                             <span class="input-group-addon" id="txtVorname">Vorname</span>
-                            <input title="Vorname" name="Vname" required="required" class="form-control" aria-describedby="txtVorname"/>
+                                <input th:value="${Vname}" title="Vorname" type="text" name="Vname" required="required" class="form-control" aria-describedby="txtName"/>
                         </div>
                     </div>
                 </div>
@@ -60,7 +60,7 @@
                     <div class="col-md-8">
                         <div class="input-group input-group-lg">
                             <span class="input-group-addon" id="txtNachname">Nachname</span>
-                            <input title="Nachname" name="Nname" required="required" class="form-control" aria-describedby="txtNachname"/>
+                            <input th:value="${Nname}" title="Nachname" type="text" name="Nname" required="required" class="form-control" aria-describedby="txtName"/>
                         </div>
                     </div>
                 </div>
@@ -69,7 +69,7 @@
                     <div class="col-md-8">
                         <div class="input-group input-group-lg">
                             <span class="input-group-addon" id="txtUsername">Benutzername</span>
-                            <input title="Benutzername" name="username" required="required" class="form-control" aria-describedby="txtUsername"/>
+                            <input th:value="${username}" title="Username" type="text" name="username" required="required" class="form-control" aria-describedby="txtName"/> <b th:text="${userW}"></b>
                         </div>
                     </div>
                 </div>
@@ -78,7 +78,7 @@
                     <div class="col-md-8">
                         <div class="input-group input-group-lg">
                             <span class="input-group-addon" id="txtEmail">Email-Adresse</span>
-                            <input title="Email" name="email" required="required" class="form-control" aria-describedby="txtEmail"/>
+                            <input th:value="${email}" title="Email" type="text" name="email" required="required" class="form-control" aria-describedby="txtEmail"/> <b th:text="${emailW}"></b>
                         </div>
                     </div>
                 </div>
@@ -87,7 +87,7 @@
                     <div class="col-md-8">
                         <div class="input-group input-group-lg">
                             <span class="input-group-addon" id="txtPassword">Passwort</span>
-                            <input title="Passwort" name="password" required="required" class="form-control" aria-describedby="txtPassword"/>
+                            <input title="Passwort" type="password" name="password" required="required" class="form-control" aria-describedby="txtName"/> <b th:text="${passwordW}"></b>
                         </div>
                     </div>
                 </div>
@@ -96,7 +96,7 @@
                     <div class="col-md-8">
                         <div class="input-group input-group-lg">
                             <span class="input-group-addon" id="txtPasswordConfirm">Passwort bestätigen</span>
-                            <input title="PasswortConfirm" name="passwordconfirm" required="required" class="form-control" aria-describedby="txtPasswordConfirm"/>
+                            <input title="PasswordConfirm" type="password" name="passwordconfirm" required="required" class="form-control" aria-describedby="txtName"/>
                         </div>
                     </div>
                 </div>
@@ -107,7 +107,7 @@
                     </div>
                     <!--<div class="col-md-1"></div>-->
                     <div class="col-md-4">
-                        <input type="submit" class="btn btn-default btn-block" value="Registrierung abschicken"/>
+                        <input name="submit" type="submit" class="btn btn-default btn-block" value="Registrierung abschicken"/>
                     </div>
                 </div>
             </div>
@@ -115,34 +115,6 @@
 
     </div>
 
-
-
-
-<!--
-    <p>Vornamen: <input th:value="${Vname}" title="Name" type="text" name="Vname" required="required" class="form-control"
-                    aria-describedby="txtName"/>
-    </p>
-    <p>Nachname: <input th:value="${Nname}" title="Name" type="text" name="Nname" required="required" class="form-control"
-                        aria-describedby="txtName"/>
-    </p>
-    <p>Benutzername: <input th:value="${username}" title="Username" type="text" name="username" required="required" class="form-control"
-                    aria-describedby="txtName"/>
-        <b th:text="${userW}"></b>
-    </p>
-    <p>Email Adresse: <input th:value="${email}" title="Email" type="text" name="email" required="required" class="form-control"
-                    aria-describedby="txtName"/>
-        <b th:text="${emailW}"></b>
-    </p>
-    <p>Passwort: <input title="Passwort" type="password" name="password" required="required" class="form-control"
-                    aria-describedby="txtName"/>
-        <b th:text="${passwordW}"></b>
-
-    </p>
-    <p>Passwort bestätigen: <input title="PasswordConfirm" type="password" name="passwordconfirm" required="required" class="form-control"
-                    aria-describedby="txtName"/>
-    </p>
-
-    <button type="submit">Daten absenden</button> -->
 </form>
 
 </body>

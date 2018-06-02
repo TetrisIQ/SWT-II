@@ -20,7 +20,7 @@ public class UserRegistrationController {
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String UserRegistration(Model model) {
-        model = putAllIn(model);
+        //model = putAllIn(model);
         return "userRegistration";
     }
 
@@ -33,65 +33,91 @@ public class UserRegistrationController {
         email = request.getParameter("email");
         String password = request.getParameter("password");
         String passwordConfirm = request.getParameter("passwordconfirm");
-        if (userName.contains("unerwünschterUsername") || !userName.matches(User.userNameRegex)) {
-            model = putAllIn(model);
-            model = createViewErros(model,false,true,false,false);
-            return "userRegistration"; //TODO: Der​ ​Username​ ​darf​ ​keine​ ​rassistischen/sexistischen Ausdrücke​ ​beinhalten.​
-        }
-        if (dau.getUserByName(userName) != null) {
-            model = putAllIn(model);
-            model = createViewErros(model,false,false,true,false);
-            return "userRegistration";
-
-        }
-
-        if (dau.isEmailInUse(email)) {
-            model = putAllIn(model);
-            model = createViewErros(model,true,false,false,false);
-            return "userRegistration";
-        }
-
+        //Teste Passwörter auf gleichheit
         if (!password.equals(passwordConfirm)) {
             model = putAllIn(model);
             model = createViewErros(model, false,false,false,true);
             return "userRegistration";
         }
+        //Teste Passwort nach /LFR01/Passwortregeln
         if (!password.matches(User.passwordRegex)) {
             //password don't match with our password policy
             model = putAllIn(model);
             model = createViewErros(model, false, false, false,true);
             return "userRegistration";
         }
+
+        //Teste Benutzername nach   /LFR02/Usernamenregel
+        if (userName.contains("unerwünschterUsername") || !userName.matches(User.userNameRegex)) {
+            model = putAllIn(model);
+            model = createViewErros(model,false,true,false,false);
+            return "userRegistration"; //TODO: Der​ ​Username​ ​darf​ ​keine​ ​rassistischen/sexistischen Ausdrücke​ ​beinhalten.​
+        }
+        //Teste ob Benutzername schon vorhanden
+        if (dau.getUserByName(userName) != null) {
+            model = putAllIn(model);
+            model = createViewErros(model,false,false,true,false);
+            return "userRegistration";
+
+        }
+        //Teste ob Email schon vorhanden
+        if (dau.isEmailInUse(email)) {
+            model = putAllIn(model);
+            model = createViewErros(model,true,false,false,false);
+            return "userRegistration";
+        }
+        //Schreibe Benutzer in Datenbank
         User user = new User(userName, password, email, vn, nn);
         dau.addUser(user);
 
         //TODO: Email bestätigung
-        //TODO: user nach 10 sec weiterleiten ??
+        //Weiterleitung nach 10 sekunden nach   /LF020/Benutzerregistrierung
+        //10 sekunden ist ein wenig lange steht aber im Lastenheft so drinn
+        try {
+            Thread.currentThread().sleep(10000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return "redictDashboard";
     }
 
 
+    /**
+     * Zeigt Error nachrichten bei Falsch eingegebenen Parametern an.
+     * @param model Arbeits Model
+     * @param email {@link Boolean} ob die Email schon genutzt wird
+     * @param userNameToShort {@link Boolean} ob der Benutzername zu Kurz ist
+     * @param userNameInUse {@link Boolean} ob der Benutzername schon Vergeben ist
+     * @param password {@link Boolean} ob das Passwort nicht den Richtlienen entspricht
+     * @return Model mit den entsprechenen Fehlernachrichten
+     */
     private Model createViewErros(Model model, boolean email, boolean userNameToShort, boolean userNameInUse, boolean password) {
         if (password) {
-            //password is not in our policy
+            //password entspricht nicht den richtlinien
             model.addAttribute("passwordW", "Dein Passwort muss min 6 zeichen lang groß und kleinschreibung beinhalten und ein sonderzeichen");
         }
         if (email) {
-            //email is in use or wrong
+            //email wird schon verwendet
             model.addAttribute("emailW", "Diese Email adresse wird schon genutzt");
         }
         if (userNameToShort) {
+            //Benutzername ist zu kurz
             model.addAttribute("userW", "Dieser Benutzername muss min. 6 zeichen lang");
         }
 
         if (userNameInUse) {
+            //Benutzername ist schon vergeben
             model.addAttribute("userW", "Dieser Benutzername ist schon vergeben oder ist nicht min. 6 zeichen lang");
-
         }
 
         return model;
     }
 
+    /**
+     * Fügt alle Felder mit ausnahme des Passwortfeldes in das Model ein
+     * @param model Model
+     * @return Model mit gefüllten feldern
+     */
     private Model putAllIn(Model model) {
         model.addAttribute("Vname", vn);
         model.addAttribute("Nname", nn);

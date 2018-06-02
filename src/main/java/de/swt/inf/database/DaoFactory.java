@@ -1,5 +1,7 @@
 package de.swt.inf.database;
 
+import de.swt.inf.model.Calendar;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -40,7 +42,7 @@ public class DaoFactory {
     }
 
     public static UserDao getUserDao() {
-        return new UserDaoImpl();
+        return new UserDaoImpl(getConnection());
     }
 
     public static TerminDao getTerminDao() {
@@ -51,7 +53,8 @@ public class DaoFactory {
         return new VCardDaoImpl(getConnection());
     }
 
-    public static CategoryDao getCategoryDao() {return new CategoryDaoImpl(getConnection());
-    }
+    public static CategoryDao getCategoryDao() {return new CategoryDaoImpl(getConnection());}
+
+    public static CalendarDao getCalendarDao() {return new CalendarDaoImpl(getConnection());}
 
 }

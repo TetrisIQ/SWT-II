@@ -20,7 +20,7 @@ public class User {
 
     private String lastname;
 
-    private boolean confirmedUser;
+    private boolean confirmedUser = false;
 
     private UserPreferences userPreferences;
 
@@ -52,6 +52,8 @@ public class User {
 
 
     //ALL SETTERS
+    public void setUSER_ID(int id) {this.USER_ID = id;}
+
     public void setUsername(String username) {
         this.username = username;
     }

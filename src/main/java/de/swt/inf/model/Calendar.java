@@ -27,5 +27,7 @@ public class Calendar {
         return termin;
     }
 
+    public int getCALENDAR_ID() {return this.CALENDAR_ID;}
+
 
 }
