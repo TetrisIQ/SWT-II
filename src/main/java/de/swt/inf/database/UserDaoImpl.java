@@ -19,12 +19,18 @@ public class UserDaoImpl implements UserDao {
     public boolean addUser(User user) {
         try {
             int confirmed = user.getConfirmedUser() ? 1 : 0;
-            int userPreferences = user.getUserPreferences().getId();
+            //int userPreferences = user.getUserPreferences().getId();
+            String userPreferences = null;
             //SQL:
             //INSERT INTO `user` (`USER_ID`, `Username`, `Password`, `Email`, `Firstname`, `Lastname`, `ConfirmedUser`, `UserPreferences`, `WeatherReport`, `CALENDAR_ID`) VALUES ('10001', 'test', 'test', 'test@test.de', 'testname', 'nn', NULL, NULL, NULL, '1')
-            String query = "INSERT INTO `user` (`USER_ID`, `Username`, `Password`, `Email`, `Firstname`, `Lastname`, `ConfirmedUser`, `UserPreferences`, `WeatherReport`, `CALENDAR_ID`) VALUES VALUES ('null', '" + user.getUsername() + "', '" + user.getPassword() + "', '" + user.getEmail() + "', '" + user.getFirstname() + "', '" + user.getLastname() + "', '" + confirmed + "', '" + userPreferences + "', NULL, '" + user.getCalendar().getCALENDAR_ID() + "'";
+            //String query = "INSERT INTO use` (USER_ID, Username, Password, Email, Firstname, Lastname, ConfirmedUser, UserPreferences, WeatherReport, CALENDAR_ID) VALUES VALUES ('null', '" + user.getUsername() + "', '" + user.getPassword() + "', '" + user.getEmail() + "', '" + user.getFirstname() + "', '" + user.getLastname() + "', '" + confirmed + "', '" + userPreferences + "', NULL, '" + user.getCalendar().getCALENDAR_ID() + "'";
+            String query = "INSERT INTO user VALUES ('null', '" + user.getUsername() + "', '" + user.getPassword()
+                    + "', '" + user.getEmail() + "', '" + user.getFirstname() + "', '" + user.getLastname() +
+                    "', NULL, NULL, NULL, '" + user.getCalendar().getCALENDAR_ID() + "')";
+            query = query.replaceAll("'null'", "NULL");
             Statement statement = this.connection.createStatement();
-            return statement.execute(query);
+            statement.execute(query);
+            return true;
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -64,24 +70,28 @@ public class UserDaoImpl implements UserDao {
 
     public User getUserByName(String username) {
         try {
-            String query = "SELECT * FROM user WHERE USERNAME = " + username;
+            //String query = "SELECT * FROM user WHERE USERNAME LIKE " + username;
+            String query = "SELECT * FROM user";
             Statement statement = this.connection.createStatement();
             ResultSet rs = statement.executeQuery(query);
             User tmpUser = new User();
-            //rs.next();
-            tmpUser.setUSER_ID(rs.getInt("USER_ID"));
-            tmpUser.setUsername(rs.getString("USERNAME"));
-            tmpUser.setPassword(rs.getString("PASSWORD"));
-            tmpUser.setEmail(rs.getString("EMAIL"));
-            tmpUser.setFirstname(rs.getString("FIRSTNAME"));
-            tmpUser.setLastname(rs.getString("LASTNAME"));
-            tmpUser.setConfirmedUser(rs.getBoolean("CONFIRMEDUSER"));
-            //tmpUreturn null;ser.setUserPreferences(rs.getInt("USERPREFERENCES"));
-            //tmpUser.setWeatherReport(rs.getInt("WEATHERREPORT"));
-            int calendarId = rs.getInt("CALENDAR_ID");
-            Calendar userCalendar = DaoFactory.getCalendarDao().getCalendarByID(calendarId);
-            tmpUser.setCalendar(userCalendar);
-            return tmpUser;
+            while (rs.next()) {
+                if (rs.getString(rs.findColumn("USERNAME")).equals(username)) {
+                    tmpUser.setUSER_ID(rs.getInt("USER_ID"));
+                    tmpUser.setUsername(rs.getString("USERNAME"));
+                    tmpUser.setPassword(rs.getString("PASSWORD"));
+                    tmpUser.setEmail(rs.getString("EMAIL"));
+                    tmpUser.setFirstname(rs.getString("FIRSTNAME"));
+                    tmpUser.setLastname(rs.getString("LASTNAME"));
+                    tmpUser.setConfirmedUser(rs.getBoolean("CONFIRMEDUSER"));
+                    //tmpUreturn null;ser.setUserPreferences(rs.getInt("USERPREFERENCES"));
+                    //tmpUser.setWeatherReport(rs.getInt("WEATHERREPORT"));
+                    int calendarId = rs.getInt("CALENDAR_ID");
+                    Calendar userCalendar = DaoFactory.getCalendarDao().getCalendarByID(calendarId);
+                    tmpUser.setCalendar(userCalendar);
+                    return tmpUser;
+                }
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -91,15 +101,21 @@ public class UserDaoImpl implements UserDao {
     @Override
     public boolean isEmailInUse(String eMail) {
         try {
-            String query = "SELECT * FROM `user` WHERE Email LIKE " + eMail;
+            String query = "SELECT * FROM user";
             Statement statement = this.connection.createStatement();
             ResultSet rs = statement.executeQuery(query);
-            return !rs.next();
+            while (rs.next()) {
+
+                if (rs.getString(rs.findColumn("EMAIL")).equals(eMail)) {
+                    return true;
+                }
+            }
+            return false;
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return true;
+        return false;
     }
 
     public boolean updateUser(int USER_ID) {

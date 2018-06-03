@@ -28,7 +28,7 @@ public class User {
 
     private Calendar calendar;
 
-    private UserDao daoUser;
+    //private UserDao daoUser; // wozu war das vorgesehen?
 
     public User() {
 
@@ -40,6 +40,7 @@ public class User {
         this.email = email;
         this.firstname = firstname;
         this.lastname = lastname;
+        this.calendar = new Calendar(this);
     }
 
     public static User getUserByEmail(String email) {
@@ -124,16 +125,16 @@ public class User {
         this.calendar = calendar;
     }
 
-    public UserDao getDaoUser() {
+    /*public UserDao getDaoUser() {
         return daoUser;
-    }
+    }*/
 
 
     //ALL METHODS
 
-    public void setDaoUser(UserDao userDao) {
+    /*public void setDaoUser(UserDao userDao) {
         this.daoUser = daoUser;
-    }
+    }*/
 
     public Location getLocation() {
         //TO DO

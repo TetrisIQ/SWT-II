@@ -69,7 +69,7 @@
                     <div class="col-md-8">
                         <div class="input-group input-group-lg">
                             <span class="input-group-addon" id="txtUsername">Benutzername</span>
-                            <input th:value="${username}" title="Username" type="text" name="username" required="required" class="form-control" aria-describedby="txtName"/> <b th:text="${userW}"></b>
+                            <input th:value="${username}" title="Username" type="text" name="username" required="required" class="form-control" aria-describedby="txtName"/> <b name="UserError" th:text="${userW}"></b>
                         </div>
                     </div>
                 </div>
@@ -78,7 +78,7 @@
                     <div class="col-md-8">
                         <div class="input-group input-group-lg">
                             <span class="input-group-addon" id="txtEmail">Email-Adresse</span>
-                            <input th:value="${email}" title="Email" type="text" name="email" required="required" class="form-control" aria-describedby="txtEmail"/> <b th:text="${emailW}"></b>
+                            <input th:value="${email}" title="Email" type="text" name="email" required="required" class="form-control" aria-describedby="txtEmail"/> <b name="EmailError" th:text="${emailW}"></b>
                         </div>
                     </div>
                 </div>
@@ -87,7 +87,7 @@
                     <div class="col-md-8">
                         <div class="input-group input-group-lg">
                             <span class="input-group-addon" id="txtPassword">Passwort</span>
-                            <input title="Passwort" type="password" name="password" required="required" class="form-control" aria-describedby="txtName"/> <b th:text="${passwordW}"></b>
+                            <input title="Passwort" type="password" name="password" required="required" class="form-control" aria-describedby="txtName"/> <b name="PasswordError" th:text="${passwordW}"></b>
                         </div>
                     </div>
                 </div>

@@ -12,11 +12,12 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import static org.junit.Assert.assertEquals;
 
-public class SeleniumHTMLDriver {
+public class SeleniumHTMLDriverTest {
 
     @BeforeClass
     public static void beforeClass() {
         DaoFactory.test = true;
+        BeforSelenium.beforSeleniumTests();
     }
 
     @AfterClass
