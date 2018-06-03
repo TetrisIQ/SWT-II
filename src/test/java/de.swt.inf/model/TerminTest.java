@@ -1,9 +1,15 @@
 package de.swt.inf.model;
 
+import de.swt.inf.database.DaoFactory;
+import de.swt.inf.database.TerminDao;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import java.util.LinkedList;
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 @RunWith(JUnitParamsRunner.class)
@@ -24,6 +30,41 @@ public class TerminTest {
         if (!sT.equals(eT)  && sD.equals(eD))  {
             assertFalse(Termin.isValid(sD, eD, eT, sT));
         }
+    }
+
+
+    @Test
+    public void testDeleteWithDatabase(){
+        TerminDao terminDao = new DaoFactory().getTerminDao();
+        Termin termin = new Termin("Test", "22-10-17", "05-10-18", false, "10:00", "11:00");
+        terminDao.addTermin(termin);
+
+        List<Termin> terminList = new LinkedList<Termin>();
+        terminList = terminDao.getAllTermine();
+
+        Termin terminOutDatabase = new Termin();
+
+        for(Termin t: terminList){
+            if(t.getName() == "Test"){
+                terminOutDatabase = t;
+            }
+        }
+
+        assertTrue(terminOutDatabase != null);
+
+        terminDao.deleteTermin(terminOutDatabase.getId());
+        terminList = terminDao.getAllTermine();
+
+        for(Termin t: terminList){
+            if(t.getName() == "Test"){
+                terminOutDatabase = t;
+                break;
+            }else{
+                terminOutDatabase = null;
+            }
+        }
+
+        assertEquals(null,terminOutDatabase);
     }
 
 }
