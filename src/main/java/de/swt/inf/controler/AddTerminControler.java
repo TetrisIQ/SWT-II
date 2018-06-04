@@ -2,7 +2,6 @@ package de.swt.inf.controler;
 
 import de.swt.inf.database.*;
 import de.swt.inf.model.*;
-import org.joda.time.DateTime;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
