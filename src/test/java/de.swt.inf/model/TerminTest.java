@@ -45,24 +45,20 @@ public class TerminTest {
         Termin terminOutDatabase = new Termin();
 
         for(Termin t: terminList){
-            if(t.getName() == "Test"){
-                terminOutDatabase = t;
-            }
-        }
-
-        assertTrue(terminOutDatabase != null);
-
-        terminDao.deleteTermin(terminOutDatabase.getId());
-        terminList = terminDao.getAllTermine();
-
-        for(Termin t: terminList){
-            if(t.getName() == "Test"){
+            if(t.getName().equals("Test")){
                 terminOutDatabase = t;
                 break;
-            }else{
-                terminOutDatabase = null;
             }
         }
+
+        System.out.println(terminOutDatabase.getName());
+        assertTrue(terminOutDatabase.getName().equals("Test"));
+
+        int terminId = terminOutDatabase.getId();
+
+        terminDao.deleteTermin(terminId);
+
+        terminOutDatabase = terminDao.getTermin(terminId);
 
         assertEquals(null,terminOutDatabase);
     }
