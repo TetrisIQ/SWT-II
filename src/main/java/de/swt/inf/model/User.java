@@ -146,11 +146,11 @@ public class User {
     }
 
     public boolean verifyUsername() {
-        return false;
+        return username.matches(userNameRegex);
     }
 
     public boolean verifyPassword() {
-        return false;
+        return password.matches(passwordRegex);
     }
 
     public void confirmUser() {

@@ -70,7 +70,7 @@ public class UserDaoImpl implements UserDao {
 
     public User getUserByName(String username) {
         try {
-            //String query = "SELECT * FROM user WHERE USERNAME LIKE " + username;
+            //String query = "SELECT * FROM user WHERE USERNAME = " + username;
             String query = "SELECT * FROM user";
             Statement statement = this.connection.createStatement();
             ResultSet rs = statement.executeQuery(query);

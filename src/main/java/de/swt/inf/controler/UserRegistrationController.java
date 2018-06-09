@@ -13,6 +13,13 @@ import java.text.ParseException;
 
 @Controller
 public class UserRegistrationController {
+    public static final String MSG_EMAIL_IN_USE = "Diese Email adresse wird schon genutzt";
+    public static final String MSG_USERNAME_IN_USE = "Dieser Benutzername ist schon vergeben";
+    public static final String MSG_PASSWORD_DONT_MATCH = "Deine Passwörter stimmen nicht überein";
+    public static final String MSG_PASSWORD_POLICY_NOT_SUFFUSED = "Dein Passwort muss min 6 zeichen lang groß und kleinschreibung beinhalten und ein sonderzeichen";
+    public static final String MSG_USERNAME_POLICY_NOT_SUFFUSED = "Dein Benutzername muss min. 6 zeichen lang";
+
+
     String vn = "";
     String nn = "";
     String email = "";
@@ -67,17 +74,18 @@ public class UserRegistrationController {
             return "userRegistration";
         }
         //Schreibe Benutzer in Datenbank
-        User user = new User(userName, password, email, vn, nn);
-        dau.addUser(user);
+
 
         //TODO: Email bestätigung
         //Weiterleitung nach 10 sekunden nach   /LF020/Benutzerregistrierung
         //10 sekunden ist ein wenig lange steht aber im Lastenheft so drinn
-        /*try {
+        try {
             Thread.currentThread().sleep(10000);
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }*/
+        }
+        User user = new User(userName, password, email, vn, nn);
+        dau.addUser(user);
         return "redictDashboard";
     }
 
@@ -93,25 +101,25 @@ public class UserRegistrationController {
      */
     private Model createViewErros(Model model, boolean email, boolean userNameToShort, boolean userNameInUse, boolean password, boolean passwordNotMatch) {
         if (passwordNotMatch) {
-            model.addAttribute("passwordW", "Deine Passwörter stimmen nicht überein");
+            model.addAttribute("passwordW", MSG_PASSWORD_DONT_MATCH);
         }
 
         if (password) {
             //password entspricht nicht den richtlinien
-            model.addAttribute("passwordW", "Dein Passwort muss min 6 zeichen lang groß und kleinschreibung beinhalten und ein sonderzeichen");
+            model.addAttribute("passwordW", MSG_PASSWORD_POLICY_NOT_SUFFUSED);
         }
         if (email) {
             //email wird schon verwendet
-            model.addAttribute("emailW", "Diese Email adresse wird schon genutzt");
+            model.addAttribute("emailW", MSG_EMAIL_IN_USE);
         }
         if (userNameToShort) {
             //Benutzername ist zu kurz
-            model.addAttribute("userW", "Dein Benutzername muss min. 6 zeichen lang");
+            model.addAttribute("userW", MSG_USERNAME_POLICY_NOT_SUFFUSED);
         }
 
         if (userNameInUse) {
             //Benutzername ist schon vergeben
-            model.addAttribute("userW", "Dieser Benutzername ist schon vergeben");
+            model.addAttribute("userW", MSG_USERNAME_IN_USE);
         }
 
         return model;
