@@ -10,15 +10,15 @@ public class UserPreferences {
 
     private User user;
 
-    private CourseEnum courseEnum;
+    private CourseEnum courseEnum = null;
 
-    private ProvinceEnum provinceEnum;
+    private ProvinceEnum provinceEnum = null;
 
-    private UniversityEnum universityEnum;
+    private UniversityEnum universityEnum = null;
 
-    private MusicPreferencesEnum musicPreferencesEnum;
+    private MusicPreferencesEnum musicPreferencesEnum = null;
 
-    private GenderEnum genderEnum;
+    private GenderEnum genderEnum = null;
 
     public UserPreferences() {
 
