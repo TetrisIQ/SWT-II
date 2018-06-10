@@ -11736,6 +11736,7 @@ Caused by: java.lang.NumberFormatException: For input string: "00:00"
 	at org.h2.util.DateTimeUtils.parseTimeNanos(DateTimeUtils.java:402)
 	at org.h2.value.ValueTime.parse(ValueTime.java:112)
 	... 33 more
+<<<<<<< Updated upstream
 2018-06-09 15:13:22 jdbc[5]: null
 org.h2.message.DbException: Die Datenbank-Verbindung wurde nicht explizit geschlossen (jetzt in der Müllabfuhr)
 The connection was not closed by the application and is garbage collected [90018-197]
@@ -11751,6 +11752,25 @@ The connection was not closed by the application and is garbage collected [90018
 	at de.swt.inf.database.DaoFactory.getConnection(DaoFactory.java:32)
 	at de.swt.inf.database.DaoFactory.getCategoryDao(DaoFactory.java:56)
 	at de.swt.inf.controler.EditTerminController.editTermin(EditTerminController.java:24)
+=======
+2018-06-04 12:22:52 jdbc[6]: exception
+org.h2.jdbc.JdbcSQLException: Kann "TIME" "24:00:00" nicht umwandeln
+Cannot parse "TIME" constant "24:00:00"; SQL statement:
+INSERT INTO termin VALUES (NULL, 'Test Intervall', '2018-06-03', '24:00:00', '2018-06-04', '14:00:00', '0', 'Lübeck', '1', 'stündlich', '0', NULL, '', '0', '0',' 1',NULL, NULL, NULL) -- (NULL, 'Test Intervall', '2018-06-03', '24:00:00', '2018-06-04', '14:00:00', '0', STRINGDECODE('L\u00fcbeck'), '1', STRINGDECODE('st\u00fcndlich'), '0', NULL, '', '0', '0', ' 1', NULL, NULL, NULL) [22007-197]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:357)
+	at org.h2.message.DbException.get(DbException.java:168)
+	at org.h2.value.ValueTime.parse(ValueTime.java:114)
+	at org.h2.value.Value.convertTo(Value.java:1067)
+	at org.h2.table.Column.convert(Column.java:177)
+	at org.h2.command.dml.Insert.insertRows(Insert.java:166)
+	at org.h2.command.dml.Insert.update(Insert.java:134)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:102)
+	at org.h2.command.Command.executeUpdate(Command.java:261)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:233)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:205)
+	at de.swt.inf.database.TerminDaoImpl.addTermin(TerminDaoImpl.java:90)
+	at de.swt.inf.controler.AddTerminControler.addTermin(AddTerminControler.java:217)
+>>>>>>> Stashed changes
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -11764,8 +11784,13 @@ The connection was not closed by the application and is garbage collected [90018
 	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:967)
 	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:901)
 	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:970)
+<<<<<<< Updated upstream
 	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:861)
 	at javax.servlet.http.HttpServlet.service(HttpServlet.java:635)
+=======
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:872)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:661)
+>>>>>>> Stashed changes
 	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:846)
 	at javax.servlet.http.HttpServlet.service(HttpServlet.java:742)
 	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
@@ -11813,6 +11838,7 @@ The connection was not closed by the application and is garbage collected [90018
 	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:868)
 	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1459)
 	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+<<<<<<< Updated upstream
 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
@@ -11829,6 +11855,30 @@ INSERT INTO termin VALUES (NULL, 'Selenium Test', '2018-05-2018', '13:00:00', '2
 	at org.h2.message.DbException.get(DbException.java:168)
 	at org.h2.value.ValueDate.parse(ValueDate.java:74)
 	at org.h2.value.Value.convertTo(Value.java:1069)
+=======
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: org.h2.message.DbException: Kann "TIME" "24:00:00" nicht umwandeln
+Cannot parse "TIME" constant "24:00:00" [22007-197]
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.value.ValueTime.fromNanos(ValueTime.java:76)
+	at org.h2.value.ValueTime.parse(ValueTime.java:112)
+	... 76 more
+Caused by: org.h2.jdbc.JdbcSQLException: Kann "TIME" "24:00:00" nicht umwandeln
+Cannot parse "TIME" constant "24:00:00" [22007-197]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:357)
+	... 79 more
+2018-06-04 12:24:06 jdbc[6]: exception
+org.h2.jdbc.JdbcSQLException: Kann "TIME" "24:00:00" nicht umwandeln
+Cannot parse "TIME" constant "24:00:00"; SQL statement:
+INSERT INTO termin VALUES (NULL, 'Test Intervall', '2018-06-04', '24:00:00', '2018-06-04', '14:00:00', '0', 'Lübeck', '1', 'stündlich', '0', NULL, '', '0', '0',' 1',NULL, NULL, NULL) -- (NULL, 'Test Intervall', '2018-06-04', '24:00:00', '2018-06-04', '14:00:00', '0', STRINGDECODE('L\u00fcbeck'), '1', STRINGDECODE('st\u00fcndlich'), '0', NULL, '', '0', '0', ' 1', NULL, NULL, NULL) [22007-197]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:357)
+	at org.h2.message.DbException.get(DbException.java:168)
+	at org.h2.value.ValueTime.parse(ValueTime.java:114)
+	at org.h2.value.Value.convertTo(Value.java:1067)
+>>>>>>> Stashed changes
 	at org.h2.table.Column.convert(Column.java:177)
 	at org.h2.command.dml.Insert.insertRows(Insert.java:166)
 	at org.h2.command.dml.Insert.update(Insert.java:134)
@@ -11837,6 +11887,7 @@ INSERT INTO termin VALUES (NULL, 'Selenium Test', '2018-05-2018', '13:00:00', '2
 	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:233)
 	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:205)
 	at de.swt.inf.database.TerminDaoImpl.addTermin(TerminDaoImpl.java:90)
+<<<<<<< Updated upstream
 	at de.swt.inf.model.TerminTest.beforeSelenium(TerminTest.java:26)
 	at de.swt.inf.model.TerminTest.seleniumTestDeleteTrue(TerminTest.java:49)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -11881,6 +11932,9 @@ The connection was not closed by the application and is garbage collected [90018
 	at de.swt.inf.database.DaoFactory.getConnection(DaoFactory.java:32)
 	at de.swt.inf.database.DaoFactory.getTerminDao(DaoFactory.java:49)
 	at de.swt.inf.controler.DashboardController.dashboard(DashboardController.java:21)
+=======
+	at de.swt.inf.controler.AddTerminControler.addTermin(AddTerminControler.java:217)
+>>>>>>> Stashed changes
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -11894,8 +11948,13 @@ The connection was not closed by the application and is garbage collected [90018
 	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:967)
 	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:901)
 	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:970)
+<<<<<<< Updated upstream
 	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:861)
 	at javax.servlet.http.HttpServlet.service(HttpServlet.java:635)
+=======
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:872)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:661)
+>>>>>>> Stashed changes
 	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:846)
 	at javax.servlet.http.HttpServlet.service(HttpServlet.java:742)
 	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
@@ -11943,6 +12002,7 @@ The connection was not closed by the application and is garbage collected [90018
 	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:868)
 	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1459)
 	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+<<<<<<< Updated upstream
 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
@@ -12004,6 +12064,30 @@ INSERT INTO termin VALUES (NULL, 'Selenium Test', '2018-05-2018', '13:00:00', '2
 	at org.h2.message.DbException.get(DbException.java:168)
 	at org.h2.value.ValueDate.parse(ValueDate.java:74)
 	at org.h2.value.Value.convertTo(Value.java:1069)
+=======
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: org.h2.message.DbException: Kann "TIME" "24:00:00" nicht umwandeln
+Cannot parse "TIME" constant "24:00:00" [22007-197]
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.value.ValueTime.fromNanos(ValueTime.java:76)
+	at org.h2.value.ValueTime.parse(ValueTime.java:112)
+	... 76 more
+Caused by: org.h2.jdbc.JdbcSQLException: Kann "TIME" "24:00:00" nicht umwandeln
+Cannot parse "TIME" constant "24:00:00" [22007-197]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:357)
+	... 79 more
+2018-06-04 12:26:05 jdbc[7]: exception
+org.h2.jdbc.JdbcSQLException: Kann "TIME" "24:00:00" nicht umwandeln
+Cannot parse "TIME" constant "24:00:00"; SQL statement:
+INSERT INTO termin VALUES (NULL, 'Test Intervall 1', '2018-04-04', '24:00:00', '2018-04-04', '14:00:00', '0', 'Lübeck', '1', 'stündlich', '0', NULL, '', '0', '0',' 1',NULL, NULL, NULL) -- (NULL, 'Test Intervall 1', '2018-04-04', '24:00:00', '2018-04-04', '14:00:00', '0', STRINGDECODE('L\u00fcbeck'), '1', STRINGDECODE('st\u00fcndlich'), '0', NULL, '', '0', '0', ' 1', NULL, NULL, NULL) [22007-197]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:357)
+	at org.h2.message.DbException.get(DbException.java:168)
+	at org.h2.value.ValueTime.parse(ValueTime.java:114)
+	at org.h2.value.Value.convertTo(Value.java:1067)
+>>>>>>> Stashed changes
 	at org.h2.table.Column.convert(Column.java:177)
 	at org.h2.command.dml.Insert.insertRows(Insert.java:166)
 	at org.h2.command.dml.Insert.update(Insert.java:134)
@@ -12012,6 +12096,7 @@ INSERT INTO termin VALUES (NULL, 'Selenium Test', '2018-05-2018', '13:00:00', '2
 	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:233)
 	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:205)
 	at de.swt.inf.database.TerminDaoImpl.addTermin(TerminDaoImpl.java:90)
+<<<<<<< Updated upstream
 	at de.swt.inf.model.TerminTest.beforeSelenium(TerminTest.java:28)
 	at de.swt.inf.model.TerminTest.seleniumTestDeleteFalse(TerminTest.java:72)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -12056,6 +12141,9 @@ The connection was not closed by the application and is garbage collected [90018
 	at de.swt.inf.database.DaoFactory.getConnection(DaoFactory.java:32)
 	at de.swt.inf.database.DaoFactory.getTerminDao(DaoFactory.java:49)
 	at de.swt.inf.controler.DashboardController.dashboard(DashboardController.java:21)
+=======
+	at de.swt.inf.controler.AddTerminControler.addTermin(AddTerminControler.java:217)
+>>>>>>> Stashed changes
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -12069,8 +12157,13 @@ The connection was not closed by the application and is garbage collected [90018
 	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:967)
 	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:901)
 	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:970)
+<<<<<<< Updated upstream
 	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:861)
 	at javax.servlet.http.HttpServlet.service(HttpServlet.java:635)
+=======
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:872)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:661)
+>>>>>>> Stashed changes
 	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:846)
 	at javax.servlet.http.HttpServlet.service(HttpServlet.java:742)
 	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
@@ -12118,6 +12211,7 @@ The connection was not closed by the application and is garbage collected [90018
 	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:868)
 	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1459)
 	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+<<<<<<< Updated upstream
 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
@@ -12134,6 +12228,30 @@ INSERT INTO termin VALUES (NULL, 'Selenium Test', '2018-05-2018', '13:00:00', '2
 	at org.h2.message.DbException.get(DbException.java:168)
 	at org.h2.value.ValueDate.parse(ValueDate.java:74)
 	at org.h2.value.Value.convertTo(Value.java:1069)
+=======
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: org.h2.message.DbException: Kann "TIME" "24:00:00" nicht umwandeln
+Cannot parse "TIME" constant "24:00:00" [22007-197]
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.value.ValueTime.fromNanos(ValueTime.java:76)
+	at org.h2.value.ValueTime.parse(ValueTime.java:112)
+	... 76 more
+Caused by: org.h2.jdbc.JdbcSQLException: Kann "TIME" "24:00:00" nicht umwandeln
+Cannot parse "TIME" constant "24:00:00" [22007-197]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:357)
+	... 79 more
+2018-06-04 12:27:53 jdbc[16]: exception
+org.h2.jdbc.JdbcSQLException: Kann "TIME" "24:00:00" nicht umwandeln
+Cannot parse "TIME" constant "24:00:00"; SQL statement:
+INSERT INTO termin VALUES (NULL, 'Test Intervall 3', '2018-07-04', '24:00:00', '2018-07-04', '14:00:00', '0', 'Lübeck', '1', 'stündlich', '0', NULL, '', '0', '0',' 1',NULL, NULL, NULL) -- (NULL, 'Test Intervall 3', '2018-07-04', '24:00:00', '2018-07-04', '14:00:00', '0', STRINGDECODE('L\u00fcbeck'), '1', STRINGDECODE('st\u00fcndlich'), '0', NULL, '', '0', '0', ' 1', NULL, NULL, NULL) [22007-197]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:357)
+	at org.h2.message.DbException.get(DbException.java:168)
+	at org.h2.value.ValueTime.parse(ValueTime.java:114)
+	at org.h2.value.Value.convertTo(Value.java:1067)
+>>>>>>> Stashed changes
 	at org.h2.table.Column.convert(Column.java:177)
 	at org.h2.command.dml.Insert.insertRows(Insert.java:166)
 	at org.h2.command.dml.Insert.update(Insert.java:134)
@@ -12142,6 +12260,7 @@ INSERT INTO termin VALUES (NULL, 'Selenium Test', '2018-05-2018', '13:00:00', '2
 	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:233)
 	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:205)
 	at de.swt.inf.database.TerminDaoImpl.addTermin(TerminDaoImpl.java:90)
+<<<<<<< Updated upstream
 	at de.swt.inf.model.TerminTest.beforeSelenium(TerminTest.java:28)
 	at de.swt.inf.model.TerminTest.seleniumTestDeleteFalse(TerminTest.java:72)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -12186,6 +12305,9 @@ The connection was not closed by the application and is garbage collected [90018
 	at de.swt.inf.database.DaoFactory.getConnection(DaoFactory.java:32)
 	at de.swt.inf.database.DaoFactory.getTerminDao(DaoFactory.java:49)
 	at de.swt.inf.controler.DashboardController.dashboard(DashboardController.java:21)
+=======
+	at de.swt.inf.controler.AddTerminControler.addTermin(AddTerminControler.java:217)
+>>>>>>> Stashed changes
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -12199,8 +12321,13 @@ The connection was not closed by the application and is garbage collected [90018
 	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:967)
 	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:901)
 	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:970)
+<<<<<<< Updated upstream
 	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:861)
 	at javax.servlet.http.HttpServlet.service(HttpServlet.java:635)
+=======
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:872)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:661)
+>>>>>>> Stashed changes
 	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:846)
 	at javax.servlet.http.HttpServlet.service(HttpServlet.java:742)
 	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
@@ -12248,6 +12375,7 @@ The connection was not closed by the application and is garbage collected [90018
 	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:868)
 	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1459)
 	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+<<<<<<< Updated upstream
 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
@@ -12264,6 +12392,30 @@ INSERT INTO termin VALUES (NULL, 'Selenium Test', '2018-05-2018', '13:00:00', '2
 	at org.h2.message.DbException.get(DbException.java:168)
 	at org.h2.value.ValueDate.parse(ValueDate.java:74)
 	at org.h2.value.Value.convertTo(Value.java:1069)
+=======
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: org.h2.message.DbException: Kann "TIME" "24:00:00" nicht umwandeln
+Cannot parse "TIME" constant "24:00:00" [22007-197]
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.value.ValueTime.fromNanos(ValueTime.java:76)
+	at org.h2.value.ValueTime.parse(ValueTime.java:112)
+	... 76 more
+Caused by: org.h2.jdbc.JdbcSQLException: Kann "TIME" "24:00:00" nicht umwandeln
+Cannot parse "TIME" constant "24:00:00" [22007-197]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:357)
+	... 79 more
+2018-06-04 12:28:50 jdbc[6]: exception
+org.h2.jdbc.JdbcSQLException: Kann "TIME" "24:00:00" nicht umwandeln
+Cannot parse "TIME" constant "24:00:00"; SQL statement:
+INSERT INTO termin VALUES (NULL, 'Test TerminIntervall', '2018-04-04', '24:00:00', '2018-04-04', '14:00:00', '0', 'Lübeck', '1', 'stündlich', '0', NULL, '', '0', '0',' 1',NULL, NULL, NULL) -- (NULL, 'Test TerminIntervall', '2018-04-04', '24:00:00', '2018-04-04', '14:00:00', '0', STRINGDECODE('L\u00fcbeck'), '1', STRINGDECODE('st\u00fcndlich'), '0', NULL, '', '0', '0', ' 1', NULL, NULL, NULL) [22007-197]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:357)
+	at org.h2.message.DbException.get(DbException.java:168)
+	at org.h2.value.ValueTime.parse(ValueTime.java:114)
+	at org.h2.value.Value.convertTo(Value.java:1067)
+>>>>>>> Stashed changes
 	at org.h2.table.Column.convert(Column.java:177)
 	at org.h2.command.dml.Insert.insertRows(Insert.java:166)
 	at org.h2.command.dml.Insert.update(Insert.java:134)
@@ -12272,6 +12424,7 @@ INSERT INTO termin VALUES (NULL, 'Selenium Test', '2018-05-2018', '13:00:00', '2
 	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:233)
 	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:205)
 	at de.swt.inf.database.TerminDaoImpl.addTermin(TerminDaoImpl.java:90)
+<<<<<<< Updated upstream
 	at de.swt.inf.model.TerminTest.beforeSelenium(TerminTest.java:28)
 	at de.swt.inf.model.TerminTest.seleniumTestDeleteTrue(TerminTest.java:50)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -12316,6 +12469,9 @@ The connection was not closed by the application and is garbage collected [90018
 	at de.swt.inf.database.DaoFactory.getConnection(DaoFactory.java:32)
 	at de.swt.inf.database.DaoFactory.getTerminDao(DaoFactory.java:49)
 	at de.swt.inf.controler.DashboardController.dashboard(DashboardController.java:21)
+=======
+	at de.swt.inf.controler.AddTerminControler.addTermin(AddTerminControler.java:217)
+>>>>>>> Stashed changes
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -12329,8 +12485,13 @@ The connection was not closed by the application and is garbage collected [90018
 	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:967)
 	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:901)
 	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:970)
+<<<<<<< Updated upstream
 	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:861)
 	at javax.servlet.http.HttpServlet.service(HttpServlet.java:635)
+=======
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:872)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:661)
+>>>>>>> Stashed changes
 	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:846)
 	at javax.servlet.http.HttpServlet.service(HttpServlet.java:742)
 	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
@@ -12378,6 +12539,7 @@ The connection was not closed by the application and is garbage collected [90018
 	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:868)
 	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1459)
 	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+<<<<<<< Updated upstream
 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
@@ -12394,6 +12556,30 @@ INSERT INTO termin VALUES (NULL, 'Selenium Test', '2018-05-2018', '13:00:00', '2
 	at org.h2.message.DbException.get(DbException.java:168)
 	at org.h2.value.ValueDate.parse(ValueDate.java:74)
 	at org.h2.value.Value.convertTo(Value.java:1069)
+=======
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: org.h2.message.DbException: Kann "TIME" "24:00:00" nicht umwandeln
+Cannot parse "TIME" constant "24:00:00" [22007-197]
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.value.ValueTime.fromNanos(ValueTime.java:76)
+	at org.h2.value.ValueTime.parse(ValueTime.java:112)
+	... 76 more
+Caused by: org.h2.jdbc.JdbcSQLException: Kann "TIME" "24:00:00" nicht umwandeln
+Cannot parse "TIME" constant "24:00:00" [22007-197]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:357)
+	... 79 more
+2018-06-04 12:30:48 jdbc[6]: exception
+org.h2.jdbc.JdbcSQLException: Kann "TIME" "24:00:00" nicht umwandeln
+Cannot parse "TIME" constant "24:00:00"; SQL statement:
+INSERT INTO termin VALUES (NULL, 'Termin Test', '2018-06-03', '24:00:00', '2018-06-04', '13:00:00', '0', 'Lübeck', '1', 'stündlich', '0', NULL, '', '0', '0',' 1',NULL, NULL, NULL) -- (NULL, 'Termin Test', '2018-06-03', '24:00:00', '2018-06-04', '13:00:00', '0', STRINGDECODE('L\u00fcbeck'), '1', STRINGDECODE('st\u00fcndlich'), '0', NULL, '', '0', '0', ' 1', NULL, NULL, NULL) [22007-197]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:357)
+	at org.h2.message.DbException.get(DbException.java:168)
+	at org.h2.value.ValueTime.parse(ValueTime.java:114)
+	at org.h2.value.Value.convertTo(Value.java:1067)
+>>>>>>> Stashed changes
 	at org.h2.table.Column.convert(Column.java:177)
 	at org.h2.command.dml.Insert.insertRows(Insert.java:166)
 	at org.h2.command.dml.Insert.update(Insert.java:134)
@@ -12402,6 +12588,7 @@ INSERT INTO termin VALUES (NULL, 'Selenium Test', '2018-05-2018', '13:00:00', '2
 	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:233)
 	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:205)
 	at de.swt.inf.database.TerminDaoImpl.addTermin(TerminDaoImpl.java:90)
+<<<<<<< Updated upstream
 	at de.swt.inf.model.TerminTest.beforeSelenium(TerminTest.java:28)
 	at de.swt.inf.model.TerminTest.seleniumTestDeleteTrue(TerminTest.java:50)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -12446,6 +12633,9 @@ The connection was not closed by the application and is garbage collected [90018
 	at de.swt.inf.database.DaoFactory.getConnection(DaoFactory.java:32)
 	at de.swt.inf.database.DaoFactory.getTerminDao(DaoFactory.java:49)
 	at de.swt.inf.controler.DashboardController.dashboard(DashboardController.java:21)
+=======
+	at de.swt.inf.controler.AddTerminControler.addTermin(AddTerminControler.java:216)
+>>>>>>> Stashed changes
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -12459,8 +12649,13 @@ The connection was not closed by the application and is garbage collected [90018
 	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:967)
 	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:901)
 	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:970)
+<<<<<<< Updated upstream
 	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:861)
 	at javax.servlet.http.HttpServlet.service(HttpServlet.java:635)
+=======
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:872)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:661)
+>>>>>>> Stashed changes
 	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:846)
 	at javax.servlet.http.HttpServlet.service(HttpServlet.java:742)
 	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
@@ -12508,6 +12703,7 @@ The connection was not closed by the application and is garbage collected [90018
 	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:868)
 	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1459)
 	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+<<<<<<< Updated upstream
 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
@@ -12524,6 +12720,30 @@ INSERT INTO termin VALUES (NULL, 'Selenium Test', '2018-05-2018', '13:00:00', '2
 	at org.h2.message.DbException.get(DbException.java:168)
 	at org.h2.value.ValueDate.parse(ValueDate.java:74)
 	at org.h2.value.Value.convertTo(Value.java:1069)
+=======
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: org.h2.message.DbException: Kann "TIME" "24:00:00" nicht umwandeln
+Cannot parse "TIME" constant "24:00:00" [22007-197]
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.value.ValueTime.fromNanos(ValueTime.java:76)
+	at org.h2.value.ValueTime.parse(ValueTime.java:112)
+	... 76 more
+Caused by: org.h2.jdbc.JdbcSQLException: Kann "TIME" "24:00:00" nicht umwandeln
+Cannot parse "TIME" constant "24:00:00" [22007-197]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:357)
+	... 79 more
+2018-06-04 12:32:31 jdbc[6]: exception
+org.h2.jdbc.JdbcSQLException: Kann "TIME" "24:00:00" nicht umwandeln
+Cannot parse "TIME" constant "24:00:00"; SQL statement:
+INSERT INTO termin VALUES (NULL, 'Malte Rusko', '2018-04-03', '24:00:00', '2018-04-04', '13:00:00', '0', 'Lübeck', '1', 'stündlich', '0', NULL, '', '0', '0',' 1',NULL, NULL, NULL) -- (NULL, 'Malte Rusko', '2018-04-03', '24:00:00', '2018-04-04', '13:00:00', '0', STRINGDECODE('L\u00fcbeck'), '1', STRINGDECODE('st\u00fcndlich'), '0', NULL, '', '0', '0', ' 1', NULL, NULL, NULL) [22007-197]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:357)
+	at org.h2.message.DbException.get(DbException.java:168)
+	at org.h2.value.ValueTime.parse(ValueTime.java:114)
+	at org.h2.value.Value.convertTo(Value.java:1067)
+>>>>>>> Stashed changes
 	at org.h2.table.Column.convert(Column.java:177)
 	at org.h2.command.dml.Insert.insertRows(Insert.java:166)
 	at org.h2.command.dml.Insert.update(Insert.java:134)
@@ -12532,6 +12752,7 @@ INSERT INTO termin VALUES (NULL, 'Selenium Test', '2018-05-2018', '13:00:00', '2
 	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:233)
 	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:205)
 	at de.swt.inf.database.TerminDaoImpl.addTermin(TerminDaoImpl.java:90)
+<<<<<<< Updated upstream
 	at de.swt.inf.model.TerminTest.beforeSelenium(TerminTest.java:28)
 	at de.swt.inf.model.TerminTest.seleniumTestDeleteTrue(TerminTest.java:50)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -12576,6 +12797,9 @@ The connection was not closed by the application and is garbage collected [90018
 	at de.swt.inf.database.DaoFactory.getConnection(DaoFactory.java:32)
 	at de.swt.inf.database.DaoFactory.getTerminDao(DaoFactory.java:49)
 	at de.swt.inf.controler.DashboardController.dashboard(DashboardController.java:21)
+=======
+	at de.swt.inf.controler.AddTerminControler.addTermin(AddTerminControler.java:217)
+>>>>>>> Stashed changes
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -12589,8 +12813,13 @@ The connection was not closed by the application and is garbage collected [90018
 	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:967)
 	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:901)
 	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:970)
+<<<<<<< Updated upstream
 	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:861)
 	at javax.servlet.http.HttpServlet.service(HttpServlet.java:635)
+=======
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:872)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:661)
+>>>>>>> Stashed changes
 	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:846)
 	at javax.servlet.http.HttpServlet.service(HttpServlet.java:742)
 	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
@@ -12638,6 +12867,7 @@ The connection was not closed by the application and is garbage collected [90018
 	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:868)
 	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1459)
 	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+<<<<<<< Updated upstream
 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
@@ -12650,6 +12880,26 @@ The connection was not closed by the application and is garbage collected [90018
 org.h2.jdbc.JdbcSQLException: Kann "DATE" "2018-05-2018" nicht umwandeln
 Cannot parse "DATE" constant "2018-05-2018"; SQL statement:
 INSERT INTO termin VALUES (NULL, 'Selenium Test', '2018-05-2018', '13:00:00', '2018-05-2018', '14:00:00', '0', NULL, '0', NULL, '0', NULL, NULL, '0', '0',' 1',NULL, NULL, NULL) -- (NULL, 'Selenium Test', '2018-05-2018', '13:00:00', '2018-05-2018', '14:00:00', '0', NULL, '0', NULL, '0', NULL, NULL, '0', '0', ' 1', NULL, NULL, NULL) [22007-197]
+=======
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: org.h2.message.DbException: Kann "TIME" "24:00:00" nicht umwandeln
+Cannot parse "TIME" constant "24:00:00" [22007-197]
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.value.ValueTime.fromNanos(ValueTime.java:76)
+	at org.h2.value.ValueTime.parse(ValueTime.java:112)
+	... 76 more
+Caused by: org.h2.jdbc.JdbcSQLException: Kann "TIME" "24:00:00" nicht umwandeln
+Cannot parse "TIME" constant "24:00:00" [22007-197]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:357)
+	... 79 more
+2018-06-09 14:56:34 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Kann "DATE" "09-06-2018" nicht umwandeln
+Cannot parse "DATE" constant "09-06-2018"; SQL statement:
+INSERT INTO termin VALUES (NULL, 'Repeat Test', '09-06-2018', '10:00:00:00', '09-06-2018', '11:30:00:00', '0', NULL, '1', 'stündlich', '0', NULL, NULL, '0', '0',' 1',NULL, NULL, NULL) -- (NULL, 'Repeat Test', '09-06-2018', '10:00:00:00', '09-06-2018', '11:30:00:00', '0', NULL, '1', STRINGDECODE('st\u00fcndlich'), '0', NULL, NULL, '0', '0', ' 1', NULL, NULL, NULL) [22007-197]
+>>>>>>> Stashed changes
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:357)
 	at org.h2.message.DbException.get(DbException.java:168)
 	at org.h2.value.ValueDate.parse(ValueDate.java:74)
@@ -12662,8 +12912,12 @@ INSERT INTO termin VALUES (NULL, 'Selenium Test', '2018-05-2018', '13:00:00', '2
 	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:233)
 	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:205)
 	at de.swt.inf.database.TerminDaoImpl.addTermin(TerminDaoImpl.java:90)
+<<<<<<< Updated upstream
 	at de.swt.inf.model.TerminTest.beforeSelenium(TerminTest.java:28)
 	at de.swt.inf.model.TerminTest.seleniumTestDeleteTrue(TerminTest.java:50)
+=======
+	at de.swt.inf.model.TerminTest.testRepeatTerminStuendlich(TerminTest.java:76)
+>>>>>>> Stashed changes
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -12687,6 +12941,7 @@ INSERT INTO termin VALUES (NULL, 'Selenium Test', '2018-05-2018', '13:00:00', '2
 	at com.intellij.rt.execution.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:47)
 	at com.intellij.rt.execution.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:242)
 	at com.intellij.rt.execution.junit.JUnitStarter.main(JUnitStarter.java:70)
+<<<<<<< Updated upstream
 Caused by: java.lang.IllegalArgumentException: 2018-5-2018
 	at org.h2.util.DateTimeUtils.parseDateValue(DateTimeUtils.java:351)
 	at org.h2.value.ValueDate.parse(ValueDate.java:72)
@@ -16814,6 +17069,29 @@ INSERT INTO termin VALUES (NULL, 'Selenium Test', '2018-05-2018', '13:00:00', '2
 	at de.swt.inf.database.TerminDaoImpl.addTermin(TerminDaoImpl.java:90)
 	at de.swt.inf.model.TerminTest.beforeSelenium(TerminTest.java:28)
 	at de.swt.inf.model.TerminTest.seleniumTestDeleteTrue(TerminTest.java:50)
+=======
+Caused by: java.lang.IllegalArgumentException: 9-6-2018
+	at org.h2.util.DateTimeUtils.parseDateValue(DateTimeUtils.java:351)
+	at org.h2.value.ValueDate.parse(ValueDate.java:72)
+	... 33 more
+2018-06-09 14:57:09 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Kann "TIME" "10:00:00:00" nicht umwandeln
+Cannot parse "TIME" constant "10:00:00:00"; SQL statement:
+INSERT INTO termin VALUES (NULL, 'Repeat Test', '2018-06-09', '10:00:00:00', '2018-06-09', '11:30:00:00', '0', NULL, '1', 'stündlich', '0', NULL, NULL, '0', '0',' 1',NULL, NULL, NULL) -- (NULL, 'Repeat Test', '2018-06-09', '10:00:00:00', '2018-06-09', '11:30:00:00', '0', NULL, '1', STRINGDECODE('st\u00fcndlich'), '0', NULL, NULL, '0', '0', ' 1', NULL, NULL, NULL) [22007-197]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:357)
+	at org.h2.message.DbException.get(DbException.java:168)
+	at org.h2.value.ValueTime.parse(ValueTime.java:114)
+	at org.h2.value.Value.convertTo(Value.java:1067)
+	at org.h2.table.Column.convert(Column.java:177)
+	at org.h2.command.dml.Insert.insertRows(Insert.java:166)
+	at org.h2.command.dml.Insert.update(Insert.java:134)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:102)
+	at org.h2.command.Command.executeUpdate(Command.java:261)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:233)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:205)
+	at de.swt.inf.database.TerminDaoImpl.addTermin(TerminDaoImpl.java:90)
+	at de.swt.inf.model.TerminTest.testRepeatTerminStuendlich(TerminTest.java:76)
+>>>>>>> Stashed changes
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -16837,6 +17115,7 @@ INSERT INTO termin VALUES (NULL, 'Selenium Test', '2018-05-2018', '13:00:00', '2
 	at com.intellij.rt.execution.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:47)
 	at com.intellij.rt.execution.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:242)
 	at com.intellij.rt.execution.junit.JUnitStarter.main(JUnitStarter.java:70)
+<<<<<<< Updated upstream
 Caused by: java.lang.IllegalArgumentException: 2018-5-2018
 	at org.h2.util.DateTimeUtils.parseDateValue(DateTimeUtils.java:351)
 	at org.h2.value.ValueDate.parse(ValueDate.java:72)
@@ -17011,3 +17290,15 @@ Caused by: org.h2.jdbc.JdbcSQLException: Die Datenbank-Verbindung wurde nicht ex
 The connection was not closed by the application and is garbage collected [90018-197]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:357)
 	... 78 more
+=======
+Caused by: java.lang.NumberFormatException: For input string: "00:00"
+	at java.lang.NumberFormatException.forInputString(NumberFormatException.java:65)
+	at java.lang.Integer.parseInt(Integer.java:580)
+	at java.lang.Integer.parseInt(Integer.java:615)
+	at org.h2.util.DateTimeUtils.parseTimeNanos(DateTimeUtils.java:402)
+	at org.h2.value.ValueTime.parse(ValueTime.java:112)
+	... 33 more
+2018-06-09 15:03:21 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Keine Daten verfügbar
+No data is available [2000-197]
+>>>>>>> Stashed changes
