@@ -86,25 +86,6 @@ public class AddTerminControler {
             t.setReminderTime(reminderT);
         }
 
-        /*if (intervall != null) {
-            if (intervall.equalsIgnoreCase("monatlich")) t.setRepeatTime(RepeatTimes.monthly);
-            if (intervall.equalsIgnoreCase("jährlich")) t.setRepeatTime(RepeatTimes.yearly);
-            if (intervall.equalsIgnoreCase("stündlich")) t.setRepeatTime(RepeatTimes.hourly);
-            if (intervall.equalsIgnoreCase("täglich")) t.setRepeatTime(RepeatTimes.dayly);
-            if (intervall.equalsIgnoreCase("wöchentlich")) t.setRepeatTime(RepeatTimes.weekly);
-        }*/
-
-
-
-
-
-
-        if (false) {
-            User u = User.getUserByEmail(share);
-            List<User> l = new ArrayList<User>();
-            l.add(u);
-            t.share(l);
-        }
         if (place != null) {
             t.setOrt(place);
         }
@@ -113,10 +94,18 @@ public class AddTerminControler {
             t.setNote(notice);
         }
 
+        /*if (false) {
+            User u = User.getUserByEmail(share);
+            List<User> l = new ArrayList<User>();
+            l.add(u);
+            t.share(l);
+        }*/
+
+
         //if (file != null) {
         //}
             //if valid returns true means the date is correct
-        if (!(validateDates(start, end, startT, endT))) {
+        /*if (!(validateDates(start, end, startT, endT))) {
             //date is incorect
             System.err.println("validate fail");
             model.addAttribute("colors", true);
@@ -165,7 +154,7 @@ public class AddTerminControler {
             model.addAttribute("notice", notice);
             return "terminEdit";
 
-        }
+        }*/
         terminDao.addTermin(t);
 
 
@@ -202,12 +191,19 @@ public class AddTerminControler {
 
             if(repeatTime.equals("stündlich")){
                 for(int i = 0; i < MAX_NEW_TERMINE; i++){
+
                     calendarAnfang.add(Calendar.HOUR_OF_DAY, 1);
                     calendarEnde.add(Calendar.HOUR_OF_DAY, 1);
                     temp.setStart(df.format(calendarAnfang.getTime()).substring(0,10));
                     temp.setStartTime(df.format(calendarAnfang.getTime()).substring(13));
                     temp.setEnd(df.format(calendarEnde.getTime()).substring(0,10));
                     temp.setEndTime(df.format(calendarEnde.getTime()).substring(13));
+                    if(temp.getStartTime().substring(0,2).equals("24")){
+                        temp.setStartTime("00:00");
+                    }
+                    if(temp.getEndTime().substring(0,2).equals("24")){
+                        temp.setEndTime("00:00");
+                    }
                     terminDao.addTermin(temp);
                 }
 

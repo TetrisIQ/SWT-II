@@ -4,6 +4,8 @@ import de.swt.inf.database.DaoFactory;
 import de.swt.inf.database.TerminDao;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -14,6 +16,16 @@ import static org.junit.Assert.*;
 
 @RunWith(JUnitParamsRunner.class)
 public class TerminTest {
+
+    /*@BeforeClass
+    public static void beforeClass(){
+        DaoFactory.test = true;
+    }
+
+    @AfterClass
+    public static void afterClass(){
+        DaoFactory.test = false;
+    }*/
 
     @Test
     @Parameters({"22-10-17, 23-10-17, 10:00, 11:00", "22-10-17, 22-10-17, 10:00, 11:00"})
@@ -63,4 +75,34 @@ public class TerminTest {
         assertEquals(null,terminOutDatabase);
     }
 
+    @Test
+    public void testRepeatTerminStuendlich(){
+        int count = 0;
+        int hour = 10;
+        boolean wrongTermin;
+        TerminDao terminDao = new DaoFactory().getTerminDao();
+
+        Termin termin = new Termin("Repeat Test", "2018-06-09", "2018-06-09",
+                false, "10:00", "11:30");
+        termin.setRepeat(true);
+        termin.setRepeatTime("stündlich");
+        terminDao.addTermin(termin);
+        System.out.println(termin.getStartTime());
+        for(Termin t : terminDao.getAllTermine()){
+            System.out.println("Test");
+            if(t.getName() == "Repeat Test"){
+                String h = hour + ":00";
+                System.out.println("Stunde: " + h);
+                System.out.println("Termin: " + t.getStartTime());
+                if(t.getStartTime().equals(h)){
+                    count++;
+                    hour++;
+                }else{
+                    wrongTermin = true;
+                }
+            }
+        }
+        wrongTermin = false;
+        assertFalse(wrongTermin);
+    }
 }
