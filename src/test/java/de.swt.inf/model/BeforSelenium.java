@@ -1,6 +1,7 @@
 package de.swt.inf.model;
 
 import de.swt.inf.controler.Main;
+import de.swt.inf.database.DaoFactory;
 import org.springframework.boot.SpringApplication;
 
 public class BeforSelenium {
@@ -9,11 +10,11 @@ public class BeforSelenium {
 
     public static void beforSeleniumTests() {
         if (springServerNotRunning) {
+            DaoFactory.test = true;
             //Start Spring Application for Selenium tests
             springServerNotRunning = false;
             String t[] = {};
             SpringApplication.run(Main.class, t);
         }
     }
-
 }

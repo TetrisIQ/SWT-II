@@ -148,7 +148,6 @@ public class AddTerminControler {
             repeats.add("jährlich");
             model.addAttribute("repeats", repeats);
 
-
             //model.addAttribute("share", share);
             //model.addAttribute("anhang", )
             model.addAttribute("notice", notice);

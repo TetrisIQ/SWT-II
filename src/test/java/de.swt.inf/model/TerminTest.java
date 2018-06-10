@@ -8,6 +8,10 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -17,15 +21,16 @@ import static org.junit.Assert.*;
 @RunWith(JUnitParamsRunner.class)
 public class TerminTest {
 
-    /*@BeforeClass
+    @BeforeClass
     public static void beforeClass(){
+        BeforSelenium.beforSeleniumTests();
         DaoFactory.test = true;
     }
 
     @AfterClass
     public static void afterClass(){
         DaoFactory.test = false;
-    }*/
+    }
 
     @Test
     @Parameters({"22-10-17, 23-10-17, 10:00, 11:00", "22-10-17, 22-10-17, 10:00, 11:00"})
@@ -39,14 +44,50 @@ public class TerminTest {
 
         //Test Time
         assertTrue(Termin.isValid(sD, eD, sT, eT));
-        if (!sT.equals(eT)  && sD.equals(eD))  {
+        if (!sT.equals(eT) && sD.equals(eD)) {
             assertFalse(Termin.isValid(sD, eD, eT, sT));
         }
     }
 
+    /**
+     * Die Idee, <br>
+     * wir gucken uns die Links auf dem Dashboard an, von denen einer ein valider link zu einem Termin ist <br>
+     * Dann holen wir uns aus diesem Link die ID des Termins um ihn dann über das delete statment zu löschen <br>
+     * Anschließend sollte dieser termin nicht mehr im Dashboard vorhanden sein <br>
+     * Dazu durchlaufen wir alle links und überprüfen nach dieser ID
+     */
+    @Test
+    public void seleniumTestDelete() {
+        DaoFactory.getTerminDao().addTermin(new Termin("J-Unit Test Termin","22-10-17","22-10-17",false,"13:00","14:00"));
+        WebDriver driver = new HtmlUnitDriver();
+        driver.navigate().to("http://localhost:8080/dashboard");
+        List<WebElement> ls = driver.findElements(By.tagName("a"));
+        String id = "";
+        int linksBefor = ls.size();
+        //find a Id from a Termin in Dashboard
+        for (WebElement e : ls) {
+            if (e.toString().contains("/edit")) {
+                //link for editing a Termin
+                String s = e.toString().substring(9, e.toString().length() - 2);
+                id = s.substring(9);
+                String uri = "http://localhost:8080/delete?id=" + id;
+                driver.navigate().to(uri);
+                break;
+            }
+        }
+        driver.navigate().to("http://localhost:8080/dashboard");
+        ls = driver.findElements(By.tagName("a"));
+        System.out.println(ls);
+        for (WebElement e : ls) {
+            if (e.toString().contains("/edit") && e.toString().contains(id)) {
+                fail();
+            }
+        }
+        assertTrue(true);
+    }
 
     @Test
-    public void testDeleteWithDatabase(){
+    public void testDeleteWithDatabase() {
         TerminDao terminDao = new DaoFactory().getTerminDao();
         Termin termin = new Termin("Test", "22-10-17", "05-10-18", false, "10:00", "11:00");
         terminDao.addTermin(termin);
@@ -56,8 +97,8 @@ public class TerminTest {
 
         Termin terminOutDatabase = new Termin();
 
-        for(Termin t: terminList){
-            if(t.getName().equals("Test")){
+        for (Termin t : terminList) {
+            if (t.getName().equals("Test")) {
                 terminOutDatabase = t;
                 break;
             }
@@ -72,7 +113,7 @@ public class TerminTest {
 
         terminOutDatabase = terminDao.getTermin(terminId);
 
-        assertEquals(null,terminOutDatabase);
+        assertEquals(null, terminOutDatabase);
     }
 
     @Test
