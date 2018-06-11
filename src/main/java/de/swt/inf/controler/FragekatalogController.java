@@ -16,6 +16,12 @@ public class FragekatalogController {
 
     private UserPreferences userPreference = Main.user.getUserPreferences();
 
+    private final int KEY_MUSIC_PREF = 0;
+    private final int KEY_GENDER_PREF = 1;
+    private final int KEY_COURSE_PREF = 2;
+    private final int KEY_PROVINCE_PREF = 3;
+    private final int KEY_UNIVERSITY_PREF = 4;
+
     @RequestMapping(value = "/fragekatalog", method = RequestMethod.GET)
     public String fragekatalog(Model model){
 
@@ -56,6 +62,7 @@ public class FragekatalogController {
         model.addAttribute("course", courseEnums);
         model.addAttribute("province", provinceEnums);
         model.addAttribute("university", universityEnums);
+
         return "fragekatalog";
     }
 
@@ -67,50 +74,50 @@ public class FragekatalogController {
         Map<Integer, String> allSelections = new HashMap<Integer, String>();
 
         //MusicPreferences
-        allSelections.put(0, request.getParameter("music"));
+        allSelections.put(KEY_MUSIC_PREF, request.getParameter("music"));
 
         //GenderPreferences
-        allSelections.put(1, request.getParameter("gender"));
+        allSelections.put(KEY_GENDER_PREF, request.getParameter("gender"));
 
         //CoursePreferences
-        allSelections.put(2, request.getParameter("course"));
+        allSelections.put(KEY_COURSE_PREF, request.getParameter("course"));
 
         //ProvincePreferences
-        allSelections.put(3, request.getParameter("province"));
+        allSelections.put(KEY_PROVINCE_PREF, request.getParameter("province"));
 
         //UniversityPreferences
-        allSelections.put(4, request.getParameter("university"));
+        allSelections.put(KEY_UNIVERSITY_PREF, request.getParameter("university"));
 
         int i = 0;
         for(Map.Entry e : allSelections.entrySet()){
             if(!e.getValue().equals("")){
                 switch (i){
                     //MusicPreferences
-                    case 0:
+                    case KEY_MUSIC_PREF:
                         userPreference.setMusic(MusicPreferencesEnum.valueOf(e.getValue().toString()));
                         neueTermine.addAll(loadTermine(i));
                         break;
 
                     //GenderPreferences
-                    case 1:
+                    case KEY_GENDER_PREF:
                         userPreference.setGender(GenderEnum.valueOf(e.getValue().toString()));
                         neueTermine.addAll(loadTermine(i));
                         break;
 
                     //CoursePreferences
-                    case 2:
+                    case KEY_COURSE_PREF:
                         userPreference.setCourse(CourseEnum.valueOf(e.getValue().toString()));
                         neueTermine.addAll(loadTermine(i));
                         break;
 
                     //ProvincePreferences
-                    case 3:
+                    case KEY_PROVINCE_PREF:
                         userPreference.setProvince(ProvinceEnum.valueOf(e.getValue().toString()));
                         neueTermine.addAll(loadTermine(i));
                         break;
 
                     //UniversityPreferences
-                    case 4:
+                    case KEY_UNIVERSITY_PREF:
                         userPreference.setUniversity(UniversityEnum.valueOf(e.getValue().toString()));
                         neueTermine.addAll(loadTermine(i));
                         break;
@@ -153,7 +160,7 @@ public class FragekatalogController {
 
         switch (i) {
             //MusicPreferences
-            case 0:
+            case KEY_MUSIC_PREF:
                 MusicPreferencesEnum tempMusic = userPreference.getMusicPreferencesEnum();
                 switch (tempMusic) {
                     case EDM:
@@ -215,7 +222,7 @@ public class FragekatalogController {
                 break;
 
             //GenderPreferences
-            case 1:
+            case KEY_GENDER_PREF:
                 GenderEnum tempGender = userPreference.getGenderEnum();
                 switch (tempGender) {
                     case Female:
@@ -256,7 +263,7 @@ public class FragekatalogController {
                 break;
 
             //CoursePreferences
-            case 2:
+            case KEY_COURSE_PREF:
                 CourseEnum tempCourse = userPreference.getCourseEnum();
                 switch (tempCourse) {
                     case Informatik_I:
@@ -298,7 +305,7 @@ public class FragekatalogController {
                 break;
 
             //ProvincePreferences
-            case 3:
+            case KEY_PROVINCE_PREF:
                 ProvinceEnum tempProvince = userPreference.getProvince();
                 switch (tempProvince) {
                     case Schleswig_Holstein:
@@ -331,7 +338,7 @@ public class FragekatalogController {
                 break;
 
             //UniversityPreferences
-            case 4:
+            case KEY_UNIVERSITY_PREF:
                 UniversityEnum tempUniversity = userPreference.getUniversityEnum();
                 switch (tempUniversity) {
                     case FH_Luebeck:
