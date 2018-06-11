@@ -1,6 +1,7 @@
 package de.swt.inf.controler;
 
 import de.swt.inf.database.Connector;
+import de.swt.inf.database.DaoFactory;
 import de.swt.inf.model.VCard;
 import de.swt.inf.model.*;
 import org.springframework.boot.SpringApplication;
@@ -18,14 +19,13 @@ public class Main {
 
     public static List<Category> categories = new ArrayList<Category>();
     public static List<VCard> vCards = new ArrayList<VCard>();
-
-
-    public static Calendar defaultCalendar = new Calendar(new User("default", "123456778",
-            "email", "max", "musterman"));
+    public static User user = new User("default", "123456778",
+            "email", "max", "musterman");
+    public static UserPreferences userPreferences = new UserPreferences();
+    public static Calendar defaultCalendar = new Calendar(user);
 
     public static void main(String[] args) {
-
-
+        user.setUserPreferences(userPreferences);
         /**
         try{
             JdbcConnectionSource conn = new JdbcConnectionSource();

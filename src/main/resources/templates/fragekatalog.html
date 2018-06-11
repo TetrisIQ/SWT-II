@@ -72,11 +72,12 @@
                                 <div class="panel-heading">Welchen Musikgeschmack hast du?</div>
                                 <div class="panel-body">
                                     <div class="row">
-                                        <div class="col-md-3"></div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-2"></div>
+                                        <div class="col-md-8">
                                             <div class="input-group input-group-lg">
                                                 <select class="form-control" name="music" id="music">
-                                                    <option th:each="m : ${music}" th:value="${m}" th:text="${m}" th:selected="${m == musicPref}"></option>
+                                                    <option value="" selected="selected">Triff deine Auswahl!</option>
+                                                    <option th:each="m : ${music}" th:value="${m}" th:text="${m}" th:selected="${m == musicSelected}"></option>
                                                 </select>
                                             </div>
                                         </div>
@@ -92,11 +93,12 @@
                                 <div class="panel-heading">Welches Geschlecht hast du?</div>
                                 <div class="panel-body">
                                     <div class="row">
-                                        <div class="col-md-3"></div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-2"></div>
+                                        <div class="col-md-8">
                                             <div class="input-group input-group-lg">
                                                 <select class="form-control" name="gender" id="gender">
-                                                    <option th:each="g : ${gender}" th:value="${g}" th:text="${g}"></option>
+                                                    <option value="" selected="selected">Triff deine Auswahl!</option>
+                                                    <option th:each="g : ${gender}" th:value="${g}" th:text="${g}" th:selected="${g == genderSelected}"></option>
                                                 </select>
                                             </div>
                                         </div>
@@ -112,11 +114,12 @@
                                 <div class="panel-heading">Was studierst du?</div>
                                 <div class="panel-body">
                                     <div class="row">
-                                        <div class="col-md-3"></div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-2"></div>
+                                        <div class="col-md-8">
                                             <div class="input-group input-group-lg">
                                                 <select class="form-control" name="course" id="course">
-                                                    <option th:each="c : ${course}" th:value="${c}" th:text="${c}"></option>
+                                                    <option value="" selected="selected">Triff deine Auswahl!</option>
+                                                    <option th:each="c : ${course}" th:value="${c}" th:text="${c}" th:selected="${c == courseSelected}"></option>
                                                 </select>
                                             </div>
                                         </div>
@@ -132,11 +135,12 @@
                                 <div class="panel-heading">Wo studierst du?</div>
                                 <div class="panel-body">
                                     <div class="row">
-                                        <div class="col-md-3"></div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-2"></div>
+                                        <div class="col-md-8">
                                             <div class="input-group input-group-lg">
                                                 <select class="form-control" name="university" id="university">
-                                                    <option th:each="u : ${university}" th:value="${u}" th:text="${u}"></option>
+                                                    <option value="" selected="selected">Triff deine Auswahl!</option>
+                                                    <option th:each="u : ${university}" th:value="${u}" th:text="${u}" th:selected="${u == universitySelected}"></option>
                                                 </select>
                                             </div>
                                         </div>
@@ -152,11 +156,12 @@
                                 <div class="panel-heading">Wo wohnst du?</div>
                                 <div class="panel-body">
                                     <div class="row">
-                                        <div class="col-md-3"></div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-2"></div>
+                                        <div class="col-md-8">
                                             <div class="input-group input-group-lg">
                                                 <select class="form-control" name="province" id="province">
-                                                    <option th:each="p : ${province}" th:value="${p}" th:text="${p}"></option>
+                                                    <option value="" selected="selected">Triff deine Auswahl!</option>
+                                                    <option th:each="p : ${province}" th:value="${p}" th:text="${p}" th:selected="${p == provinceSelected}"></option>
                                                 </select>
                                             </div>
                                         </div>

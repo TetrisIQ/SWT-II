@@ -4,7 +4,7 @@ public enum ProvinceEnum {
 
     Schleswig_Holstein,
 
-    Hansestadt_Hanburg,
+    Hansestadt_Hamburg,
 
     Mecklenburg_Vorpommern;
 
