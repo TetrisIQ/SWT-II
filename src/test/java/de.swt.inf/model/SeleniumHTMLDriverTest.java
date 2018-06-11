@@ -37,7 +37,7 @@ public class SeleniumHTMLDriverTest {
         element= driver.findElement(By.name("startT"));
         element.sendKeys("13:00");
         element= driver.findElement(By.name("start"));
-        element.sendKeys("2018-05-2018");
+        element.sendKeys("2018-05-20");
         element = driver.findElement(By.name("ort"));
         element.sendKeys("Lübeck");
         element = driver.findElement(By.name("endT"));
