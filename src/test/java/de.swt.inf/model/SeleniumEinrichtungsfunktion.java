@@ -35,19 +35,6 @@ public class SeleniumEinrichtungsfunktion {
 
        WebElement element;
 
-       /* element.sendKeys("Vorlesung");
-        element= driver.findElement(By.name("startT"));
-        element.sendKeys("13:00");
-        element= driver.findElement(By.name("start"));
-        element.sendKeys("2018-05-20");
-        element = driver.findElement(By.name("ort"));
-        element.sendKeys("Lübeck");
-        element = driver.findElement(By.name("endT"));
-        element.sendKeys("20:00");
-        element = driver.findElement(By.name("end"));
-        element.sendKeys("2018-06-21");
-        */
-
         Select favoritmusic = new Select(driver.findElement(By.id("music")));
        // favoritmusic.selectByVisibleText("EDM");
         favoritmusic.selectByValue("EDM");
