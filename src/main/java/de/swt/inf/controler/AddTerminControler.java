@@ -68,7 +68,7 @@ public class AddTerminControler {
         }
         String repeatTime = request.getParameter("repeatTime");
         String share = request.getParameter("share");
-        //File file = (File) request.getParameter("file"); TODO:
+        //File file = (File) request.getParameter("file");
         String notice = request.getParameter("notice");
         Termin t;
 
@@ -80,18 +80,21 @@ public class AddTerminControler {
         t.setRepeatTime(repeatTime);
 
 
-        //VCards und Kategorien sind nicht im Sprint!!!
 
-        /*if(!cat.equals("")){
+
+        //TODO: Kategorien hinzufügen
+        if(!cat.equals("")){
             t.addCategory(new Category(cat, (byte)1));
         }
 
-        if(!prof.equals("")){
+
+        //VCards sind nicht im Sprint!!!
+
+        /*if(!prof.equals("")){
 
         }*/
 
-        //TODO:
-        //ReminderTime kann nicht in die Datenbank geschrieben werden
+        //TODO: ReminderTime kann nicht in die Datenbank geschrieben werden
         if (reminder) {
             t.setReminder(true);
             t.setReminderDate(reminderD);
@@ -269,40 +272,5 @@ public class AddTerminControler {
     }
 
 
-   /* static boolean validateDates(String start, String end, String startT, String endT) {
-        String[] s = start.split("-");
-        String[] e = end.split("-");
-        Integer[] i1 = new Integer[3];
-        Integer[] i2 = new Integer[3];
-        for (int i = 0; i < 3; i++) {
-            i1[i] = Integer.parseInt(s[i]);
-            i2[i] = Integer.parseInt(e[i]);
-            //System.err.println(i1[i] + " " + i2[i]);
-        }
-
-        for (int i = 0; i < 3; i++) {
-            if (i1[i] < i2[i]) {
-                return true;
-            }
-        } if (start.equalsIgnoreCase(end)) {
-
-        String[] sT = startT.split(":");
-        String[] eT = endT.split(":");
-        for (int i = 0; i < 2; i++) {
-            i1[i] = Integer.parseInt(sT[i]);
-            i2[i] = Integer.parseInt(eT[i]);
-            //System.err.println(i1[i] + " " + i2[i]);
-        }
-
-        for (int i = 0; i < 2; i++) {
-            if (i1[i] < i2[i]) {
-                return true;
-            }
-        }
-
-        }
-
-        return false;
-    }*/
 
 }

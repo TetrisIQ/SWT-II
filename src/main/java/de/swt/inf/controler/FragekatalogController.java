@@ -27,8 +27,7 @@ public class FragekatalogController {
     @RequestMapping(value = "/fragekatalog", method = RequestMethod.GET)
     public String fragekatalog(Model model){
 
-        //TODO:
-        //Sobald der Login steht muss der User abgeholt werden
+        //TODO: Sobald der Login steht muss der User abgeholt werden
         userPreference = (userPreference == null ? new UserPreferences() : userPreference);
 
 

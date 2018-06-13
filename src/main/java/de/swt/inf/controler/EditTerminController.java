@@ -127,7 +127,7 @@ public class EditTerminController {
         }
         String intervall = request.getParameter("repeat");
         String share = request.getParameter("share");
-        //File file = (File) request.getParameter("file"); TODO:
+        //File file = (File) request.getParameter("file");
         String notice = request.getParameter("notice");
         Termin t;
 
