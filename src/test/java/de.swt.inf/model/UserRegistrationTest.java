@@ -13,6 +13,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class UserRegistrationTest {
     @BeforeClass
     public static void beforeClass() {
         DaoFactory.test = true;
-        //BeforSelenium.beforSeleniumTests();
+        BeforSelenium.beforSeleniumTests();
     }
 
     @AfterClass
@@ -54,6 +55,40 @@ public class UserRegistrationTest {
         assertFalse(password.matches(User.passwordRegex));
         password = randomizeString(password);
         assertFalse(password.matches(User.passwordRegex));
+    }
+
+    @Test
+    @Parameters({"KarlEnder", "ManniDasMamut", "DarthVader", "Hitler", "phirewire", "nini19", "TetrisIQ"})
+    public void testUsernameRegexTrue(String username) {
+        assertTrue(username.matches(User.userNameRegex));
+        username = randomizeString(username);
+        assertTrue(username.matches(User.userNameRegex));
+        username = randomizeString(username);
+        assertTrue(username.matches(User.userNameRegex));
+        username = randomizeString(username);
+        assertTrue(username.matches(User.userNameRegex));
+    }
+
+    @Test
+    @Parameters({"Karl", "Manni", "Vader", "phire", "nini", "alex"})
+    public void testUsernameRegexFalse(String username) {
+        assertFalse(username.matches(User.userNameRegex));
+        username = randomizeString(username);
+        assertFalse(username.matches(User.userNameRegex));
+        username = randomizeString(username);
+        assertFalse(username.matches(User.userNameRegex));
+        username = randomizeString(username);
+        assertFalse(username.matches(User.userNameRegex));
+    }
+
+    @Test
+    @Parameters({"Hitler", "Stalin", "Arschloch", "Penis"})
+    public void testUsernameBlacklist(String username) throws IOException {
+        //username sollte in der Blacklist stehen
+        assertTrue(User.checkBlacklistedUsernames(username));
+        //Der username sollte nicht mehr auf der blacklist stehen wenn der String anders angeordnet ist
+        username = randomizeString(username);
+        assertFalse(User.checkBlacklistedUsernames(username));
     }
 
     @Test

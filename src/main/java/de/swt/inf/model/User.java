@@ -1,12 +1,14 @@
 package de.swt.inf.model;
 
-import de.swt.inf.database.UserDao;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class User {
 
     public static final String passwordRegex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[,.!%$#_&@])(?=\\S+$).{6,}$";
 
-    public static final String userNameRegex = ".{6,}"; //TODO: Richtign Regex für Username
+    public static final String userNameRegex = "(\\w)*(\\d)*(\\w)*.{6,}"; //TODO: Richtign Regex für Username
 
     private int USER_ID;
 
@@ -145,8 +147,8 @@ public class User {
         return false;
     }
 
-    public boolean verifyUsername() {
-        return username.matches(userNameRegex);
+    public boolean verifyUsername() throws IOException {
+        return username.matches(userNameRegex) && checkBlacklistedUsernames(username);
     }
 
     public boolean verifyPassword() {
@@ -155,6 +157,23 @@ public class User {
 
     public void confirmUser() {
         this.confirmedUser = true;
+    }
+
+    public static boolean checkBlacklistedUsernames(String userName) throws IOException {
+        BufferedReader bufferedReader;
+        try {
+            bufferedReader = new BufferedReader(new FileReader("src/main/resources/usernameBlacklist.txt"));
+            String sCurrentLine;
+            while ((sCurrentLine = bufferedReader.readLine()) != null) {
+                if (userName.toUpperCase().contains(sCurrentLine.toUpperCase())) {
+                    return true;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new IOException("Cannot Check Blacklisted Usernames.\nContact an Systemadmin.");
+        }
+        return false;
     }
 
 }
