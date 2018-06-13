@@ -10,7 +10,7 @@ public class BeforSelenium {
 
     public static void beforSeleniumTests() {
         if (springServerNotRunning) {
-            DaoFactory.test = true;
+           // DaoFactory.test = true;
             //Start Spring Application for Selenium tests
             springServerNotRunning = false;
             String t[] = {};
