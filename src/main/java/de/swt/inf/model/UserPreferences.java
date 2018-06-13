@@ -4,9 +4,9 @@ public class UserPreferences {
 
     private int USER_PREFERENCES_ID;
 
-    private int semester;
+    private String semester = null;
 
-    private int age;
+    private String age = null;
 
     private User user;
 
@@ -32,7 +32,7 @@ public class UserPreferences {
 
     public void setCourse(CourseEnum course) { this.courseEnum = course; }
 
-    public void setSemester(int semester) {
+    public void setSemester(String semester) {
         this.semester = semester;
     }
 
@@ -40,7 +40,7 @@ public class UserPreferences {
 
     public void setGender(GenderEnum gender) { this.genderEnum = gender; }
 
-    public void setAge(int age) {
+    public void setAge(String age) {
         this.age = age;
     }
 
@@ -52,13 +52,13 @@ public class UserPreferences {
 
     public CourseEnum getCourseEnum() { return this.courseEnum; }
 
-    public int getSemester(){ return this.semester;}
+    public String getSemester(){ return this.semester;}
 
     public MusicPreferencesEnum getMusicPreferencesEnum() { return this.musicPreferencesEnum; }
 
     public GenderEnum getGenderEnum() { return this.genderEnum; }
 
-    public int getAge() { return this.age; }
+    public String getAge() { return this.age; }
 
     public int getId() { return this.USER_PREFERENCES_ID;}
 }

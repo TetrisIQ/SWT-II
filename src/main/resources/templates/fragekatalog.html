@@ -132,6 +132,27 @@
                         <div class="col-md-3"></div>
                         <div class="col-md-6">
                             <div class="panel panel-success">
+                                <div class="panel-heading">In welchem Semester bist du?</div>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-md-2"></div>
+                                        <div class="col-md-8">
+                                            <div class="input-group input-group-lg">
+                                                <select class="form-control" name="semester" id="semester">
+                                                    <option value="" selected="selected">Triff deine Auswahl!</option>
+                                                    <option th:each="s : ${semester}" th:value="${s}" th:text="${s}" th:selected="${s == semesterSelected}"></option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-6">
+                            <div class="panel panel-success">
                                 <div class="panel-heading">Wo studierst du?</div>
                                 <div class="panel-body">
                                     <div class="row">
@@ -162,6 +183,27 @@
                                                 <select class="form-control" name="province" id="province">
                                                     <option value="" selected="selected">Triff deine Auswahl!</option>
                                                     <option th:each="p : ${province}" th:value="${p}" th:text="${p}" th:selected="${p == provinceSelected}"></option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-10">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-6">
+                            <div class="panel panel-success">
+                                <div class="panel-heading">Wie alt bist du?</div>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-md-2"></div>
+                                        <div class="col-md-8">
+                                            <div class="input-group input-group-lg">
+                                                <select class="form-control" name="age" id="age">
+                                                    <option value="" selected="selected">Triff deine Auswahl!</option>
+                                                    <option th:each="a : ${age}" th:value="${a}" th:text="${a}" th:selected="${a == ageSelected}"></option>
                                                 </select>
                                             </div>
                                         </div>

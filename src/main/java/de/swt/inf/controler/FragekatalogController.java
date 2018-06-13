@@ -21,9 +21,16 @@ public class FragekatalogController {
     private final int KEY_COURSE_PREF = 2;
     private final int KEY_PROVINCE_PREF = 3;
     private final int KEY_UNIVERSITY_PREF = 4;
+    private final int KEY_AGE_PREF = 5;
+    private final int KEY_SEMESTER_PREF = 6;
 
     @RequestMapping(value = "/fragekatalog", method = RequestMethod.GET)
     public String fragekatalog(Model model){
+
+        //TODO:
+        //Sobald der Login steht muss der User abgeholt werden
+        userPreference = (userPreference == null ? new UserPreferences() : userPreference);
+
 
         // Falls der Fragekatalog schon einmal verwendet wurde, werden die alten Preferenzen vorausgewählt
         if(userPreference.getMusicPreferencesEnum() != null){
@@ -46,6 +53,15 @@ public class FragekatalogController {
             UniversityEnum universitySelected = userPreference.getUniversityEnum();
             model.addAttribute("universitySelected", universitySelected);
         }
+        if(userPreference.getAge() != null){
+            String ageSelected = userPreference.getAge();
+            model.addAttribute("ageSelected", ageSelected);
+        }
+        if(userPreference.getSemester() != null){
+            String semesterSelected = userPreference.getSemester();
+            model.addAttribute("semesterSelected", semesterSelected);
+        }
+
 
 
         //Enums einlesen
@@ -55,6 +71,13 @@ public class FragekatalogController {
         List<ProvinceEnum> provinceEnums = Arrays.asList(ProvinceEnum.values());
         List<UniversityEnum> universityEnums = Arrays.asList(UniversityEnum.values());
 
+        //Alters- und Semestergruppierung einlesen
+        //Anschließend dem Model hinzufügen wenn nicht null
+        List<String> ageEnums = loadOtherPreferences(KEY_AGE_PREF);
+        List<String> semesterEnums = loadOtherPreferences(KEY_SEMESTER_PREF);
+
+        model.addAttribute("age", ageEnums);
+        model.addAttribute("semester", semesterEnums);
 
         //Enums dem Model hinzufügen
         model.addAttribute("music", musicEnums);
@@ -87,6 +110,13 @@ public class FragekatalogController {
 
         //UniversityPreferences
         allSelections.put(KEY_UNIVERSITY_PREF, request.getParameter("university"));
+
+        //AgePreferences
+        allSelections.put(KEY_AGE_PREF, request.getParameter("age"));
+
+        //SemesterPreferences
+        allSelections.put(KEY_SEMESTER_PREF, request.getParameter("semester"));
+
 
         int i = 0;
         for(Map.Entry e : allSelections.entrySet()){
@@ -121,12 +151,23 @@ public class FragekatalogController {
                         userPreference.setUniversity(UniversityEnum.valueOf(e.getValue().toString()));
                         neueTermine.addAll(loadTermine(i));
                         break;
+
+                    //AgePreferences
+                    case KEY_AGE_PREF:
+                        userPreference.setAge(e.getValue().toString());
+                        neueTermine.addAll(loadTermine(i));
+                        break;
+
+                    case KEY_SEMESTER_PREF:
+                        userPreference.setSemester(e.getValue().toString());
+                        neueTermine.addAll(loadTermine(i));
+                        break;
                 }
             }
             i++;
         }
 
-        //Alle Termine, die noch nicht im Karl Ender vorhanden sind, werden nun hinzugefügt.
+        //Alle Termine, die noch nicht im aktuellen Kalender vorhanden sind, werden nun hinzugefügt.
         boolean found = false;
         if(neueTermine != null){
             for(Termin tNeu : neueTermine){
@@ -387,12 +428,145 @@ public class FragekatalogController {
                         break;
                 }
                 break;
+
+            //AgePreferences
+            case KEY_AGE_PREF:
+                String tempAge = userPreference.getAge();
+                if(tempAge.equals("unter 18")){
+                    switch (aktuellesJahr) {
+                        case 2018:
+                            temp = new Termin("unter 18", "2018-08-02", "2018-08-02", false,
+                                    "07:00", "08:00");
+                            neueTermine.add(temp);
+                    }
+                }else if(tempAge.equals("unter 30")){
+                    switch (aktuellesJahr) {
+                        case 2018:
+                            temp = new Termin("unter 30", "2018-08-02", "2018-08-02", false,
+                                    "07:00", "08:00");
+                            neueTermine.add(temp);
+                    }
+                } else if(tempAge.equals("über 30")){
+                    switch (aktuellesJahr) {
+                        case 2018:
+                            temp = new Termin("über 30", "2018-08-02", "2018-08-02", false,
+                                    "07:00", "08:00");
+                            neueTermine.add(temp);
+                    }
+                }
+                break;
+
+            //SemesterPreferences
+            case KEY_SEMESTER_PREF:
+                String tempSemester = userPreference.getSemester();
+                if(tempSemester.equals("1")){
+                    switch (aktuellesJahr) {
+                        case 2018:
+                            temp = new Termin("1. Semester", "2018-08-02", "2018-08-02", false,
+                                    "07:00", "08:00");
+                            neueTermine.add(temp);
+                    }
+                } else if(tempSemester.equals("2")){
+                    switch (aktuellesJahr) {
+                        case 2018:
+                            temp = new Termin("2. Semester", "2018-08-02", "2018-08-02", false,
+                                    "07:00", "08:00");
+                            neueTermine.add(temp);
+                    }
+                } else if(tempSemester.equals("3")){
+                    switch (aktuellesJahr) {
+                        case 2018:
+                            temp = new Termin("3. Semester", "2018-08-02", "2018-08-02", false,
+                                    "07:00", "08:00");
+                            neueTermine.add(temp);
+                    }
+                } else if(tempSemester.equals("4")){
+                    switch (aktuellesJahr) {
+                        case 2018:
+                            temp = new Termin("4. Semester", "2018-08-02", "2018-08-02", false,
+                                    "07:00", "08:00");
+                            neueTermine.add(temp);
+                    }
+                } else if(tempSemester.equals("5")){
+                    switch (aktuellesJahr) {
+                        case 2018:
+                            temp = new Termin("5. Semester", "2018-08-02", "2018-08-02", false,
+                                    "07:00", "08:00");
+                            neueTermine.add(temp);
+                    }
+                } else if(tempSemester.equals("6")){
+                    switch (aktuellesJahr) {
+                        case 2018:
+                            temp = new Termin("6. Semester", "2018-08-02", "2018-08-02", false,
+                                    "07:00", "08:00");
+                            neueTermine.add(temp);
+                    }
+                } else if(tempSemester.equals("7")){
+                    switch (aktuellesJahr) {
+                        case 2018:
+                            temp = new Termin("7. Semester", "2018-08-02", "2018-08-02", false,
+                                    "07:00", "08:00");
+                            neueTermine.add(temp);
+                    }
+                }  else if(tempSemester.equals("8")){
+                    switch (aktuellesJahr) {
+                        case 2018:
+                            temp = new Termin("8. Semester", "2018-08-02", "2018-08-02", false,
+                                    "07:00", "08:00");
+                            neueTermine.add(temp);
+                    }
+                } else if(tempSemester.equals("9")){
+                    switch (aktuellesJahr) {
+                        case 2018:
+                            temp = new Termin("9. Semester", "2018-08-02", "2018-08-02", false,
+                                    "07:00", "08:00");
+                            neueTermine.add(temp);
+                    }
+                }  else if(tempSemester.equals("10")){
+                    switch (aktuellesJahr) {
+                        case 2018:
+                            temp = new Termin("10. Semester", "2018-08-02", "2018-08-02", false,
+                                    "07:00", "08:00");
+                            neueTermine.add(temp);
+                    }
+                } else if(tempSemester.equals(">10")){
+                    switch (aktuellesJahr) {
+                        case 2018:
+                            temp = new Termin("(10+) Semester", "2018-08-02", "2018-08-02", false,
+                                    "07:00", "08:00");
+                            neueTermine.add(temp);
+                    }
+                }
         }
 
 
         return neueTermine;
     }
 
-
+    private List<String> loadOtherPreferences(int key){
+        switch (key){
+            case 5:
+                List<String> altersgruppen = new LinkedList<String>();
+                altersgruppen.add("unter 18");
+                altersgruppen.add("unter 30");
+                altersgruppen.add("über 30");
+                return altersgruppen;
+            case 6:
+                List<String> semester = new LinkedList<String>();
+                semester.add("1");
+                semester.add("2");
+                semester.add("3");
+                semester.add("4");
+                semester.add("5");
+                semester.add("6");
+                semester.add("7");
+                semester.add("8");
+                semester.add("9");
+                semester.add("10");
+                semester.add(">10");
+                return semester;
+        }
+        return null;
+    }
 
 }

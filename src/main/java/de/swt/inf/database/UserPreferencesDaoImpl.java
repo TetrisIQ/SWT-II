@@ -24,10 +24,10 @@ public class UserPreferencesDaoImpl implements UserPreferencesDao{
             tempUserPref.setProvince(ProvinceEnum.valueOf(rs.getString("Province")));
             tempUserPref.setUniversity(UniversityEnum.valueOf(rs.getString("University")));
             tempUserPref.setCourse(CourseEnum.valueOf(rs.getString("Course")));
-            tempUserPref.setSemester(rs.getInt("Semester"));
+            tempUserPref.setSemester(rs.getString("Semester"));
             tempUserPref.setMusic(MusicPreferencesEnum.valueOf(rs.getString("Music")));
             tempUserPref.setGender(GenderEnum.valueOf(rs.getString("Gender")));
-            tempUserPref.setAge(rs.getInt("Age"));
+            tempUserPref.setAge(rs.getString("Age"));
 
             return tempUserPref;
 
