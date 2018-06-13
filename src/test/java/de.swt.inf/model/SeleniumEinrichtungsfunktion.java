@@ -34,7 +34,7 @@ public class SeleniumEinrichtungsfunktion {
 
         driver.navigate().to("http://localhost:8080/fragekatalog");
 
-        
+
         Select favoritmusic = new Select(driver.findElement(By.id("music")));
         favoritmusic.selectByValue("EDM");
 

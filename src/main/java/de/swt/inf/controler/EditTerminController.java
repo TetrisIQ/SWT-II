@@ -67,11 +67,12 @@ public class EditTerminController {
         boolean reminder = termin.getReminder();
         String reminderD = " ";
         String reminderT = " ";
+
         if (reminder) {
             reminderD = termin.getReminderDate();
             reminderT = termin.getReminderTime();
         }
-        System.err.println(termin.getReminderTime());
+        //System.err.println(termin.getReminderTime());
         String notice = termin.getNote();
         int prio = termin.getPriority();
 
@@ -140,13 +141,7 @@ public class EditTerminController {
             t.setReminderTime(reminderT);
         }
 
-        /*if (intervall != null) {
-            if (intervall.equalsIgnoreCase("monatlich")) t.setRepeatTime(RepeatTimes.monthly);
-            if (intervall.equalsIgnoreCase("jährlich")) t.setRepeatTime(RepeatTimes.yearly);
-            if (intervall.equalsIgnoreCase("stündlich")) t.setRepeatTime(RepeatTimes.hourly);
-            if (intervall.equalsIgnoreCase("täglich")) t.setRepeatTime(RepeatTimes.dayly);
-            if (intervall.equalsIgnoreCase("wöchentlich")) t.setRepeatTime(RepeatTimes.weekly);
-        }*/
+
 
         if (false) {
             User u = User.getUserByEmail(share);
@@ -163,10 +158,9 @@ public class EditTerminController {
             t.setOrt(place);
         }
 
-        //if (file != null) {
-        //}
 
-        if (!(AddTerminControler.validateDates(start, end, startT, endT))) {
+
+        if (!(Termin.isValid(start, end, startT, endT))) {
             //date is incorect
             System.err.println("validate fail");
             model.addAttribute("colors", true);

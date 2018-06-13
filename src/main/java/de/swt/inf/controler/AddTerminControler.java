@@ -80,6 +80,18 @@ public class AddTerminControler {
         t.setRepeatTime(repeatTime);
 
 
+        //VCards und Kategorien sind nicht im Sprint!!!
+
+        /*if(!cat.equals("")){
+            t.addCategory(new Category(cat, (byte)1));
+        }
+
+        if(!prof.equals("")){
+
+        }*/
+
+        //TODO:
+        //ReminderTime kann nicht in die Datenbank geschrieben werden
         if (reminder) {
             t.setReminder(true);
             t.setReminderDate(reminderD);
@@ -94,18 +106,10 @@ public class AddTerminControler {
             t.setNote(notice);
         }
 
-        /*if (false) {
-            User u = User.getUserByEmail(share);
-            List<User> l = new ArrayList<User>();
-            l.add(u);
-            t.share(l);
-        }*/
 
+        terminDao.addTermin(t);
 
-        //if (file != null) {
-        //}
-            //if valid returns true means the date is correct
-        /*if (!(validateDates(start, end, startT, endT))) {
+        if (!(Termin.isValid(start, end, startT, endT))) {
             //date is incorect
             System.err.println("validate fail");
             model.addAttribute("colors", true);
@@ -148,14 +152,13 @@ public class AddTerminControler {
             repeats.add("jährlich");
             model.addAttribute("repeats", repeats);
 
+
             //model.addAttribute("share", share);
             //model.addAttribute("anhang", )
             model.addAttribute("notice", notice);
             return "terminEdit";
 
-        }*/
-        terminDao.addTermin(t);
-
+        }
 
         if(terminRepeat){
             Termin temp = t;
@@ -266,7 +269,7 @@ public class AddTerminControler {
     }
 
 
-    static boolean validateDates(String start, String end, String startT, String endT) {
+   /* static boolean validateDates(String start, String end, String startT, String endT) {
         String[] s = start.split("-");
         String[] e = end.split("-");
         Integer[] i1 = new Integer[3];
@@ -300,11 +303,6 @@ public class AddTerminControler {
         }
 
         return false;
-    }
-
-    /*private void copyTermin(Termin original, ){
-        neu.setName(original.getName());
-        //neu.
-
     }*/
+
 }

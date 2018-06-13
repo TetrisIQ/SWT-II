@@ -197,6 +197,7 @@
                     <div class="input-group input-group-lg">
                         <span class="input-group-addon" id="category">Kategorie: </span>
                         <select class="form-control">
+                            <option value="" selected="selected"></option>
                             <option name="category" th:each="cat : ${categories}" th:value="${cat}"
                                     th:text="${cat.name}"></option>
                         </select>
@@ -217,6 +218,7 @@
                         <span class="input-group-addon" id="vcards">Professor: </span>
 
                         <select class="form-control">
+                            <option value="" selected="selected"></option>
                             <option name="prof" th:each="v : ${vcards}" th:value="${v}"
                                     th:text="${v.title} + ' ' + ${v.lastname}"></option>
                         </select>
