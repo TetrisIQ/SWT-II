@@ -16,7 +16,7 @@ public class SeleniumEinrichtungsfunktion {
 
    @BeforeClass
     public static void beforeClass() {
-        //DaoFactory.test = true;
+        DaoFactory.test = true;
         BeforSelenium.beforSeleniumTests();
     }
 
@@ -30,13 +30,12 @@ public class SeleniumEinrichtungsfunktion {
     public void SeleniumTestEinrichtungsfunktion() {
 
         WebDriver driver = new HtmlUnitDriver();
+        WebElement element;
 
         driver.navigate().to("http://localhost:8080/fragekatalog");
 
-       WebElement element;
-
+        
         Select favoritmusic = new Select(driver.findElement(By.id("music")));
-       // favoritmusic.selectByVisibleText("EDM");
         favoritmusic.selectByValue("EDM");
 
         Select gender = new Select(driver.findElement(By.name("gender")));
