@@ -83,9 +83,9 @@ public class AddTerminControler {
 
 
         //TODO: Kategorien hinzufügen
-        if(!cat.equals("")){
+        /*if(!cat.equals("")){
             t.addCategory(new Category(cat, (byte)1));
-        }
+        }*/
 
 
         //VCards sind nicht im Sprint!!!
