@@ -27,9 +27,15 @@ public class SeleniumWiederholung {
 
     @Test
     public void WdhTestTaeglich(){
+        //Webdriver erstellen
         WebDriver driver = new HtmlUnitDriver();
-
-        driver.navigate().to("http://localhost:8080/termin");
+        // Navigieren zum Dashboard
+        driver.navigate().to("http://localhost:8080/dashboard");
+        System.out.println("Go to Dashboard: " + driver.getCurrentUrl());
+        //In neuen Termin erstellen gehen
+        WebElement NeuerTerminElement = driver.findElement(By.linkText("Neuer Termin"));
+        NeuerTerminElement.click();
+        //Neuen Termin erstellen
         WebElement element = driver.findElement(By.name("name"));
         element.sendKeys("Test täglich");
         element= driver.findElement(By.name("startT"));
@@ -47,16 +53,30 @@ public class SeleniumWiederholung {
         Select dropdown = new Select(driver.findElement(By.name("repeatTime")));
         dropdown.selectByVisibleText("täglich");
 
-
-
+        //Termin speichern
         element = driver.findElement(By.name("speichern"));
         element.click();
 
-        System.out.println("Name:" + driver.getCurrentUrl());
+        System.out.println("Termin gespeichert: " + driver.getCurrentUrl());
         System.out.println("Title is: " + driver.getTitle());
-
+        //Junit-Test, ob der Termin gespeichert wurde
         assertEquals("http://localhost:8080/dashboard", driver.getCurrentUrl());
         assertEquals("Dashboard", driver.getTitle());
+
+        // In den angelegten Termin gehen
+        WebElement element2 = driver.findElement(By.linkText("Test täglich"));
+        element2.click();
+
+        System.out.println("Name:" + driver.getCurrentUrl());
+        System.out.println("Title is: " + driver.getTitle());
+        //JUnit-Test, ob der Termin richtig mit täglich angelegt wurde
+        assertEquals("http://localhost:8080/edit?id=1", driver.getCurrentUrl());
+        assertEquals("Termin Bearbeiten", driver.getTitle());
+
+        String searchOption = new Select(driver.findElement(By.name("repeatTime"))).getFirstSelectedOption().getText();
+
+        System.out.println("Select: " +searchOption);
+        assertEquals("täglich", searchOption);
     }
 
     @Test
@@ -115,10 +135,14 @@ public class SeleniumWiederholung {
 
     @Test
     public void WdhTestWoechentlich() {
-
+        //Webdriver erstellen
         WebDriver driver = new HtmlUnitDriver();
-
-        driver.navigate().to("http://localhost:8080/termin");
+        //Navigieren zum Dashboard
+        driver.navigate().to("http://localhost:8080/dashboard");
+        //Neuen Termin anklicken
+        WebElement NeuerTerminElement = driver.findElement(By.linkText("Neuer Termin"));
+        NeuerTerminElement.click();
+        //Neuen Termin erstellen
         WebElement element = driver.findElement(By.name("name"));
         element.sendKeys("Test wöchentlich");
         element= driver.findElement(By.name("startT"));
@@ -136,24 +160,43 @@ public class SeleniumWiederholung {
         Select dropdown = new Select(driver.findElement(By.name("repeatTime")));
         dropdown.selectByVisibleText("wöchentlich");
 
-
-
+        //Termin speichern
         element = driver.findElement(By.name("speichern"));
         element.click();
 
         System.out.println("Name:" + driver.getCurrentUrl());
         System.out.println("Title is: " + driver.getTitle());
-
+        //JUnit-Test, ob der Termin erstellt wurde
         assertEquals("http://localhost:8080/dashboard", driver.getCurrentUrl());
         assertEquals("Dashboard", driver.getTitle());
+        //Den neuen Termin im Dashboard anklicken
+        WebElement element2;
+        element2 = driver.findElement(By.linkText("Test wöchentlich"));
+        element2.click();
+
+        System.out.println("Im Termin: " + driver.getCurrentUrl());
+        System.out.println("Title is: " + driver.getTitle());
+
+        //JUnit-Test, ob der Termin richtig mit wöchentlich angelegt wurde
+        assertEquals("http://localhost:8080/edit?id=1", driver.getCurrentUrl());
+        assertEquals("Termin Bearbeiten", driver.getTitle());
+        String searchOption = new Select(driver.findElement(By.name("repeatTime"))).getFirstSelectedOption().getText();
+
+        System.out.println("Select: " +searchOption);
+        assertEquals("wöchentlich", searchOption);
+
     }
 
     @Test
     public void WdhTestMonatlich() {
-
+        //Webdriver erstellen
         WebDriver driver = new HtmlUnitDriver();
-
-        driver.navigate().to("http://localhost:8080/termin");
+        //Navigieren zum Dashboard
+        driver.navigate().to("http://localhost:8080/dashboard");
+        //Neuen Termin anklicken
+        WebElement NeuerTerminElement = driver.findElement(By.linkText("Neuer Termin"));
+        NeuerTerminElement.click();
+        //Neuen Termin erstellen
         WebElement element = driver.findElement(By.name("name"));
         element.sendKeys("Test monatlich");
         element= driver.findElement(By.name("startT"));
@@ -171,24 +214,43 @@ public class SeleniumWiederholung {
         Select dropdown = new Select(driver.findElement(By.name("repeatTime")));
         dropdown.selectByVisibleText("monatlich");
 
-
-
+        //Termin speichern
         element = driver.findElement(By.name("speichern"));
         element.click();
 
         System.out.println("Name:" + driver.getCurrentUrl());
         System.out.println("Title is: " + driver.getTitle());
-
+        //JUnit-Test, ob der Termin angelegt wurde
         assertEquals("http://localhost:8080/dashboard", driver.getCurrentUrl());
         assertEquals("Dashboard", driver.getTitle());
+
+        //Den neuen Termin im Dashboard anklicken
+        WebElement element2;
+        element2 = driver.findElement(By.linkText("Test monatlich"));
+        element2.click();
+
+        System.out.println("Im Termin: " + driver.getCurrentUrl());
+        System.out.println("Title is: " + driver.getTitle());
+
+        //JUnit-Test, ob der Termin richtig mit wöchentlich angelegt wurde
+        assertEquals("http://localhost:8080/edit?id=1", driver.getCurrentUrl());
+        assertEquals("Termin Bearbeiten", driver.getTitle());
+        String searchOption = new Select(driver.findElement(By.name("repeatTime"))).getFirstSelectedOption().getText();
+
+        System.out.println("Select: " +searchOption);
+        assertEquals("monatlich", searchOption);
     }
 
     @Test
     public void WdhTestjaerhlich() {
-
+        // Webdriver erstellen
         WebDriver driver = new HtmlUnitDriver();
-
-        driver.navigate().to("http://localhost:8080/termin");
+        // Navigieren zum Dashboard
+        driver.navigate().to("http://localhost:8080/dashboard");
+        //Neuen Termin anklicken
+        WebElement NeuerTerminElement = driver.findElement(By.linkText("Neuer Termin"));
+        NeuerTerminElement.click();
+        //Neuen Termin erstellen
         WebElement element = driver.findElement(By.name("name"));
         element.sendKeys("Test jährlich");
         element= driver.findElement(By.name("startT"));
@@ -206,15 +268,30 @@ public class SeleniumWiederholung {
         Select dropdown = new Select(driver.findElement(By.name("repeatTime")));
         dropdown.selectByVisibleText("jährlich");
 
-
-
+        //Termin speichern
         element = driver.findElement(By.name("speichern"));
         element.click();
 
         System.out.println("Name:" + driver.getCurrentUrl());
         System.out.println("Title is: " + driver.getTitle());
-
+        //JUnit-Test, ob der Termin angelegt wurde
         assertEquals("http://localhost:8080/dashboard", driver.getCurrentUrl());
         assertEquals("Dashboard", driver.getTitle());
+
+        //Den neuen Termin im Dashboard anklicken
+        WebElement element2;
+        element2 = driver.findElement(By.linkText("Test jährlich"));
+        element2.click();
+
+        System.out.println("Im Termin: " + driver.getCurrentUrl());
+        System.out.println("Title is: " + driver.getTitle());
+
+        //JUnit-Test, ob der Termin richtig mit wöchentlich angelegt wurde
+        assertEquals("http://localhost:8080/edit?id=1", driver.getCurrentUrl());
+        assertEquals("Termin Bearbeiten", driver.getTitle());
+        String searchOption = new Select(driver.findElement(By.name("repeatTime"))).getFirstSelectedOption().getText();
+
+        System.out.println("Select: " +searchOption);
+        assertEquals("jährlich", searchOption);
     }
 }
