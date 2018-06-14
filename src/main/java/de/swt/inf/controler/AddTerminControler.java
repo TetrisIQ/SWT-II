@@ -183,12 +183,7 @@ public class AddTerminControler {
             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd - kk:mm");
             Calendar calendarAnfang = new GregorianCalendar(jahrAnf, monatAnf, tagAnf, stundeAnf, minuteAnf);
             Calendar calendarEnde = new GregorianCalendar(jahrEnde, monatEnde, tagEnde, stundeEnde, minuteEnde);
-            System.out.println(df.format(calendarAnfang.getTime()));
-            System.out.println(df.format(calendarEnde.getTime()));
-            System.out.println("Start: " + temp.getStart());
-            System.out.println("StartTime: " + temp.getStartTime());
-            System.out.println("Ende: " + temp.getEnd());
-            System.out.println("EndeTime: " + temp.getEndTime());
+
 
 
 

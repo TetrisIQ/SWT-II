@@ -69,7 +69,7 @@ public class TerminTest {
             }
         }
 
-        System.out.println(terminOutDatabase.getName());
+
         assertTrue(terminOutDatabase.getName().equals("Test"));
 
         int terminId = terminOutDatabase.getId();
@@ -93,13 +93,12 @@ public class TerminTest {
         termin.setRepeat(true);
         termin.setRepeatTime("stündlich");
         terminDao.addTermin(termin);
-        System.out.println(termin.getStartTime());
+
         for(Termin t : terminDao.getAllTermine()){
-            System.out.println("Test");
+
             if(t.getName() == "Repeat Test"){
                 String h = hour + ":00";
-                System.out.println("Stunde: " + h);
-                System.out.println("Termin: " + t.getStartTime());
+
                 if(t.getStartTime().equals(h)){
                     count++;
                     hour++;
