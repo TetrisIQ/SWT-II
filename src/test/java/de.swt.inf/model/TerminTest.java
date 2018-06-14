@@ -49,42 +49,7 @@ public class TerminTest {
         }
     }
 
-    /**
-     * Die Idee, <br>
-     * wir gucken uns die Links auf dem Dashboard an, von denen einer ein valider link zu einem Termin ist <br>
-     * Dann holen wir uns aus diesem Link die ID des Termins um ihn dann über das delete statment zu löschen <br>
-     * Anschließend sollte dieser termin nicht mehr im Dashboard vorhanden sein <br>
-     * Dazu durchlaufen wir alle links und überprüfen nach dieser ID
-     */
-    @Test
-    public void seleniumTestDelete() {
-        DaoFactory.getTerminDao().addTermin(new Termin("J-Unit Test Termin","22-10-17","22-10-17",false,"13:00","14:00"));
-        WebDriver driver = new HtmlUnitDriver();
-        driver.navigate().to("http://localhost:8080/dashboard");
-        List<WebElement> ls = driver.findElements(By.tagName("a"));
-        String id = "";
-        int linksBefor = ls.size();
-        //find a Id from a Termin in Dashboard
-        for (WebElement e : ls) {
-            if (e.toString().contains("/edit")) {
-                //link for editing a Termin
-                String s = e.toString().substring(9, e.toString().length() - 2);
-                id = s.substring(9);
-                String uri = "http://localhost:8080/delete?id=" + id;
-                driver.navigate().to(uri);
-                break;
-            }
-        }
-        driver.navigate().to("http://localhost:8080/dashboard");
-        ls = driver.findElements(By.tagName("a"));
-        System.out.println(ls);
-        for (WebElement e : ls) {
-            if (e.toString().contains("/edit") && e.toString().contains(id)) {
-                fail();
-            }
-        }
-        assertTrue(true);
-    }
+
 
     @Test
     public void testDeleteWithDatabase() {
