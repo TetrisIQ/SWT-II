@@ -41,7 +41,7 @@ public class SeleniumWiederholung {
         element = driver.findElement(By.name("endT"));
         element.sendKeys("20:00");
         element = driver.findElement(By.name("end"));
-        element.sendKeys("2018-05-13");
+        element.sendKeys("2018-05-15");
         element = driver.findElement(By.name("repeat"));
         element.click();
         Select dropdown = new Select(driver.findElement(By.name("repeatTime")));
@@ -61,12 +61,18 @@ public class SeleniumWiederholung {
 
     @Test
     public void WdhTestStuendlich() {
-
+        //Webdriver erstellen
         WebDriver driver = new HtmlUnitDriver();
-
-        driver.navigate().to("http://localhost:8080/termin");
+        //Auf das Daschboard navigieren
+        driver.navigate().to("http://localhost:8080/dashboard");
+        System.out.println("Go to Dashboard: " + driver.getCurrentUrl());
+        //Neuen Termin anklicken
+        WebElement testElement = driver.findElement(By.linkText("Neuer Termin"));
+        testElement.click();
+        System.out.println("Go to Neuer Termin: " + driver.getCurrentUrl());
+        //Neuen Termin erstellen
         WebElement element = driver.findElement(By.name("name"));
-        element.sendKeys("Test stündlich");
+        element.sendKeys("Wiederholung Std");
         element= driver.findElement(By.name("startT"));
         element.sendKeys("18:00");
         element= driver.findElement(By.name("start"));
@@ -74,24 +80,37 @@ public class SeleniumWiederholung {
         element = driver.findElement(By.name("ort"));
         element.sendKeys("Lübeck");
         element = driver.findElement(By.name("endT"));
-        element.sendKeys("20:00");
+        element.sendKeys("19:00");
         element = driver.findElement(By.name("end"));
         element.sendKeys("2018-06-09");
         element = driver.findElement(By.name("repeat"));
         element.click();
         Select dropdown = new Select(driver.findElement(By.name("repeatTime")));
         dropdown.selectByVisibleText("stündlich");
-
-
-
+        //Termin speichern
         element = driver.findElement(By.name("speichern"));
         element.click();
 
-        System.out.println("Name:" + driver.getCurrentUrl());
+        System.out.println("Termin gespeichert: " + driver.getCurrentUrl());
         System.out.println("Title is: " + driver.getTitle());
-
+        //Junit-Test, ob der Termin gespeichert wurde
         assertEquals("http://localhost:8080/dashboard", driver.getCurrentUrl());
         assertEquals("Dashboard", driver.getTitle());
+        //In den vorhandenen Termin gehen
+        WebElement element2;
+        element2 = driver.findElement(By.linkText("Wiederholung Std"));
+        element2.click();
+
+        System.out.println("Im Termin: " + driver.getCurrentUrl());
+        System.out.println("Title is: " + driver.getTitle());
+
+        //JUnit-Test, ob der Termin richtig mit stündlich angelegt wurde
+        assertEquals("http://localhost:8080/edit?id=1", driver.getCurrentUrl());
+        assertEquals("Termin Bearbeiten", driver.getTitle());
+        String searchOption = new Select(driver.findElement(By.name("repeatTime"))).getFirstSelectedOption().getText();
+
+        System.out.println("Select: " +searchOption);
+        assertEquals("stündlich", searchOption);
     }
 
     @Test
