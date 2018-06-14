@@ -11,6 +11,8 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.support.ui.Select;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
 public class SeleniumEinrichtungsfunktion {
 
@@ -55,11 +57,13 @@ public class SeleniumEinrichtungsfunktion {
 
         System.out.println("Name:" + driver.getCurrentUrl());
         System.out.println("Title is: " + driver.getTitle());
+        System.out.println("Termin: " + driver.findElement(By.linkText("Deichbrand Festival")).getText());
+
+        String strg = driver.findElement(By.linkText("Deichbrand Festival")).getText();
 
         assertEquals("http://localhost:8080/dashboard", driver.getCurrentUrl());
         assertEquals("Dashboard", driver.getTitle());
-
-
+        assertEquals("Deichbrand Festival", strg);
     }
 }
 
