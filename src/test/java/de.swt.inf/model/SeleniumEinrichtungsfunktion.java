@@ -33,8 +33,11 @@ public class SeleniumEinrichtungsfunktion {
         WebDriver driver = new HtmlUnitDriver();
         WebElement element;
 
-        driver.navigate().to("http://localhost:8080/fragekatalog");
+        driver.navigate().to("http://localhost:8080/dashboard");
 
+        WebElement fragekatalogElement = driver.findElement(By.linkText("Fragekatalog"));
+        fragekatalogElement.click();
+        System.out.println("Fragekatalog URL: " + driver.getCurrentUrl());
 
         Select favoritmusic = new Select(driver.findElement(By.id("music")));
         favoritmusic.selectByValue("EDM");
@@ -59,7 +62,7 @@ public class SeleniumEinrichtungsfunktion {
         System.out.println("Termin: " + driver.findElement(By.linkText("Deichbrand Festival")).getText());
 
         String strg = driver.findElement(By.linkText("Deichbrand Festival")).getText();
-
+        //JUnit-Test, ob der Termin mit dem Festival erstellt wurde
         assertEquals("http://localhost:8080/dashboard", driver.getCurrentUrl());
         assertEquals("Dashboard", driver.getTitle());
         assertEquals("Deichbrand Festival", strg);
