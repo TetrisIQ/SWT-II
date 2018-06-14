@@ -7,7 +7,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DaoFactory {
-    public static boolean test = true;
+    public static boolean test = false;
 
     private static String dbDriver = "";
     private static String dbUrl = "";

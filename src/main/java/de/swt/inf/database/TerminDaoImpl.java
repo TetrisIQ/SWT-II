@@ -191,6 +191,22 @@ public class TerminDaoImpl implements TerminDao {
 
     }
 
+
+    public List<Termin> getDateTermine(String start) {
+        List<Termin> dateTermine = new ArrayList<Termin>();
+        try{
+            String query = "SELECT * FROM termin WHERE start=" + start;
+            Statement statement = this.connection.createStatement();
+            ResultSet rs = statement.executeQuery(query);
+
+            return resultSetToList(rs);
+        }
+        catch (SQLException ex){
+            System.err.println(ex);
+        }
+        return dateTermine;
+    }
+
     public List<Termin> getAllTermine()
     {
         List<Termin> alleTermine = new ArrayList<Termin>();
@@ -198,9 +214,23 @@ public class TerminDaoImpl implements TerminDao {
             String query = "SELECT * FROM termin";
             Statement statement = this.connection.createStatement();
             ResultSet rs = statement.executeQuery(query);
+            alleTermine = resultSetToList(rs);
+
+            return alleTermine;
+        }
+        catch(SQLException ex){
+            System.err.println(ex);
+        }
+        return alleTermine;
+    }
 
 
+    private List<Termin> resultSetToList(ResultSet rs){
+        List<Termin> listTermin = new ArrayList<Termin>();
+
+        try{
             while( rs.next() == true) {
+
                 Termin tempTermin = new Termin();
                 tempTermin.setId(rs.getInt("TERMIN_ID"));
                 tempTermin.setName(rs.getString("Name"));
@@ -231,14 +261,15 @@ public class TerminDaoImpl implements TerminDao {
 
                 tempTermin.setReminderTime(rtime);
 
-                alleTermine.add(tempTermin);
+                listTermin.add(tempTermin);
             }
-            return alleTermine;
         }
-        catch(SQLException ex){
+        catch (SQLException ex){
             System.err.println(ex);
         }
-        return alleTermine;
+
+
+        return listTermin;
     }
 
 }

@@ -19,4 +19,7 @@ public interface TerminDao {
     public abstract List<Termin> getAllTermine();
 
     public abstract Termin getTermin(int id);
+
+    public abstract List<Termin> getDateTermine(String start);
+
 }
