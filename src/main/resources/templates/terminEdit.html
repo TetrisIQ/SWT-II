@@ -225,7 +225,7 @@
     </div>
     <button type="submit">Speicher Termin</button>
     <button type="submit">
-        <a style="color: black" th:href="@{/delete(id=${id})}" onclick = "if (! confirm('Continue?')) { return false; }">Termin Löschen</a>
+        <a style="color: black" type="text/javascript" th:href="@{/delete(id=${id})}" onclick="confirm('Continue?')" >Termin Löschen</a>
     </button>
 
 </form>

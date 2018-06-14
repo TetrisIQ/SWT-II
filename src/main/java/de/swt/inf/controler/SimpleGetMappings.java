@@ -16,10 +16,15 @@ public class SimpleGetMappings {
         return "about";
     }
 
-
     @RequestMapping(value = "/greeting")
     public String greeting(HttpServletRequest request, Model model) {
         model.addAttribute("name", request.getParameter("name"));
         return "greeting";
     }
+
+    @RequestMapping(value="/login")
+    public String login() {
+        return "login";
+    }
+
 }

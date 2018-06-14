@@ -33,9 +33,7 @@ public class DashboardController {
 
     @RequestMapping(value = "/dashboard", method = RequestMethod.POST)
     public String viewTermin(HttpServletRequest request, Model model) {
-
         return "termin/ViewTermin";
     }
-
 
 }
