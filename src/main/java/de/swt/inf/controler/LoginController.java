@@ -5,7 +5,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,6 +22,7 @@ public class LoginController {
     public boolean login;
     private String username = "";
     private String password = "";
+    private String uID = "";
 
     public boolean loggedIn(){
         Connection con = DaoFactory.getConnection();
@@ -28,6 +31,7 @@ public class LoginController {
             Statement statement = con.createStatement();
             ResultSet rs = statement.executeQuery(query);
             while (rs.next()) {
+                this.uID = (rs.getString("USER_ID"));
                 String passwordDB = (rs.getString("PASSWORD"));
                 if (passwordDB.equals(this.password)) {
                     System.out.println("Successfully LoggedIn!");
@@ -42,14 +46,24 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String getLoginData(HttpServletRequest request) throws ParseException {
+    public void getLoginData(HttpServletRequest request, HttpServletResponse response) throws ParseException {
         String logName = request.getParameter("LoginName");
         String logPassword = request.getParameter("LoginPassword");
         System.out.println("Username: " + logName);
         System.out.println("Password: " + logPassword);
         this.username = logName;
         this.password = logPassword;
-        boolean success = loggedIn();;
-        return success? "/dashboard" : "/login";
+        boolean success = loggedIn();
+        try {
+            if (success) {
+                Cookie ck = new Cookie("login", "" + uID);
+                response.addCookie(ck);
+                response.sendRedirect("/dashboard");
+            } else {
+                response.sendRedirect("/login");
+            }
+        } catch (Exception io) {
+            io.printStackTrace();
+        }
     }
 }
