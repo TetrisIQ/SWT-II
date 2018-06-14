@@ -1,14 +1,14 @@
 # Contributing
-Wenn Sie an diesem Repository mitarbeiten wollen, duskutieren Sie bitte erst die Änderungen die Sie wünschen über einen `issue` oder via E-Mail, bevor Sie Änderungen vornehmen.
+Wenn Sie an diesem Repository mitarbeiten wollen, diskutieren Sie bitte erst die Änderungen die Sie wünschen über einen `issue` oder via E-Mail, bevor Sie Änderungen vornehmen.
 
-Bitte beachten Sie das wir ein `code of conduct` haben, bitte halten Sie sich an die darin hinterlegten Vereinbarungen.
+Bitte beachten Sie, dass wir ein `code of conduct` haben, bitte halten Sie sich an die darin hinterlegten Vereinbarungen.
 
 ## Pull Request Process
 
-1. Stellen Sie sicher das alle Installation und Build-Abhängikeiten entfernt sind 
+1. Stellen Sie sicher, dass alle Installation und Build-Abhängikeiten entfernt sind 
 2. Aktuallisieren Sie die README.md ggf. mit sinnvollen Erweiterungen
 3. Schreiben Sie Softwaretests für die neuen Komponenten nach den unten definierten Anforderungen
-4. Ihr PullRequest wird akzeptiert wenn 2 entwickler ihren ändereungen zustimmen.
+4. Ihr PullRequest wird akzeptiert wenn 2 Entwickler ihren Änderungen zustimmen.
 <!-- 3. Aktualisiere die Versionsnummer in allen Datein.  -->
 
 ## Code of Conduct
@@ -16,16 +16,15 @@ Bitte beachten Sie das wir ein `code of conduct` haben, bitte halten Sie sich an
 ### Our Pledge
 
 Um eine offene und einladende Umgebung zu fördern, haben wir uns als
-Mitwirkende und Betreuer verpflichtet, den Teilnehmern an unserem Projekt eine belästigungsfreie und angenehme Athmosphäre zu schaffen. Unabhängig von Alter und Körper
-Größe, Behinderung, ethnische Zugehörigkeit, Geschlechtsidentität und -ausdruck, Erfahrungsniveau, Nationalität, persönliches Aussehen, Rasse, Religion oder sexuelle Identität und
+Mitwirkende und Betreuer verpflichtet, den Teilnehmern an unserem Projekt eine belästigungsfreie und angenehme Athmosphäre zu schaffen. Unabhängig von Alter und Körpergröße, Behinderung, ethnischer Zugehörigkeit, Geschlechtsidentität und -ausdruck, Erfahrungsniveau, Nationalität, persönliches Aussehen, Rasse, Religion oder sexuelle Identität und
 Orientierung.
 
 ### Our Standards
 
-Beispiele für Verhaltensweisen die ein positiven eindruck schaffen:
+Beispiele für Verhaltensweisen die ein positiven Eindruck schaffen:
 
 * Freundliche und verständliche Sprache
-* Respektieren unterschiedlicher Erfahrungsstaände 
+* Respektieren unterschiedlicher Erfahrungsstände 
 * Konstruktive Kritik akzeptieren
 * Empathie gegenüber anderen Community-Mitgliedern zeigen
 
