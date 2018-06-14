@@ -11,6 +11,13 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        function terminDelete(){
+            return confirm("Are you sure?");
+        }
+
+    </script>
+
 
 
     <style>
@@ -223,10 +230,10 @@
             </div>
         </div>
     </div>
-    <button type="submit">Speicher Termin</button>
-    <button type="submit">
-        <a style="color: black" th:href="@{/delete(id=${id})}" onclick = "if (! confirm('Continue?')) { return false; }">Termin Löschen</a>
-    </button>
+    <button class="btn btn-default" type="submit">Speicher Termin</button>
+
+
+    <a class="btn btn-default" role="button" onclick="return confirm('Sind Sie sich sicher das Sie den Termin löschen wollen?');" th:href="@{/delete(id=${id})}">Termin Löschen</a>
 
 </form>
 </body>
