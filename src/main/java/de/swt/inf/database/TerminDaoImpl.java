@@ -193,7 +193,7 @@ public class TerminDaoImpl implements TerminDao {
     public List<Termin> getDateTermine(String start) {
         List<Termin> dateTermine = new ArrayList<Termin>();
         try{
-            String query = "SELECT * FROM termin WHERE start=" + start;
+            String query = "SELECT * FROM termin WHERE start='" + start+"'";
             Statement statement = this.connection.createStatement();
             ResultSet rs = statement.executeQuery(query);
 

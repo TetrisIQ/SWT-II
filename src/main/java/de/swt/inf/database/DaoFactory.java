@@ -17,6 +17,7 @@ public class DaoFactory {
 
     public static Connection getConnection(){
         if (test) {
+
             dbDriver = "org.h2.Driver";
             dbUrl = "jdbc:h2:mem:testdb";
             username = "sa";
