@@ -2,10 +2,8 @@ package de.swt.inf.database;
 
 
 import de.swt.inf.model.Termin;
-
 import java.sql.*;
 import java.util.ArrayList;
-
 import java.util.List;
 
 
