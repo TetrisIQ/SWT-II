@@ -32,7 +32,6 @@ public class SeleniumEinrichtungsfunktion {
 
         WebDriver driver = new HtmlUnitDriver();
         WebElement element;
-
         driver.navigate().to("http://localhost:8080/dashboard");
 
         WebElement fragekatalogElement = driver.findElement(By.linkText("Fragekatalog"));

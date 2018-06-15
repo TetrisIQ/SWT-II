@@ -1,7 +1,5 @@
 package de.swt.inf.database;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletResponse;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -22,9 +20,6 @@ public class DaoFactory {
             dbUrl = "jdbc:h2:mem:testdb";
             username = "sa";
             password = "";
-            HttpServletResponse response = null;
-            Cookie testCookie = new Cookie("login", "1");
-            response.addCookie(testCookie);
         } else {
             dbDriver= "org.h2.Driver";
             dbUrl = "jdbc:h2:file:./src/main/resources/test";

@@ -28,7 +28,6 @@ public class SeleniumTermin {
     public void SeleniumTestAddTermin() {
 
         WebDriver driver = new HtmlUnitDriver();
-
         driver.navigate().to("http://localhost:8080/termin");
 
         WebElement element = driver.findElement(By.name("name"));

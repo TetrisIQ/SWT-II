@@ -22,61 +22,64 @@ import java.util.List;
 public class DashboardController {
 
     TerminDao terminDao = DaoFactory.getTerminDao();
+    boolean test = LoginController.test;
+    boolean success = false;
 
     @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
     public String dashboard(HttpServletRequest request, HttpServletResponse response,Model model) throws ParseException {Cookie[] cookies = request.getCookies();
-        boolean success = false;
+        if(test) { success = true;}
+        else {
 
-        for(int i=0; i< cookies.length; i++) {
-            if(cookies[i].getName().equals("login")){
-                success = true;
-            }
-        }
-
-        if(success) {
-        String calendar = request.getParameter("kalender");
-        TerminDao terminDao = DaoFactory.getTerminDao();
-        if (calendar != null) {
-            //use this Calendar // not implemented in Prototype
-        } else {  //use default calendar
-            List<Termin> terminList = terminDao.getAllTermine();
-
-            for(Termin t : terminList){
-
-                //if(checkInCurrentWeek(t.getStart())){
-                int weekday = getWeekdayFromDate(t.getStart());
-
-                switch (weekday){
-                    case 1 :            model.addAttribute("Montag",t);
-                        break;
-
-                    case 2 :
-                        model.addAttribute("Dienstag",t);
-                        break;
-
-                    case 3 :
-                        model.addAttribute("Mittwoch",t);
-                        break;
-
-                    case 4 :
-                        model.addAttribute("Donnerstag",t);
-                        break;
-
-                    case 5 :
-                        model.addAttribute("Freitag",t);
-                        break;
-
-                    case 6 :
-                        model.addAttribute("Samstag",t);
-                        break;
-
-                    case 7 :
-                        model.addAttribute("Sontag",t);
-                        break;
+            for (int i = 0; i < cookies.length; i++) {
+                if (cookies[i].getName().equals("login")) {
+                    success = true;
                 }
-                // }
             }
         }
+        if(success) {
+            String calendar = request.getParameter("kalender");
+            TerminDao terminDao = DaoFactory.getTerminDao();
+            if (calendar != null) {
+                //use this Calendar // not implemented in Prototype
+            } else {  //use default calendar
+                List<Termin> terminList = terminDao.getAllTermine();
+
+                for(Termin t : terminList){
+
+                    //if(checkInCurrentWeek(t.getStart())){
+                    int weekday = getWeekdayFromDate(t.getStart());
+
+                    switch (weekday){
+                        case 1 :            model.addAttribute("Montag",t);
+                            break;
+
+                        case 2 :
+                            model.addAttribute("Dienstag",t);
+                            break;
+
+                        case 3 :
+                            model.addAttribute("Mittwoch",t);
+                            break;
+
+                        case 4 :
+                            model.addAttribute("Donnerstag",t);
+                            break;
+
+                        case 5 :
+                            model.addAttribute("Freitag",t);
+                            break;
+
+                        case 6 :
+                            model.addAttribute("Samstag",t);
+                            break;
+
+                        case 7 :
+                            model.addAttribute("Sontag",t);
+                            break;
+                    }
+                    // }
+                }
+            }
 
             return "dashboard";
 
