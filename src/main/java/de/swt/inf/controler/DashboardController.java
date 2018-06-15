@@ -9,23 +9,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.Cookie;
-import static java.time.DayOfWeek.MONDAY;
-import static java.time.DayOfWeek.SUNDAY;
-import static java.time.temporal.TemporalAdjusters.nextOrSame;
-import static java.time.temporal.TemporalAdjusters.previousOrSame;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.util.Date;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.text.ParseException;
-import java.util.LinkedList;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
-
-
-import static java.time.DayOfWeek.FRIDAY;
 
 
 @Controller
@@ -49,42 +39,42 @@ public class DashboardController {
         if (calendar != null) {
             //use this Calendar // not implemented in Prototype
         } else {  //use default calendar
-List<Termin> terminList = terminDao.getAllTermine();
+            List<Termin> terminList = terminDao.getAllTermine();
 
             for(Termin t : terminList){
 
                 //if(checkInCurrentWeek(t.getStart())){
-                    int weekday = getWeekdayFromDate(t.getStart());
+                int weekday = getWeekdayFromDate(t.getStart());
 
-                    switch (weekday){
-                        case 1 :            model.addAttribute("Montag",t);
-                            break;
+                switch (weekday){
+                    case 1 :            model.addAttribute("Montag",t);
+                        break;
 
-                        case 2 :
-                            model.addAttribute("Dienstag",t);
-                            break;
+                    case 2 :
+                        model.addAttribute("Dienstag",t);
+                        break;
 
-                        case 3 :
-            model.addAttribute("Mittwoch",t);
-                            break;
+                    case 3 :
+                        model.addAttribute("Mittwoch",t);
+                        break;
 
-                        case 4 :
-                            model.addAttribute("Donnerstag",t);
-                            break;
+                    case 4 :
+                        model.addAttribute("Donnerstag",t);
+                        break;
 
-                        case 5 :
-                            model.addAttribute("Freitag",t);
-                            break;
+                    case 5 :
+                        model.addAttribute("Freitag",t);
+                        break;
 
-                        case 6 :
-                            model.addAttribute("Samstag",t);
-                            break;
+                    case 6 :
+                        model.addAttribute("Samstag",t);
+                        break;
 
-                        case 7 :
-                            model.addAttribute("Sontag",t);
-                            break;
-                    }
-               // }
+                    case 7 :
+                        model.addAttribute("Sontag",t);
+                        break;
+                }
+                // }
             }
         }
 
@@ -138,5 +128,4 @@ List<Termin> terminList = terminDao.getAllTermine();
 
         return toCheckDate.compareTo(monday) >= 0 && toCheckDate.compareTo(sunday) <= 0;
     }*/
-
 }
