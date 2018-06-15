@@ -42,38 +42,39 @@ public class DashboardController {
 
             for(Termin t : terminList){
 
-                if(checkInCurrentWeek(t.getStart())){
-                    String weekday = getWeekdayFromDate(t.getStart());
+                //if(checkInCurrentWeek(t.getStart())){
+                    int weekday = getWeekdayFromDate(t.getStart());
 
                     switch (weekday){
-                        case "Montag" :
+                        case 1 :
                             model.addAttribute("Montag",t);
                             break;
 
-                        case "Dienstag" :
+                        case 2 :
                             model.addAttribute("Dienstag",t);
                             break;
 
-                        case "Mittwoch" :
+                        case 3 :
                             model.addAttribute("Mittwoch",t);
                             break;
 
-                        case "Donnerstag" :
+                        case 4 :
                             model.addAttribute("Donnerstag",t);
                             break;
 
-                        case "Freitag" :
+                        case 5 :
                             model.addAttribute("Freitag",t);
                             break;
 
-                        case "Samstag" :
+                        case 6 :
                             model.addAttribute("Samstag",t);
                             break;
 
-                        case "Sontag" :
+                        case 7 :
                             model.addAttribute("Sontag",t);
+                            break;
                     }
-                }
+               // }
             }
         }
 
@@ -88,17 +89,26 @@ public class DashboardController {
     }
 
 
-    private String getWeekdayFromDate(String inputDate) throws ParseException {
+    private int getWeekdayFromDate(String inputDate) throws ParseException {
         String[]dateFormat = inputDate.split("-");
         String date = dateFormat[2] + "/" + dateFormat[1] + "/" + dateFormat[0];
+
 
         Date dt1=new SimpleDateFormat("dd/MM/yyyy").parse(date);
         String finalDay=new SimpleDateFormat("EEEE").format(dt1);
 
-        return finalDay;
+        if(finalDay.equals("Montag")) return 1;
+        if(finalDay.equals("Dienstag"))return 2;
+        if(finalDay.equals("Mittwoch")) return 3;
+        if(finalDay.equals("Donnerstag")) return 4;
+        if(finalDay.equals("Freitag")) return 5;
+        if(finalDay.equals("Samstag")) return 6;
+        if(finalDay.equals("Sontag")) return 7;
+
+        return 0;
     }
 
-    private boolean checkInCurrentWeek(String inputDate) throws ParseException {
+    /*private boolean checkInCurrentWeek(String inputDate) throws ParseException {
         LocalDate today = LocalDate.now();
 
         Date monday = new SimpleDateFormat("yyyy-MM-dd").parse(today.with(previousOrSame(MONDAY)).toString());
@@ -107,6 +117,6 @@ public class DashboardController {
         Date toCheckDate = new SimpleDateFormat("yyyy-MM-dd").parse(inputDate);
 
         return toCheckDate.compareTo(monday) >= 0 && toCheckDate.compareTo(sunday) <= 0;
-    }
+    }*/
 
 }
