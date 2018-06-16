@@ -110,7 +110,7 @@ public class DashboardController {
             if (cookies[i].getName().equals("login")) {
                 success = true;
             }
-
+        }
         if (success) {
             String calendar = request.getParameter("kalender");
             TerminDao terminDao = DaoFactory.getTerminDao();
