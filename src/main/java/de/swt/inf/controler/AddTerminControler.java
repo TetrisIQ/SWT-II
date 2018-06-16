@@ -216,6 +216,7 @@ public class AddTerminControler {
             } else if(repeatTime.equals("täglich")){
                 for(int i = 0; i < MAX_NEW_TERMINE; i++){
                     calendarAnfang.add(Calendar.DAY_OF_MONTH, 1);
+                    calendarAnfang.get(Calendar.WEEK_OF_MONTH);
                     calendarEnde.add(Calendar.DAY_OF_MONTH, 1);
                     temp.setStart(df.format(calendarAnfang.getTime()).substring(0,10));
                     temp.setStartTime(df.format(calendarAnfang.getTime()).substring(13));

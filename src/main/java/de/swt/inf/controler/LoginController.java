@@ -58,7 +58,7 @@ public class LoginController {
             if (success == true && test != true) {
                 Cookie ck = new Cookie("login", "" + uID);
                 response.addCookie(ck);
-                response.sendRedirect("/dashboard");
+                response.sendRedirect("/dashboard/woche");
             } else {
                 response.sendRedirect("/login");
             }

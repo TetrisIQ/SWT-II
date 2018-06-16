@@ -8,14 +8,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 
 @Controller
@@ -25,110 +26,295 @@ public class DashboardController {
     boolean test = LoginController.test;
     boolean success = false;
 
-    @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
-    public String dashboard(HttpServletRequest request, HttpServletResponse response,Model model) throws ParseException {Cookie[] cookies = request.getCookies();
-        if(test) { success = true;}
-        else {
+    private static Calendar calendarTag;
+    private static Calendar calendarWoche;
+    private static Calendar calendarMonat;
+    private static Calendar calendarSemster;
+    private static Calendar calendarJahr;
 
-            for (int i = 0; i < cookies.length; i++) {
-                if (cookies[i].getName().equals("login")) {
-                    success = true;
-                }
+
+    @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
+    public String dashboard(HttpServletRequest request, HttpServletResponse response, Model model) throws ParseException {
+        return "dashboard";
+    }
+
+
+    @RequestMapping(value = "/dashboard/monat", method = RequestMethod.GET)
+    public String viewMonat(HttpServletRequest request, HttpServletResponse response, Model model) throws ParseException {
+        Cookie[] cookies = request.getCookies();
+        boolean success = false;
+
+        for (int i = 0; i < cookies.length; i++) {
+            if (cookies[i].getName().equals("login")) {
+                success = true;
             }
         }
-        if(success) {
+
+        if (success) {
             String calendar = request.getParameter("kalender");
             TerminDao terminDao = DaoFactory.getTerminDao();
             if (calendar != null) {
                 //use this Calendar // not implemented in Prototype
             } else {  //use default calendar
+
+                calendarMonat = getCurrentCalendar();
+
                 List<Termin> terminList = terminDao.getAllTermine();
 
-                for(Termin t : terminList){
+                for (Termin t : terminList) {
 
-                    //if(checkInCurrentWeek(t.getStart())){
-                    int weekday = getWeekdayFromDate(t.getStart());
-
-                    switch (weekday){
-                        case 1 :            model.addAttribute("Montag",t);
-                            break;
-
-                        case 2 :
-                            model.addAttribute("Dienstag",t);
-                            break;
-
-                        case 3 :
-                            model.addAttribute("Mittwoch",t);
-                            break;
-
-                        case 4 :
-                            model.addAttribute("Donnerstag",t);
-                            break;
-
-                        case 5 :
-                            model.addAttribute("Freitag",t);
-                            break;
-
-                        case 6 :
-                            model.addAttribute("Samstag",t);
-                            break;
-
-                        case 7 :
-                            model.addAttribute("Sontag",t);
-                            break;
+                    if(calendarMonat.get(Calendar.MONTH) == Integer.parseInt(t.getStart().substring(2,3))){
+                        //addInModel(model,getWeekdayFromDate(t.getStart()),t);
                     }
-                    // }
                 }
             }
 
-            return "dashboard";
+            return "monat";
 
-        }  else {
+        } else {
 
             try {
                 response.sendRedirect("/login");
                 return "login";
-            }
-            catch (IOException e) {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-        return "";
+        return "monat";
     }
 
-    @RequestMapping(value = "/dashboard", method = RequestMethod.POST)
-    public String viewTermin(HttpServletRequest request, Model model) {
-        return "termin/ViewTermin";
+    @RequestMapping(value = "/dashboard/jahr", method = RequestMethod.GET)
+    public String viewJahr (HttpServletRequest request, HttpServletResponse response, Model model){
+
+        return "jahr";
+    }
+
+    @RequestMapping(value = "/dashboard/tag", method = RequestMethod.GET)
+    public String viewTag (HttpServletRequest request, HttpServletResponse response, Model model){
+
+        return "tag";
+    }
+
+    @RequestMapping(value = "/dashboard/semester", method = RequestMethod.GET)
+    public String viewSemester (HttpServletRequest request, HttpServletResponse response, Model model){
+
+        return "semester";
+    }
+
+    @RequestMapping(value = "dashboard/woche/add", method = RequestMethod.GET)
+    public String addWoche (HttpServletRequest request, HttpServletResponse response, Model model) throws ParseException {
+        Cookie[] cookies = request.getCookies();
+        boolean success = false;
+
+        for (int i = 0; i < cookies.length; i++) {
+            if (cookies[i].getName().equals("login")) {
+                success = true;
+            }
+
+        if (success) {
+            String calendar = request.getParameter("kalender");
+            TerminDao terminDao = DaoFactory.getTerminDao();
+
+            if (calendar != null) {
+                //use this Calendar // not implemented in Prototype
+            } else {  //use default calendar
+                DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+                calendarWoche.add(Calendar.DAY_OF_MONTH, 7);
+
+                List<List<Termin>> termine = sortByCurrentWeekDay(calendarWoche, terminDao.getAllTermine());
+
+                model.addAttribute("Montag", termine.get(1));
+
+                model.addAttribute("Dienstag", termine.get(2));
+
+                model.addAttribute("Mittwoch", termine.get(3));
+
+                model.addAttribute("Donnerstag", termine.get(4));
+
+                model.addAttribute("Freitag", termine.get(5));
+
+                model.addAttribute("Samstag", termine.get(6));
+
+                model.addAttribute("Sonntag", termine.get(7));
+
+            }
+            return "woche";
+        } else {
+            try {
+                response.sendRedirect("/login");
+                return "login";
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return "woche";
+    }
+
+    @RequestMapping(value = "dashboard/woche/dec", method = RequestMethod.GET)
+    public String decWoche (HttpServletRequest request, HttpServletResponse response, Model model) throws ParseException {
+        Cookie[] cookies = request.getCookies();
+        boolean success = false;
+
+        for (int i = 0; i < cookies.length; i++) {
+            if (cookies[i].getName().equals("login")) {
+                success = true;
+            }
+        }
+
+        if (success) {
+            String calendar = request.getParameter("kalender");
+            TerminDao terminDao = DaoFactory.getTerminDao();
+
+            if (calendar != null) {
+                //use this Calendar // not implemented in Prototype
+            } else {  //use default calendar
+                DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+                calendarWoche.add(Calendar.DAY_OF_MONTH, -7);
+
+                List<List<Termin>> termine = sortByCurrentWeekDay(calendarWoche, terminDao.getAllTermine());
+
+                model.addAttribute("Montag", termine.get(1));
+
+                model.addAttribute("Dienstag", termine.get(2));
+
+                model.addAttribute("Mittwoch", termine.get(3));
+
+                model.addAttribute("Donnerstag", termine.get(4));
+
+                model.addAttribute("Freitag", termine.get(5));
+
+                model.addAttribute("Samstag", termine.get(6));
+
+                model.addAttribute("Sonntag", termine.get(7));
+
+            }
+            return "woche";
+        } else {
+            try {
+                response.sendRedirect("/login");
+                return "login";
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return "woche";
+    }
+
+    @RequestMapping(value = "/dashboard/woche", method = RequestMethod.GET)
+    public String viewWoche (HttpServletRequest request, HttpServletResponse response, Model model) throws ParseException {
+
+        Cookie[] cookies = request.getCookies();
+        boolean success = false;
+
+        for (int i = 0; i < cookies.length; i++) {
+            if (cookies[i].getName().equals("login")) {
+                success = true;
+            }
+        }
+
+        if (success) {
+            String calendar = request.getParameter("kalender");
+            TerminDao terminDao = DaoFactory.getTerminDao();
+
+            if (calendar != null) {
+                //use this Calendar // not implemented in Prototype
+            } else {  //use default calendar
+                DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+                calendarWoche = getCurrentCalendar();
+
+                List<List<Termin>> termine = sortByCurrentWeekDay(calendarWoche, terminDao.getAllTermine());
+
+                model.addAttribute("Montag", termine.get(1));
+
+                model.addAttribute("Dienstag", termine.get(2));
+
+                model.addAttribute("Mittwoch", termine.get(3));
+
+                model.addAttribute("Donnerstag", termine.get(4));
+
+                model.addAttribute("Freitag", termine.get(5));
+
+                model.addAttribute("Samstag", termine.get(6));
+
+                model.addAttribute("Sonntag", termine.get(7));
+
+            }
+            return "woche";
+        } else {
+            try {
+                response.sendRedirect("/login");
+                return "login";
+            } catch (IOException e) {
+                    e.printStackTrace();
+            }
+        }
+
+        return "woche";
+    }
+
+    private List<List<Termin>> sortByCurrentWeekDay (Calendar c, List<Termin> listTermin) throws ParseException {
+        List<List<Termin>> termine = new LinkedList<List<Termin>>();
+
+        for(int i = 0;i <= 7;i++){
+            termine.add(new LinkedList<Termin>());
+        }
+
+        for(Termin t: listTermin){
+
+            if(checkInMarkedWeek(c, t.getStart())){
+
+                String[] dateFormat = t.getStart().split("-");
+                String date = dateFormat[2] + "/" + dateFormat[1] + "/" + dateFormat[0];
+
+                Date dt1 = new SimpleDateFormat("dd/MM/yyyy").parse(date);
+                String finalDay = new SimpleDateFormat("EEEE").format(dt1);
+
+                if (finalDay.equals("Montag")) termine.get(1).add(t);
+                if (finalDay.equals("Dienstag")) termine.get(2).add(t);
+                if (finalDay.equals("Mittwoch")) termine.get(3).add(t);
+                if (finalDay.equals("Donnerstag")) termine.get(4).add(t);
+                if (finalDay.equals("Freitag")) termine.get(5).add(t);
+                if (finalDay.equals("Samstag")) termine.get(6).add(t);
+                if (finalDay.equals("Sonntag")) termine.get(7).add(t);
+            }
+        }
+
+        return termine;
     }
 
 
-    private int getWeekdayFromDate(String inputDate) throws ParseException {
-        String[]dateFormat = inputDate.split("-");
-        String date = dateFormat[2] + "/" + dateFormat[1] + "/" + dateFormat[0];
+
+    private boolean checkInMarkedWeek (Calendar c, String inputDate) throws ParseException {
+        DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+
+        Calendar calendar = getCurrentCalendar();
+        calendar.setTime(c.getTime());
+        inputDate = inputDate.replaceAll("-","/");
 
 
-        Date dt1=new SimpleDateFormat("dd/MM/yyyy").parse(date);
-        String finalDay=new SimpleDateFormat("EEEE").format(dt1);
+        Date dateToCheck = df.parse(inputDate);
 
-        if(finalDay.equals("Montag")) return 1;
-        if(finalDay.equals("Dienstag"))return 2;
-        if(finalDay.equals("Mittwoch")) return 3;
-        if(finalDay.equals("Donnerstag")) return 4;
-        if(finalDay.equals("Freitag")) return 5;
-        if(finalDay.equals("Samstag")) return 6;
-        if(finalDay.equals("Sontag")) return 7;
+        calendar.set(Calendar.DAY_OF_WEEK,Calendar.MONDAY);
 
-        return 0;
+        Date startDay = calendar.getTime();
+        calendar.add(Calendar.DATE,7);
+
+        Date endDay = calendar.getTime();
+
+        return dateToCheck.compareTo(startDay) >= 0 && dateToCheck.compareTo(endDay) <= 0;
+
     }
 
-    /*private boolean checkInCurrentWeek(String inputDate) throws ParseException {
-        LocalDate today = LocalDate.now();
+    private GregorianCalendar getCurrentCalendar(){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd-kk-mm");
+        Date date = new Date();
 
-        Date monday = new SimpleDateFormat("yyyy-MM-dd").parse(today.with(previousOrSame(MONDAY)).toString());
-        Date sunday = new SimpleDateFormat("yyyy-MM-dd").parse(today.with(nextOrSame(SUNDAY)).toString());
+        String[] currentDate = dateFormat.format(date).split("-");
 
-        Date toCheckDate = new SimpleDateFormat("yyyy-MM-dd").parse(inputDate);
-
-        return toCheckDate.compareTo(monday) >= 0 && toCheckDate.compareTo(sunday) <= 0;
-    }*/
+        return new GregorianCalendar(Integer.parseInt(currentDate[0]),Integer.parseInt(currentDate[1]) - 1,
+                Integer.parseInt(currentDate[2]),Integer.parseInt(currentDate[3]),
+                Integer.parseInt(currentDate[4]));
+    }
 }
