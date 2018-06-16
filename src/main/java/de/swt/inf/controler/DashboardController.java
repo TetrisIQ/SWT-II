@@ -26,6 +26,8 @@ public class DashboardController {
     boolean test = LoginController.test;
     boolean success = false;
 
+    private DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+
     private static Calendar calendarTag;
     private static Calendar calendarWoche;
     private static Calendar calendarMonat;
@@ -89,9 +91,97 @@ public class DashboardController {
         return "jahr";
     }
 
+    @RequestMapping(value = "/dashboard/tag/dec", method = RequestMethod.GET)
+    public String decTag(HttpServletRequest request, HttpServletResponse response, Model model){
+        Cookie[] cookies = request.getCookies();
+        boolean success = false;
+
+        for (int i = 0; i < cookies.length; i++) {
+            if (cookies[i].getName().equals("login")) {
+                success = true;
+            }
+        }
+        if(success){
+            String calendar = request.getParameter("kalender");
+            TerminDao terminDao = DaoFactory.getTerminDao();
+
+            if (calendar != null) {
+                //use this Calendar // not implemented in Prototype
+            } else {
+                DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                calendarTag.add(Calendar.DAY_OF_MONTH,-1);
+
+                List<Termin> terminList = terminDao.getDateTermine(dateFormat.format(calendarTag.getTime()));
+
+                model.addAttribute("Tag", terminList);
+
+                return "tag";
+            }
+            return "tag";
+        }
+        return "tag";
+    }
+
+
+    @RequestMapping(value = "/dashboard/tag/add", method = RequestMethod.GET)
+    public String addTag(HttpServletRequest request, HttpServletResponse response, Model model){
+        Cookie[] cookies = request.getCookies();
+        boolean success = false;
+
+        for (int i = 0; i < cookies.length; i++) {
+            if (cookies[i].getName().equals("login")) {
+                success = true;
+            }
+        }
+        if(success){
+            String calendar = request.getParameter("kalender");
+            TerminDao terminDao = DaoFactory.getTerminDao();
+
+            if (calendar != null) {
+                //use this Calendar // not implemented in Prototype
+            } else {
+                DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                calendarTag.add(Calendar.DAY_OF_MONTH,1);
+
+                List<Termin> terminList = terminDao.getDateTermine(dateFormat.format(calendarTag.getTime()));
+
+                model.addAttribute("Tag", terminList);
+
+                return "tag";
+            }
+            return "tag";
+        }
+        return "tag";
+    }
+
     @RequestMapping(value = "/dashboard/tag", method = RequestMethod.GET)
     public String viewTag (HttpServletRequest request, HttpServletResponse response, Model model){
+        Cookie[] cookies = request.getCookies();
+        boolean success = false;
 
+        for (int i = 0; i < cookies.length; i++) {
+            if (cookies[i].getName().equals("login")) {
+                success = true;
+            }
+        }
+        if(success){
+            String calendar = request.getParameter("kalender");
+            TerminDao terminDao = DaoFactory.getTerminDao();
+
+            if (calendar != null) {
+                //use this Calendar // not implemented in Prototype
+            } else {
+                DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                calendarTag = getCurrentCalendar();
+
+                List<Termin> terminList = terminDao.getDateTermine(dateFormat.format(calendarTag.getTime()));
+
+                model.addAttribute("Tag", terminList);
+
+                return "tag";
+            }
+            return "tag";
+        }
         return "tag";
     }
 
@@ -118,7 +208,7 @@ public class DashboardController {
             if (calendar != null) {
                 //use this Calendar // not implemented in Prototype
             } else {  //use default calendar
-                DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+
                 calendarWoche.add(Calendar.DAY_OF_MONTH, 7);
 
                 List<List<Termin>> termine = sortByCurrentWeekDay(calendarWoche, terminDao.getAllTermine());
