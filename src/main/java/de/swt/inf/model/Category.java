@@ -70,4 +70,9 @@ public class Category {
         this.symbol = symbol;
     }*/
 
+
+    @Override
+    public String toString(){
+        return this.name;
+    }
 }

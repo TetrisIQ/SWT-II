@@ -25,6 +25,8 @@ public class AddTerminControler {
         List<Category> categories = categoryDao.getAllCategories();
         List<VCard> vCards = vCardDao.getAllVCards();
         List<Integer> prios = new ArrayList<Integer>();
+
+        //Prioritäten hinzufügen
         prios.add(0);
         prios.add(1);
         prios.add(2);
@@ -35,9 +37,11 @@ public class AddTerminControler {
         prios.add(7);
         prios.add(8);
         prios.add(9);
+
         model.addAttribute("prios", prios);
         model.addAttribute("categories", categories);
         model.addAttribute("vcards", vCards);
+
         return "termin";
     }
 
@@ -51,7 +55,7 @@ public class AddTerminControler {
         String start = request.getParameter("start");
         String startT = request.getParameter("startT");
         String end = request.getParameter("end");
-        String cat = request.getParameter("category");
+        String[] cat = request.getParameterValues("category");
         boolean terminRepeat = request.getParameter("repeat") != null ? true : false;
         String endT = request.getParameter("endT");
         String place = request.getParameter("ort");
@@ -60,12 +64,9 @@ public class AddTerminControler {
         int priority = Integer.parseInt(request.getParameter("priority"));
         boolean reminder = request.getParameter("reminder") != null ? true : false;
         String prof = request.getParameter("prof");
-        String reminderD = " ";
-        String reminderT = " ";
-        if (reminder) {
-            reminderD = request.getParameter("reminderD");
-            reminderT = request.getParameter("reminderT");
-        }
+        String reminderD = "";
+        String reminderT = "";
+        StringBuilder selectedCategories = new StringBuilder();
         String repeatTime = request.getParameter("repeatTime");
         String share = request.getParameter("share");
         //File file = (File) request.getParameter("file");
@@ -74,32 +75,37 @@ public class AddTerminControler {
 
         t = new Termin(name, start, end, allDay, startT, endT);
 
-        t.addCategory(new Category());
+        //t.addCategory(new Category());
         t.setPriority(priority);
         t.setRepeat(terminRepeat);
         t.setRepeatTime(repeatTime);
 
 
 
+        //Kategorien werden zu einem String zusammengefasst (z.B.: "Kategorie1,Kategorie2,Kategorie3")
 
-        //TODO: Kategorien hinzufügen
-        /*if(!cat.equals("")){
-            t.addCategory(new Category(cat, (byte)1));
-        }*/
+        if(cat != null){
+            for(int i = 0; i < cat.length; i++){
+                if(i == (cat.length - 1)){
+                    selectedCategories.append(cat[i]);
+                } else {
+                    selectedCategories.append(cat[i]).append(",");
+                }
+            }
+            t.setCategories(selectedCategories.toString());
+        }else{
+            t.setCategories("");
+        }
 
 
-        //VCards sind nicht im Sprint!!!
-
-        /*if(!prof.equals("")){
-
-        }*/
-
-        //TODO: ReminderTime kann nicht in die Datenbank geschrieben werden
         if (reminder) {
+            reminderD = request.getParameter("reminderD");
+            reminderT = request.getParameter("reminderT");
             t.setReminder(true);
             t.setReminderDate(reminderD);
             t.setReminderTime(reminderT);
         }
+
 
         if (place != null) {
             t.setOrt(place);

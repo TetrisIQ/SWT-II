@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class EditTerminController {
@@ -23,7 +25,7 @@ public class EditTerminController {
     public String editTermin(Model model, HttpServletRequest request) {
         CategoryDao categoryDao = DaoFactory.getCategoryDao();
         VCardDao vCardDao = DaoFactory.getVCardDao();
-        List<Category> categories = categoryDao.getAllCategories();
+        Map<Category, Boolean> categories = new HashMap<Category, Boolean>();
         List<VCard> vCards = vCardDao.getAllVCards();
         List<String> repeats = new ArrayList<String>();
         repeats.add("stündlich");
@@ -45,12 +47,14 @@ public class EditTerminController {
         prios.add(9);
 
 
-        model.addAttribute("prios", prios);
-        model.addAttribute("repeats", repeats);
-        model.addAttribute("categories", categories);
-        model.addAttribute("vcards", vCards);
+        //Kategorien zur Map hinzufügen
+        for(Category c : categoryDao.getAllCategories()){
+            categories.put(c, false);
+        }
 
 
+
+        //Termin einlesen
         int id = Integer.parseInt(request.getParameter("id"));
         TerminDao terminDao = DaoFactory.getTerminDao();
         Termin termin = terminDao.getTermin(id);
@@ -65,6 +69,7 @@ public class EditTerminController {
         boolean terminRepeat = termin.getRepeat();
         String repeatTime = termin.getRepeatTime();
         boolean reminder = termin.getReminder();
+        String cat = termin.getCategories();
         String reminderD = " ";
         String reminderT = " ";
 
@@ -75,6 +80,15 @@ public class EditTerminController {
         //System.err.println(termin.getReminderTime());
         String notice = termin.getNote();
         int prio = termin.getPriority();
+
+
+
+        //Vorausgewählte Kategorien auf "true" setzen
+        if(cat != null){
+            categories = preselectCategories(categories, cat);
+        }
+
+
 
         //for delete
         model.addAttribute("id", id);
@@ -97,6 +111,18 @@ public class EditTerminController {
         model.addAttribute("notice", notice);
         model.addAttribute("priority", prio);
         model.addAttribute("repeatTime", repeatTime);
+
+        model.addAttribute("prios", prios);
+        model.addAttribute("repeats", repeats);
+        model.addAttribute("categories", categories);
+        model.addAttribute("vcards", vCards);
+
+
+
+
+
+
+
         return "terminEdit";
 
     }
@@ -228,5 +254,29 @@ public class EditTerminController {
         return "redictDashboard";
     }
 
+    /**
+     * Setzt bei allen Kategorien das Value auf "true", wenn diese im Termin vorhanden sind.
+     * Somit werden die im Termin vorhanden Kategorien vorausgewählt.
+     * @param categories die Liste an Kategorien
+     * @param selectedCategories alle im Termin vorhanden Kategorien.
+     * @return
+     */
+    private Map<Category, Boolean> preselectCategories(Map<Category, Boolean> categories, String selectedCategories){
+        String[] selected = selectedCategories.split(",");
+
+        if(selected.length > 0){
+            for(int i = 0; i < selected.length; i++){
+                for(Map.Entry e : categories.entrySet()){
+                    if(selected[i].equals(e.getKey().toString())){
+                        e.setValue(true);
+                    }
+                }
+            }
+        }
+
+
+
+        return categories;
+    }
 
 }

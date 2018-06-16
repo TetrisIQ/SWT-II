@@ -58,7 +58,7 @@ public class Termin {
 
     private List<Calendar> calendars = new LinkedList<Calendar>();
 
-    private List<Category> categories = new LinkedList<Category>();
+    private String categories;
 
     private TerminDao daoTermin;
 
@@ -160,6 +160,7 @@ public class Termin {
         this.vcard = vcard;
     }
 
+    public void setCategories(String categories) { this.categories = categories; }
 
     //ALL GETTER
     public int getId() {
@@ -246,7 +247,7 @@ public class Termin {
         return calendars;
     }
 
-    public List<Category> getCategories() {
+    public String getCategories() {
         return categories;
     }
 
@@ -318,14 +319,16 @@ public class Termin {
     }
 
     /**
-     * Fügt einem Termin die Category hinzu, falls diese noch nicht vorhanden ist.
-     *
-     * @param category Category
+     * Gibt alle Kategorien in Form einer Liste zurück!
+     * @return
      */
-    public void addCategory(Category category) {
-        if (!categories.contains(category)) {
-            categories.add(category);
+    public List<String> getAllCategories() {
+        List<String> all = new LinkedList<String>();
+        String[] allCategories = this.categories.split(",");
+        for(int i = 0; i < allCategories.length; i++){
+            all.add(allCategories[i]);
         }
+        return all;
     }
 
     /**

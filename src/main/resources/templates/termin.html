@@ -84,71 +84,77 @@
         <div class="panel panel-default">
             <div class="panel-heading text-center"><h4>Neuen Termin erstellen</h4></div>
             <div class="row mt-10">
-                <div class="col-md-1"></div>
-                <div class="col-md-5">
-                    <div class="input-group input-group-lg">
-                        <span class="input-group-addon" id="txtName">Name</span>
-                        <input title="TerminName" type="text" name="name" required="required" class="form-control"
-                               aria-describedby="txtName"/>
+                <div class="row mt-10">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-5">
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-addon" id="txtName">Name</span>
+                            <input title="TerminName" type="text" name="name" class="form-control"
+                                   aria-describedby="txtName"/>
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-5">
-                    <div class="input-group input-group-lg">
-                        <span class="input-group-addon" id="txtVonZeit">Von</span>
-                        <input type="time" name="startT" required="required" class="form-control"
-                               aria-describedby="txtVonZeit"
-                               placeholder="HH:MM"/>
-                        <span class="input-group-addon" id="txtVonDatum">Von</span>
-                        <input type="date" name="start" required="required" class="form-control"
-                               aria-describedby="txtVonDatum"
-                               placeholder="DD.MM.JJJJ"/>
+                    <div class="col-md-5">
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-addon" id="txtVonZeit">Von</span>
+                            <input type="time" name="startT" required="required" class="form-control"
+                                   aria-describedby="txtVonZeit"
+                                   placeholder="HH:MM"/>
+                            <span class="input-group-addon" id="txtVonDatum">Von</span>
+                            <input type="date" name="start" required="required" class="form-control"
+                                   aria-describedby="txtVonDatum"
+                                   placeholder="DD.MM.JJJJ"/>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="row mt-10">
-                <div class="col-md-1"></div>
-                <div class="col-md-5">
-                    <div class="input-group input-group-lg">
-                        <span class="input-group-addon" id="txtOrt">Ort</span>
-                        <input title="TerminOrt" type="text" name="ort" class="form-control" aria-describedby="txtOrt"/>
+                <div class="row mt-10">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-5">
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-addon" id="txtOrt">Ort</span>
+                            <input title="TerminOrt" type="text" name="ort" class="form-control" aria-describedby="txtOrt"/>
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-5">
-                    <div class="input-group input-group-lg">
-                        <span class="input-group-addon" id="txtBisZeit">Bis</span>
-                        <input type="time" name="endT" required="required" class="form-control"
-                               aria-describedby="txtBisZeit"
-                               placeholder="HH:MM"/>
-                        <span class="input-group-addon" id="txtBisDatum">Bis</span>
-                        <input type="date" name="end" required="required" class="form-control"
-                               aria-describedby="txtBisDatum"
-                               placeholder="DD.MM.JJJJ"/>
+                    <div class="col-md-5">
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-addon" id="txtBisZeit">Bis</span>
+                            <input type="time" name="endT" required="required" class="form-control"
+                                   aria-describedby="txtBisZeit"
+                                   placeholder="HH:MM"/>
+                            <span class="input-group-addon" id="txtBisDatum">Bis</span>
+                            <input type="date" name="end" required="required" class="form-control"
+                                   aria-describedby="txtBisDatum"
+                                   placeholder="DD.MM.JJJJ"/>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="row mt-50">
-                <div class="col-md-1"></div>
-                <div class="col-md-2">
-                    <div class="input-group input-group-lg">
-                        <span class="input-group-addon" id="checkAllDay">Ganztägig?</span>
-                        <span class="input-group-addon">
+                <div class="row mt-10">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-2">
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-addon" id="checkAllDay">Ganztägig?</span>
+                            <span class="input-group-addon">
                             <input title="TerminAllDay" type="checkbox" name="allDay" aria-label="checkAllDay"/>
                         </span>
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-2">
-                    <div class="input-group input-group-lg">
-                        <span class="input-group-addon" id="txtPriority">Priorität: </span>
-                        <select class="form-control" name="priority" id="priority">
-                            <option th:each="prio : ${prios}" th:value="${prio}" th:text="${prio}" th:selected="${prio == priority}"></option>
-                        </select>
+                    <div class="col-md-2">
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-addon" id="txtPriority">Priorität: </span>
+                            <select class="form-control" name="priority" id="priority">
+                                <option th:each="prio : ${prios}" th:value="${prio}" th:text="${prio}"></option>
+                            </select>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div class="row mt-10">
                 <div class="col-md-1"></div>
-                <div class="col-md-4">
+                <div class="col-md-5">
                     <div class="input-group input-group-lg">
 
                         <span class="input-group-addon" id="checkRepeat">Wiederholung?</span>
@@ -170,58 +176,65 @@
             <div class="row mt-10">
                 <div class="col-md-1"></div>
                 <div class="col-md-7">
-                    <div class="input-group input-group-lg">
-                        <span class="input-group-addon" id="checkReminder">Erinnerung?</span>
-                        <span class="input-group-addon">
+                    <div class="row mt-10">
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-addon" id="checkReminder">Erinnerung?</span>
+                            <span class="input-group-addon">
                             <input title="TerminReminder" type="checkbox" name="reminder" aria-label="checkReminder"/>
                         </span>
-                        <span class="input-group-addon" id="reminderD_span">Datum</span>
-                        <input title="TerminReminderDate" type="date" name="reminderD" id="reminderD" class="form-control"
-                               aria-describedby="reminderD" placeholder="DD.MM.JJJJ"/>
-                        <span class="input-group-addon" id="reminderT_span">Um</span>
-                        <input title="TerminReminderTime" type="time" name="reminderT" id="reminderT" class="form-control"
-                               aria-describedby="TerminReminderTime" placeholder="HH:MM"/>
+                            <span class="input-group-addon" id="reminderD_span">Datum</span>
+                            <input id="reminderD" title="TerminReminderDate" type="date" name="reminderD" class="form-control"
+                                   aria-describedby="reminderD_span" placeholder="DD.MM.JJJJ"/>
+                            <span class="input-group-addon" id="reminderT_span">Um</span>
+                            <input id="reminderT" title="TerminReminderTime" type="text" name="reminderT" class="form-control"
+                                   aria-describedby="reminderT_span" placeholder="HH:MM"/>
+                        </div>
                     </div>
                 </div>
             </div>
+
             <div class="row mt-50">
                 <div class="col-md-1"></div>
                 <div class="col-md-5">
-                    <div class="input-group input-group-lg">
-                        <span class="input-group-addon" id="txtShare">Teilen</span>
-                        <input name="share" type="email" class="form-control" aria-describedby="txtShare"
-                               placeholder="max.mustermann@stud.fh-luebeck.de"/>
+                    <div class="row mt-10">
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-addon" id="txtShare">Teilen</span>
+                            <input name="share" type="email" class="form-control" aria-describedby="txtShare"
+                                   placeholder="max.mustermann@stud.fh-luebeck.de"/>
+                        </div>
+                    </div>
+                    <div class="row mt-10">
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-addon" id="txtAttachment">Anhang</span>
+                            <input name="file" type="text" class="form-control" aria-describedby="txtAttachment"
+                                   placeholder="Dateipfad"/>
+                        </div>
+                    </div>
+                    <div class="row mt-10">
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-addon" id="vcards">Professor: </span>
+                            <select class="form-control">
+                                <option name="prof" th:each="v : ${vcards}" th:value="${v}" th:text="${v.title} + ' ' + ${v.lastname}"></option>
+                            </select>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="input-group input-group-lg">
-                        <span class="input-group-addon" id="category">Kategorie: </span>
-                        <select class="form-control">
-                            <option value="" selected="selected"></option>
-                            <option name="category" th:each="cat : ${categories}" th:value="${cat}"
-                                    th:text="${cat.name}"></option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="row mt-10">
                 <div class="col-md-1"></div>
-                <div class="col-md-5">
-                    <div class="input-group input-group-lg">
-                        <span class="input-group-addon" id="txtAttachment">Anhang</span>
-                        <input name="file" type="text" class="form-control" aria-describedby="txtAttachment"
-                               placeholder="Dateipfad"/>
-                    </div>
-                </div>
                 <div class="col-md-4">
-                    <div class="input-group input-group-lg">
-                        <span class="input-group-addon" id="vcards">Professor: </span>
-
-                        <select class="form-control">
-                            <option value="" selected="selected"></option>
-                            <option name="prof" th:each="v : ${vcards}" th:value="${v}"
-                                    th:text="${v.title} + ' ' + ${v.lastname}"></option>
-                        </select>
+                    <div class="row mt-10">
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-addon" id="txtCategory">Kategorien</span>
+                        </div>
+                    </div>
+                    <div class="row mt-10">
+                        <div class="col-md-2"></div>
+                        <div class="input-group mb-5">
+                            <select multiple="multiple" class="form-control" id="category" name="category" align="center">
+                                <option selected="selected" disabled="disabled">CTRL gedrückt halten für Mehrfachauswahl!</option>
+                                <option name="category" th:each="cat : ${categories}" th:value="${cat}"
+                                        th:text="${cat}"></option>
+                            </select>
+                        </div>
                     </div>
                 </div>
             </div>
