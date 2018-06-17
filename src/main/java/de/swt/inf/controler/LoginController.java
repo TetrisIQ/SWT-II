@@ -69,4 +69,17 @@ public class LoginController {
             io.printStackTrace();
         }
     }
+
+
+    public static boolean isUserLoggedIn(Cookie[] cookies) {
+        if (!test) {
+            for (int i = 0; i < cookies.length; i++) {
+                if (cookies[i].getName().equals("login")) {
+                    return true;
+                }
+            }
+            return false;
+        }
+        return true;
+    }
 }

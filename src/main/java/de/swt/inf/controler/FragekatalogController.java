@@ -7,7 +7,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 import java.util.Calendar;
@@ -39,16 +38,7 @@ public class FragekatalogController {
 
         userPreference = (userPreference == null ? new UserPreferences() : userPreference);
 
-        Cookie[] cookies = request.getCookies();
-        boolean success = false;
-
-        for (int i = 0; i < cookies.length; i++) {
-            if (cookies[i].getName().equals("login")) {
-                success = true;
-            }
-        }
-
-        if(success){
+        if(LoginController.isUserLoggedIn(request.getCookies())){
             // Falls der Fragekatalog schon einmal verwendet wurde, werden die alten Preferenzen vorausgewählt
             if(userPreference.getMusicPreferencesEnum() != null){
                 MusicPreferencesEnum musicSelected = userPreference.getMusicPreferencesEnum();

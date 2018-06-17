@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import sun.rmi.runtime.Log;
 
 
 import javax.servlet.http.Cookie;
@@ -43,16 +44,7 @@ public class DashboardController {
 
     @RequestMapping(value = "/dashboard/monat", method = RequestMethod.GET)
     public String viewMonat(HttpServletRequest request, HttpServletResponse response, Model model) throws ParseException {
-        Cookie[] cookies = request.getCookies();
-        boolean success = false;
-
-        for (int i = 0; i < cookies.length; i++) {
-            if (cookies[i].getName().equals("login")) {
-                success = true;
-            }
-        }
-
-        if (success) {
+        if (LoginController.isUserLoggedIn(request.getCookies())) {
             String calendar = request.getParameter("kalender");
             TerminDao terminDao = DaoFactory.getTerminDao();
             if (calendar != null) {
@@ -93,15 +85,7 @@ public class DashboardController {
 
     @RequestMapping(value = "/dashboard/tag/dec", method = RequestMethod.GET)
     public String decTag(HttpServletRequest request, HttpServletResponse response, Model model){
-        Cookie[] cookies = request.getCookies();
-        boolean success = false;
-
-        for (int i = 0; i < cookies.length; i++) {
-            if (cookies[i].getName().equals("login")) {
-                success = true;
-            }
-        }
-        if(success){
+        if(LoginController.isUserLoggedIn(request.getCookies())){
             String calendar = request.getParameter("kalender");
             TerminDao terminDao = DaoFactory.getTerminDao();
 
@@ -125,15 +109,7 @@ public class DashboardController {
 
     @RequestMapping(value = "/dashboard/tag/add", method = RequestMethod.GET)
     public String addTag(HttpServletRequest request, HttpServletResponse response, Model model){
-        Cookie[] cookies = request.getCookies();
-        boolean success = false;
-
-        for (int i = 0; i < cookies.length; i++) {
-            if (cookies[i].getName().equals("login")) {
-                success = true;
-            }
-        }
-        if(success){
+        if(LoginController.isUserLoggedIn(request.getCookies())){
             String calendar = request.getParameter("kalender");
             TerminDao terminDao = DaoFactory.getTerminDao();
 
@@ -156,15 +132,8 @@ public class DashboardController {
 
     @RequestMapping(value = "/dashboard/tag", method = RequestMethod.GET)
     public String viewTag (HttpServletRequest request, HttpServletResponse response, Model model){
-        Cookie[] cookies = request.getCookies();
-        boolean success = false;
 
-        for (int i = 0; i < cookies.length; i++) {
-            if (cookies[i].getName().equals("login")) {
-                success = true;
-            }
-        }
-        if(success){
+        if(LoginController.isUserLoggedIn(request.getCookies())){
             String calendar = request.getParameter("kalender");
             TerminDao terminDao = DaoFactory.getTerminDao();
 
@@ -193,15 +162,8 @@ public class DashboardController {
 
     @RequestMapping(value = "dashboard/woche/add", method = RequestMethod.GET)
     public String addWoche (HttpServletRequest request, HttpServletResponse response, Model model) throws ParseException {
-        Cookie[] cookies = request.getCookies();
-        boolean success = false;
 
-        for (int i = 0; i < cookies.length; i++) {
-            if (cookies[i].getName().equals("login")) {
-                success = true;
-            }
-        }
-        if (success) {
+        if (LoginController.isUserLoggedIn(request.getCookies())) {
             String calendar = request.getParameter("kalender");
             TerminDao terminDao = DaoFactory.getTerminDao();
 
@@ -295,16 +257,7 @@ public class DashboardController {
     @RequestMapping(value = "/dashboard/woche", method = RequestMethod.GET)
     public String viewWoche (HttpServletRequest request, HttpServletResponse response, Model model) throws ParseException {
 
-        Cookie[] cookies = request.getCookies();
-        boolean success = false;
-
-        for (int i = 0; i < cookies.length; i++) {
-            if (cookies[i].getName().equals("login")) {
-                success = true;
-            }
-        }
-
-        if (success) {
+        if (LoginController.isUserLoggedIn(request.getCookies())) {
             String calendar = request.getParameter("kalender");
             TerminDao terminDao = DaoFactory.getTerminDao();
 
