@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.Calendar;
 
@@ -221,6 +223,9 @@ public class FragekatalogController {
         Calendar calendar = new GregorianCalendar();
         int aktuellesJahr = calendar.get(Calendar.YEAR);
 
+        //Nur für den Test
+        java.util.Calendar c = Calendar.getInstance();
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 
         switch (i) {
             //MusicPreferences
@@ -230,12 +235,12 @@ public class FragekatalogController {
                     case EDM:
                         switch (aktuellesJahr) {
                             case 2018:
-                                temp = new Termin("Deichbrand Festival", "2018-07-19", "2018-07-22", true,
+                                temp = new Termin("Deichbrand Festival", df.format(c.getTime())/*"2018-07-19"*/, df.format(c.getTime())/*"2018-07-22"*/, true,
                                         "10:00", "22:00");
                                 neueTermine.add(temp);
 
                             case 2019:
-                                temp = new Termin("Deichbrand Festival", "2019-07-19", "2019-07-22", true,
+                                temp = new Termin("Deichbrand Festival", df.format(c.getTime())/*"2019-07-19"*/, df.format(c.getTime())/*"2019-07-22"*/, true,
                                         "11:00", "23:00");
                                 neueTermine.add(temp);
                         }
