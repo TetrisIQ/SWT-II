@@ -408,7 +408,7 @@ public class DashboardController {
                 response.sendRedirect("/login");
                 return "login";
             } catch (IOException e) {
-                    e.printStackTrace();
+                e.printStackTrace();
             }
         }
 
@@ -463,7 +463,7 @@ public class DashboardController {
         Date endDay = calendar.getTime();
 
         return (dateToCheck.after(startDay) || df.format(dateToCheck).equals(df.format(startDay)))&&
-                    (dateToCheck.before(endDay) || df.format(dateToCheck).equals(df.format(endDay)));
+                (dateToCheck.before(endDay) || df.format(dateToCheck).equals(df.format(endDay)));
     }
 
     private GregorianCalendar getCurrentCalendar(){
