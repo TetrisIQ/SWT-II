@@ -261,15 +261,30 @@ public class DashboardController {
             if (calendar != null) {
                 //use this Calendar // not implemented in Prototype
             } else {
-                DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                calendarTag.add(Calendar.DAY_OF_MONTH,1);
+                String day = request.getParameter("datum");
 
-                model.addAttribute("datum", dateFormat.format(calendarTag.getTime()));
-                List<Termin> terminList = terminDao.getDateTermine(dateFormat.format(calendarTag.getTime()));
+                if(day == null){
+                    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                    calendarTag.add(Calendar.DAY_OF_MONTH,1);
 
-                model.addAttribute("Tag", terminList);
+                    model.addAttribute("datum", dateFormat.format(calendarTag.getTime()));
+                    List<Termin> terminList = terminDao.getDateTermine(dateFormat.format(calendarTag.getTime()));
 
-                return "tag";
+                    model.addAttribute("Tag", terminList);
+
+                    return "tag";
+                } else {
+
+                    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                    calendarTag.set(Calendar.DAY_OF_MONTH,Integer.parseInt(day));
+
+                    model.addAttribute("datum", dateFormat.format(calendarTag.getTime()));
+                    List<Termin> terminList = terminDao.getDateTermine(dateFormat.format(calendarTag.getTime()));
+
+                    model.addAttribute("Tag", terminList);
+
+                    return "tag";
+                }
             }
             return "tag";
         }
