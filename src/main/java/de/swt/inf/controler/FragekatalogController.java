@@ -33,7 +33,7 @@ public class FragekatalogController {
      * @param model
      * @return
      */
-    @RequestMapping(value = "/fragekatalog", method = RequestMethod.GET)
+    @RequestMapping(value = "/dashboard/fragekatalog", method = RequestMethod.GET)
     public String fragekatalog(HttpServletRequest request, Model model){
 
         userPreference = (userPreference == null ? new UserPreferences() : userPreference);
@@ -108,7 +108,7 @@ public class FragekatalogController {
      * @param model
      * @return
      */
-    @RequestMapping(value = "/fragekatalog", method = RequestMethod.POST)
+    @RequestMapping(value = "/dashboard/fragekatalog", method = RequestMethod.POST)
     public String addFragekatalog(HttpServletRequest request, Model model){
         TerminDao terminDao = DaoFactory.getTerminDao();
         List<Termin> alteTermine = terminDao.getAllTermine();

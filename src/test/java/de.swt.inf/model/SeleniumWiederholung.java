@@ -10,6 +10,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.support.ui.Select;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 import static org.junit.Assert.assertEquals;
 
 public class SeleniumWiederholung {
@@ -27,6 +31,10 @@ public class SeleniumWiederholung {
 
     @Test
     public void WdhTestTaeglich(){
+
+        java.util.Calendar c = Calendar.getInstance();
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+
         //Webdriver erstellen
         WebDriver driver = new HtmlUnitDriver();
         // Navigieren zum Dashboard
@@ -41,13 +49,13 @@ public class SeleniumWiederholung {
         element= driver.findElement(By.name("startT"));
         element.sendKeys("19:00");
         element= driver.findElement(By.name("start"));
-        element.sendKeys("2018-05-13");
+        element.sendKeys(df.format(c.getTime()));
         element = driver.findElement(By.name("ort"));
         element.sendKeys("Lübeck");
         element = driver.findElement(By.name("endT"));
         element.sendKeys("20:00");
         element = driver.findElement(By.name("end"));
-        element.sendKeys("2018-05-15");
+        element.sendKeys(df.format(c.getTime()));
         element = driver.findElement(By.name("repeat"));
         element.click();
         Select dropdown = new Select(driver.findElement(By.name("repeatTime")));
@@ -81,6 +89,10 @@ public class SeleniumWiederholung {
 
     @Test
     public void WdhTestStuendlich() {
+
+        java.util.Calendar c = Calendar.getInstance();
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+
         //Webdriver erstellen
         WebDriver driver = new HtmlUnitDriver();
         //Auf das Daschboard navigieren
@@ -96,13 +108,13 @@ public class SeleniumWiederholung {
         element= driver.findElement(By.name("startT"));
         element.sendKeys("18:00");
         element= driver.findElement(By.name("start"));
-        element.sendKeys("2018-06-09");
+        element.sendKeys(df.format(c.getTime()));
         element = driver.findElement(By.name("ort"));
         element.sendKeys("Lübeck");
         element = driver.findElement(By.name("endT"));
         element.sendKeys("19:00");
         element = driver.findElement(By.name("end"));
-        element.sendKeys("2018-06-09");
+        element.sendKeys(df.format(c.getTime()));
         element = driver.findElement(By.name("repeat"));
         element.click();
         Select dropdown = new Select(driver.findElement(By.name("repeatTime")));
@@ -135,6 +147,10 @@ public class SeleniumWiederholung {
 
     @Test
     public void WdhTestWoechentlich() {
+
+        java.util.Calendar c = Calendar.getInstance();
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+
         //Webdriver erstellen
         WebDriver driver = new HtmlUnitDriver();
         //Navigieren zum Dashboard
@@ -148,13 +164,13 @@ public class SeleniumWiederholung {
         element= driver.findElement(By.name("startT"));
         element.sendKeys("13:00");
         element= driver.findElement(By.name("start"));
-        element.sendKeys("2018-05-26");
+        element.sendKeys(df.format(c.getTime()));
         element = driver.findElement(By.name("ort"));
         element.sendKeys("Lübeck");
         element = driver.findElement(By.name("endT"));
         element.sendKeys("14:00");
         element = driver.findElement(By.name("end"));
-        element.sendKeys("2018-06-26");
+        element.sendKeys(df.format(c.getTime()));
         element = driver.findElement(By.name("repeat"));
         element.click();
         Select dropdown = new Select(driver.findElement(By.name("repeatTime")));
@@ -189,6 +205,10 @@ public class SeleniumWiederholung {
 
     @Test
     public void WdhTestMonatlich() {
+
+        java.util.Calendar c = Calendar.getInstance();
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+
         //Webdriver erstellen
         WebDriver driver = new HtmlUnitDriver();
         //Navigieren zum Dashboard
@@ -202,13 +222,13 @@ public class SeleniumWiederholung {
         element= driver.findElement(By.name("startT"));
         element.sendKeys("18:00");
         element= driver.findElement(By.name("start"));
-        element.sendKeys("2018-05-01");
+        element.sendKeys(df.format(c.getTime()));
         element = driver.findElement(By.name("ort"));
         element.sendKeys("Lübeck");
         element = driver.findElement(By.name("endT"));
         element.sendKeys("20:00");
         element = driver.findElement(By.name("end"));
-        element.sendKeys("2018-06-09");
+        element.sendKeys(df.format(c.getTime()));
         element = driver.findElement(By.name("repeat"));
         element.click();
         Select dropdown = new Select(driver.findElement(By.name("repeatTime")));
@@ -243,6 +263,10 @@ public class SeleniumWiederholung {
 
     @Test
     public void WdhTestjaerhlich() {
+
+        java.util.Calendar c = Calendar.getInstance();
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+
         // Webdriver erstellen
         WebDriver driver = new HtmlUnitDriver();
         // Navigieren zum Dashboard
@@ -256,13 +280,13 @@ public class SeleniumWiederholung {
         element= driver.findElement(By.name("startT"));
         element.sendKeys("18:00");
         element= driver.findElement(By.name("start"));
-        element.sendKeys("2018-05-01");
+        element.sendKeys(df.format(c.getTime()));
         element = driver.findElement(By.name("ort"));
         element.sendKeys("Lübeck");
         element = driver.findElement(By.name("endT"));
         element.sendKeys("20:00");
         element = driver.findElement(By.name("end"));
-        element.sendKeys("2020-05-01");
+        element.sendKeys(df.format(c.getTime()));
         element = driver.findElement(By.name("repeat"));
         element.click();
         Select dropdown = new Select(driver.findElement(By.name("repeatTime")));

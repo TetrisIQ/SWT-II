@@ -9,6 +9,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 import static org.junit.Assert.*;
 
 public class SeleniumTermin {
@@ -62,6 +66,10 @@ public class SeleniumTermin {
 
         WebDriver driver = new HtmlUnitDriver();
 
+        Calendar c = Calendar.getInstance();
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+
+
         driver.navigate().to("http://localhost:8080/dashboard");
         //Neuen Termin erstellen anklicken
         WebElement elementKlick = driver.findElement(By.linkText("Neuer Termin"));
@@ -72,13 +80,13 @@ public class SeleniumTermin {
         element= driver.findElement(By.name("startT"));
         element.sendKeys("13:00");
         element= driver.findElement(By.name("start"));
-        element.sendKeys("2018-05-20");
+        element.sendKeys(df.format(c.getTime()));
         element = driver.findElement(By.name("ort"));
         element.sendKeys("Lübeck");
         element = driver.findElement(By.name("endT"));
         element.sendKeys("20:00");
         element = driver.findElement(By.name("end"));
-        element.sendKeys("2018-06-21");
+        element.sendKeys(df.format(c.getTime()));
 
         element = driver.findElement(By.name("speichern"));
         element.click();
