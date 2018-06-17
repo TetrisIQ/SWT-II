@@ -13,6 +13,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -87,8 +90,10 @@ public class TerminTest {
         int hour = 10;
         boolean wrongTermin;
         TerminDao terminDao = new DaoFactory().getTerminDao();
+        java.util.Calendar c = Calendar.getInstance();
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 
-        Termin termin = new Termin("Repeat Test", "2018-06-09", "2018-06-09",
+        Termin termin = new Termin("Repeat Test", df.format(c.getTime()), df.format(c.getTime()),
                 false, "10:00", "11:30");
         termin.setRepeat(true);
         termin.setRepeatTime("stündlich");
