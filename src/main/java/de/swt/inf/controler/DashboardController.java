@@ -43,16 +43,7 @@ public class DashboardController {
 
     @RequestMapping(value = "/dashboard/monat/dec", method = RequestMethod.GET)
     public String decMonat(HttpServletRequest request,HttpServletResponse response, Model model){
-        Cookie[] cookies = request.getCookies();
-        boolean success = false;
-
-        for (int i = 0; i < cookies.length; i++) {
-            if (cookies[i].getName().equals("login")) {
-                success = true;
-            }
-        }
-
-        if (success) {
+        if (LoginController.isUserLoggedIn(request.getCookies())) {
             String calendar = request.getParameter("kalender");
             TerminDao terminDao = DaoFactory.getTerminDao();
             if (calendar != null) {
@@ -72,33 +63,14 @@ public class DashboardController {
                 if(maxDay == 28) return "monat29";
 
             }
-
             return "monat31";
-
-        } else {
-
-            try {
-                response.sendRedirect("/login");
-                return "login";
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
         return "monat";
     }
 
     @RequestMapping(value = "/dashboard/monat/add", method = RequestMethod.GET)
     public String addMonat(HttpServletRequest request,HttpServletResponse response, Model model){
-        Cookie[] cookies = request.getCookies();
-        boolean success = false;
-
-        for (int i = 0; i < cookies.length; i++) {
-            if (cookies[i].getName().equals("login")) {
-                success = true;
-            }
-        }
-
-        if (success) {
+        if (LoginController.isUserLoggedIn(request.getCookies())) {
             String calendar = request.getParameter("kalender");
             TerminDao terminDao = DaoFactory.getTerminDao();
             if (calendar != null) {
@@ -121,14 +93,6 @@ public class DashboardController {
             }
 
             return "monat";
-        } else {
-
-            try {
-                response.sendRedirect("/login");
-                return "login";
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
         return "monat";
     }
