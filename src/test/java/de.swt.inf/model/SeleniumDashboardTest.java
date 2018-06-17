@@ -23,7 +23,7 @@ import java.util.Calendar;
 
 import static org.junit.Assert.assertEquals;
 
-public class SeleniumDashboard {
+public class SeleniumDashboardTest {
 
     @BeforeClass
     public static void beforeClass(){

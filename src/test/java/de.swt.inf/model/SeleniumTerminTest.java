@@ -15,7 +15,7 @@ import java.util.Calendar;
 
 import static org.junit.Assert.*;
 
-public class SeleniumTermin {
+public class SeleniumTerminTest {
 
     @BeforeClass
     public static void beforeClass() {

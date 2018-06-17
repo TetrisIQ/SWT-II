@@ -13,7 +13,7 @@ import org.openqa.selenium.support.ui.Select;
 import static org.junit.Assert.assertEquals;
 
 
-public class SeleniumEinrichtungsfunktion {
+public class SeleniumEinrichtungsfunktionTest {
 
    @BeforeClass
     public static void beforeClass() {

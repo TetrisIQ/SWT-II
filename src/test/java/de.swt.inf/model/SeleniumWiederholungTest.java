@@ -16,7 +16,7 @@ import java.util.Calendar;
 
 import static org.junit.Assert.assertEquals;
 
-public class SeleniumWiederholung {
+public class SeleniumWiederholungTest {
 
   @BeforeClass
     public static void beforeClass() {

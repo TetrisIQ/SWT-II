@@ -4,10 +4,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.Cookie;
 
-public class TestLogin {
+public class TestLoginTest {
     private final WebDriver driver;
 
-    public TestLogin(WebDriver driver) {
+    public TestLoginTest(WebDriver driver) {
         this.driver = driver;
     }
 
