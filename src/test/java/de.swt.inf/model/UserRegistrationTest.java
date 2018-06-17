@@ -123,8 +123,7 @@ public class UserRegistrationTest {
         element = driver.findElement(By.name("submit"));
         element.click();
         //expected we are back on Dashboard
-        assertEquals("http://localhost:8080/dashboard", driver.getCurrentUrl());
-        assertEquals("Dashboard", driver.getTitle());
+        assertTrue(driver.getTitle().contains("Dashboard"));
     }
 
 
@@ -160,8 +159,7 @@ public class UserRegistrationTest {
         element.click();
         if ((username.equals("KarlEnder1"))) {
             // put first user in database
-            assertEquals("http://localhost:8080/dashboard", driver.getCurrentUrl());
-            assertEquals("Dashboard", driver.getTitle());
+            assertTrue(driver.getTitle().contains("Dashboard"));
         } else {
             // other user with this email cant register
             element = driver.findElement(By.tagName("body"));
@@ -203,8 +201,7 @@ public class UserRegistrationTest {
         element.click();
         if ((password.equals("J4V4R@ck5"))) {
             // register first User
-            assertEquals("http://localhost:8080/dashboard", driver.getCurrentUrl());
-            assertEquals("Dashboard", driver.getTitle());
+            assertTrue(driver.getTitle().contains("Dashboard"));
         } else {
             // other User with this username canot register
             element = driver.findElement(By.tagName("body"));
