@@ -75,48 +75,7 @@ public class AddTerminControler {
 
         t = new Termin(name, start, end, allDay, startT, endT);
 
-        //t.addCategory(new Category());
-        t.setPriority(priority);
-        t.setRepeat(terminRepeat);
-        t.setRepeatTime(repeatTime);
 
-
-
-        //Kategorien werden zu einem String zusammengefasst (z.B.: "Kategorie1,Kategorie2,Kategorie3")
-
-        if(cat != null){
-            for(int i = 0; i < cat.length; i++){
-                if(i == (cat.length - 1)){
-                    selectedCategories.append(cat[i]);
-                } else {
-                    selectedCategories.append(cat[i]).append(",");
-                }
-            }
-            t.setCategories(selectedCategories.toString());
-        }else{
-            t.setCategories("");
-        }
-
-
-        if (reminder) {
-            reminderD = request.getParameter("reminderD");
-            reminderT = request.getParameter("reminderT");
-            t.setReminder(true);
-            t.setReminderDate(reminderD);
-            t.setReminderTime(reminderT);
-        }
-
-
-        if (place != null) {
-            t.setOrt(place);
-        }
-
-        if (notice != null) {
-            t.setNote(notice);
-        }
-
-
-        terminDao.addTermin(t);
 
         if (!(Termin.isValid(start, end, startT, endT))) {
             //date is incorect
@@ -149,7 +108,12 @@ public class AddTerminControler {
             model.addAttribute("prios", prios);
             CategoryDao categoryDao = DaoFactory.getCategoryDao();
             VCardDao vCardDao = DaoFactory.getVCardDao();
-            List<Category> categories = categoryDao.getAllCategories();
+            Map<Category, Boolean> categories = new HashMap<Category, Boolean>();
+
+            //Kategorien zur Map hinzufügen
+            for(Category c : categoryDao.getAllCategories()){
+                categories.put(c, false);
+            }
             List<VCard> vCards = vCardDao.getAllVCards();
             model.addAttribute("categories", categories);
             model.addAttribute("vcards", vCards);
@@ -160,111 +124,148 @@ public class AddTerminControler {
             repeats.add("monatlich");
             repeats.add("jährlich");
             model.addAttribute("repeats", repeats);
-
-
-            //model.addAttribute("share", share);
-            //model.addAttribute("anhang", )
             model.addAttribute("notice", notice);
             return "terminEdit";
 
-        }
+        } else {
 
-        if(terminRepeat){
-            Termin temp = t;
-            int stundeAnf = Integer.parseInt(t.getStartTime().substring(0,2));
-            int minuteAnf = Integer.parseInt(t.getStartTime().substring(3));
-            int tagAnf = Integer.parseInt(t.getStart().substring(8));
-            int monatAnf = Integer.parseInt(t.getStart().substring(5,7)) - 1; //Java.util.Calendar rechnet beim Monat von 0 bis 11
-            int jahrAnf = Integer.parseInt(t.getStart().substring(0,4));
-            int stundeEnde = Integer.parseInt(t.getEndTime().substring(0,2));
-            int minuteEnde = Integer.parseInt(t.getEndTime().substring(3));
-            int tagEnde = Integer.parseInt(t.getEnd().substring(8));
-            int monatEnde = Integer.parseInt(t.getEnd().substring(5,7)) - 1; //Java.util.Calendar rechnet beim Monat von 0 bis 11
-            int jahrEnde = Integer.parseInt(t.getEnd().substring(0,4));
+            t.setPriority(priority);
+            t.setRepeat(terminRepeat);
+            t.setRepeatTime(repeatTime);
 
 
 
+            //Kategorien werden zu einem String zusammengefasst (z.B.: "Kategorie1,Kategorie2,Kategorie3")
 
-
-            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd - kk:mm");
-            Calendar calendarAnfang = new GregorianCalendar(jahrAnf, monatAnf, tagAnf, stundeAnf, minuteAnf);
-            Calendar calendarEnde = new GregorianCalendar(jahrEnde, monatEnde, tagEnde, stundeEnde, minuteEnde);
-
-
-
-
-
-
-            if(repeatTime.equals("stündlich")){
-                for(int i = 0; i < MAX_NEW_TERMINE; i++){
-
-                    calendarAnfang.add(Calendar.HOUR_OF_DAY, 1);
-                    calendarEnde.add(Calendar.HOUR_OF_DAY, 1);
-                    temp.setStart(df.format(calendarAnfang.getTime()).substring(0,10));
-                    temp.setStartTime(df.format(calendarAnfang.getTime()).substring(13));
-                    temp.setEnd(df.format(calendarEnde.getTime()).substring(0,10));
-                    temp.setEndTime(df.format(calendarEnde.getTime()).substring(13));
-                    if(temp.getStartTime().substring(0,2).equals("24")){
-                        temp.setStartTime("00:00");
+            if(cat != null){
+                for(int i = 0; i < cat.length; i++){
+                    if(i == (cat.length - 1)){
+                        selectedCategories.append(cat[i]);
+                    } else {
+                        selectedCategories.append(cat[i]).append(",");
                     }
-                    if(temp.getEndTime().substring(0,2).equals("24")){
-                        temp.setEndTime("00:00");
-                    }
-                    terminDao.addTermin(temp);
                 }
-
-            } else if(repeatTime.equals("täglich")){
-                for(int i = 0; i < MAX_NEW_TERMINE; i++){
-                    calendarAnfang.add(Calendar.DAY_OF_MONTH, 1);
-                    calendarAnfang.get(Calendar.WEEK_OF_MONTH);
-                    calendarEnde.add(Calendar.DAY_OF_MONTH, 1);
-                    temp.setStart(df.format(calendarAnfang.getTime()).substring(0,10));
-                    temp.setStartTime(df.format(calendarAnfang.getTime()).substring(13));
-                    temp.setEnd(df.format(calendarEnde.getTime()).substring(0,10));
-                    temp.setEndTime(df.format(calendarEnde.getTime()).substring(13));
-                    terminDao.addTermin(temp);
-                }
-
-            } else if(repeatTime.equals("wöchentlich")){
-                for(int i = 0; i < MAX_NEW_TERMINE; i++){
-                    calendarAnfang.add(Calendar.DAY_OF_MONTH, 7);
-                    calendarEnde.add(Calendar.DAY_OF_MONTH, 7);
-                    temp.setStart(df.format(calendarAnfang.getTime()).substring(0,10));
-                    temp.setStartTime(df.format(calendarAnfang.getTime()).substring(13));
-                    temp.setEnd(df.format(calendarEnde.getTime()).substring(0,10));
-                    temp.setEndTime(df.format(calendarEnde.getTime()).substring(13));
-                    terminDao.addTermin(temp);
-                }
-
-            } else if(repeatTime.equals("jährlich")){
-                for(int i = 0; i < MAX_NEW_TERMINE; i++){
-                    calendarAnfang.add(Calendar.YEAR, 1);
-                    calendarEnde.add(Calendar.YEAR, 1);
-                    temp.setStart(df.format(calendarAnfang.getTime()).substring(0,10));
-                    temp.setStartTime(df.format(calendarAnfang.getTime()).substring(13));
-                    temp.setEnd(df.format(calendarEnde.getTime()).substring(0,10));
-                    temp.setEndTime(df.format(calendarEnde.getTime()).substring(13));
-                    terminDao.addTermin(temp);
-                }
-
-            } else if(repeatTime.equals("monatlich")){
-                for(int i = 0; i < MAX_NEW_TERMINE; i++){
-                    calendarAnfang.add(Calendar.MONTH, 1);
-                    calendarEnde.add(Calendar.MONTH, 1);
-                    temp.setStart(df.format(calendarAnfang.getTime()).substring(0,10));
-                    temp.setStartTime(df.format(calendarAnfang.getTime()).substring(13));
-                    temp.setEnd(df.format(calendarEnde.getTime()).substring(0,10));
-                    temp.setEndTime(df.format(calendarEnde.getTime()).substring(13));
-                    terminDao.addTermin(temp);
-                }
-
+                t.setCategories(selectedCategories.toString());
+            }else{
+                t.setCategories("");
             }
+
+
+            if (reminder) {
+                reminderD = request.getParameter("reminderD");
+                reminderT = request.getParameter("reminderT");
+                t.setReminder(true);
+                t.setReminderDate(reminderD);
+                t.setReminderTime(reminderT);
+            }
+
+
+            if (place != null) {
+                t.setOrt(place);
+            }
+
+            if (notice != null) {
+                t.setNote(notice);
+            }
+
+
+            terminDao.addTermin(t);
+
+            if(terminRepeat){
+                Termin temp = t;
+                int stundeAnf = Integer.parseInt(t.getStartTime().substring(0,2));
+                int minuteAnf = Integer.parseInt(t.getStartTime().substring(3));
+                int tagAnf = Integer.parseInt(t.getStart().substring(8));
+                int monatAnf = Integer.parseInt(t.getStart().substring(5,7)) - 1; //Java.util.Calendar rechnet beim Monat von 0 bis 11
+                int jahrAnf = Integer.parseInt(t.getStart().substring(0,4));
+                int stundeEnde = Integer.parseInt(t.getEndTime().substring(0,2));
+                int minuteEnde = Integer.parseInt(t.getEndTime().substring(3));
+                int tagEnde = Integer.parseInt(t.getEnd().substring(8));
+                int monatEnde = Integer.parseInt(t.getEnd().substring(5,7)) - 1; //Java.util.Calendar rechnet beim Monat von 0 bis 11
+                int jahrEnde = Integer.parseInt(t.getEnd().substring(0,4));
+
+
+
+
+
+                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd - kk:mm");
+                Calendar calendarAnfang = new GregorianCalendar(jahrAnf, monatAnf, tagAnf, stundeAnf, minuteAnf);
+                Calendar calendarEnde = new GregorianCalendar(jahrEnde, monatEnde, tagEnde, stundeEnde, minuteEnde);
+
+
+
+
+
+
+                if(repeatTime.equals("stündlich")){
+                    for(int i = 0; i < MAX_NEW_TERMINE; i++){
+
+                        calendarAnfang.add(Calendar.HOUR_OF_DAY, 1);
+                        calendarEnde.add(Calendar.HOUR_OF_DAY, 1);
+                        temp.setStart(df.format(calendarAnfang.getTime()).substring(0,10));
+                        temp.setStartTime(df.format(calendarAnfang.getTime()).substring(13));
+                        temp.setEnd(df.format(calendarEnde.getTime()).substring(0,10));
+                        temp.setEndTime(df.format(calendarEnde.getTime()).substring(13));
+                        if(temp.getStartTime().substring(0,2).equals("24")){
+                            temp.setStartTime("00:00");
+                        }
+                        if(temp.getEndTime().substring(0,2).equals("24")){
+                            temp.setEndTime("00:00");
+                        }
+                        terminDao.addTermin(temp);
+                    }
+
+                } else if(repeatTime.equals("täglich")){
+                    for(int i = 0; i < MAX_NEW_TERMINE; i++){
+                        calendarAnfang.add(Calendar.DAY_OF_MONTH, 1);
+                        calendarAnfang.get(Calendar.WEEK_OF_MONTH);
+                        calendarEnde.add(Calendar.DAY_OF_MONTH, 1);
+                        temp.setStart(df.format(calendarAnfang.getTime()).substring(0,10));
+                        temp.setStartTime(df.format(calendarAnfang.getTime()).substring(13));
+                        temp.setEnd(df.format(calendarEnde.getTime()).substring(0,10));
+                        temp.setEndTime(df.format(calendarEnde.getTime()).substring(13));
+                        terminDao.addTermin(temp);
+                    }
+
+                } else if(repeatTime.equals("wöchentlich")){
+                    for(int i = 0; i < MAX_NEW_TERMINE; i++){
+                        calendarAnfang.add(Calendar.DAY_OF_MONTH, 7);
+                        calendarEnde.add(Calendar.DAY_OF_MONTH, 7);
+                        temp.setStart(df.format(calendarAnfang.getTime()).substring(0,10));
+                        temp.setStartTime(df.format(calendarAnfang.getTime()).substring(13));
+                        temp.setEnd(df.format(calendarEnde.getTime()).substring(0,10));
+                        temp.setEndTime(df.format(calendarEnde.getTime()).substring(13));
+                        terminDao.addTermin(temp);
+                    }
+
+                } else if(repeatTime.equals("jährlich")){
+                    for(int i = 0; i < MAX_NEW_TERMINE; i++){
+                        calendarAnfang.add(Calendar.YEAR, 1);
+                        calendarEnde.add(Calendar.YEAR, 1);
+                        temp.setStart(df.format(calendarAnfang.getTime()).substring(0,10));
+                        temp.setStartTime(df.format(calendarAnfang.getTime()).substring(13));
+                        temp.setEnd(df.format(calendarEnde.getTime()).substring(0,10));
+                        temp.setEndTime(df.format(calendarEnde.getTime()).substring(13));
+                        terminDao.addTermin(temp);
+                    }
+
+                } else if(repeatTime.equals("monatlich")){
+                    for(int i = 0; i < MAX_NEW_TERMINE; i++){
+                        calendarAnfang.add(Calendar.MONTH, 1);
+                        calendarEnde.add(Calendar.MONTH, 1);
+                        temp.setStart(df.format(calendarAnfang.getTime()).substring(0,10));
+                        temp.setStartTime(df.format(calendarAnfang.getTime()).substring(13));
+                        temp.setEnd(df.format(calendarEnde.getTime()).substring(0,10));
+                        temp.setEndTime(df.format(calendarEnde.getTime()).substring(13));
+                        terminDao.addTermin(temp);
+                    }
+
+                }
+            }
+
+            return "redictDashboard";
         }
 
-
-
-
-        return "redictDashboard";
     }
 
 
