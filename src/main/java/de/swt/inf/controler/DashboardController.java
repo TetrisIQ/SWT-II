@@ -336,16 +336,7 @@ public class DashboardController {
 
     @RequestMapping(value = "dashboard/woche/dec", method = RequestMethod.GET)
     public String decWoche (HttpServletRequest request, HttpServletResponse response, Model model) throws ParseException {
-        Cookie[] cookies = request.getCookies();
-        boolean success = false;
-
-        for (int i = 0; i < cookies.length; i++) {
-            if (cookies[i].getName().equals("login")) {
-                success = true;
-            }
-        }
-
-        if (success) {
+        if (LoginController.isUserLoggedIn(request.getCookies())){
             String calendar = request.getParameter("kalender");
             TerminDao terminDao = DaoFactory.getTerminDao();
 
@@ -375,15 +366,7 @@ public class DashboardController {
 
             }
             return "woche";
-        } else {
-            try {
-                response.sendRedirect("/login");
-                return "login";
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
-
         return "woche";
     }
 
