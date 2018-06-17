@@ -73,6 +73,7 @@ public class LoginController {
 
     public static boolean isUserLoggedIn(Cookie[] cookies) {
         if (!test) {
+            if(cookies == null) return false;
             for (int i = 0; i < cookies.length; i++) {
                 if (cookies[i].getName().equals("login")) {
                     return true;
