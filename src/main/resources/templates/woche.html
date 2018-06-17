@@ -55,7 +55,6 @@
                             <li><a th:href="@{/dashboard/tag}">Tag</a></li>
                             <li><a th:href="@{/dashboard/woche}">Woche</a></li>
                             <li><a th:href="@{/dashboard/monat}">Monat</a></li>
-                            <li><a th:href="@{/dashboard/semester}">Semester</a></li>
                             <li><a th:href="@{/dashboard/jahr}">Jahr</a></li>
                         </ul>
                     </li>
@@ -97,8 +96,7 @@
 <div class="panel panel-default">
     <div class="panel-heading text-center"><h4>Karl Ender</h4></div>
     <div class="row">
-        <!--<div class="col-md-1"></div>-->
-        <div class="col-md-2 text-center">
+        <div class="col-md-2 col-md-offset-1 text-center">
             <h5>Montag</h5>
             <div class="panel panel-default" id="panelMontag"></div>
             <table  class="table table-striped" border="1">
@@ -173,7 +171,7 @@
                 </tbody>
             </table>
         </div>
-        <div class="col-md-1 text-center">
+        <div class="col-md-2 text-center">
             <h5>Freitag</h5>
             <div class="panel panel-default" id="panelFreitag">
             </div>
@@ -192,7 +190,9 @@
                 </tbody>
             </table>
         </div>
-        <div class="col-md-1 text-center">
+    </div>
+    <div class="row">
+        <div class="col-md-2 col-md-offset-1 text-center">
             <h5>Samstag</h5>
             <div class="panel panel-default" id="panelSamstag">
             </div>
@@ -211,7 +211,7 @@
                 </tbody>
             </table>
         </div>
-        <div class="col-md-1 text-center">
+        <div class="col-md-2 text-center">
             <h5>Sontag</h5>
             <div class="panel panel-default" id="panelSonntag">
             </div>

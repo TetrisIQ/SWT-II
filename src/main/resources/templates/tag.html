@@ -54,7 +54,6 @@
                             <li><a th:href="@{/dashboard/tag}">Tag</a></li>
                             <li><a th:href="@{/dashboard/woche}">Woche</a></li>
                             <li><a th:href="@{/dashboard/monat}">Monat</a></li>
-                            <li><a th:href="@{/dashboard/semester}">Semester</a></li>
                             <li><a th:href="@{/dashboard/jahr}">Jahr</a></li>
                         </ul>
                     </li>
@@ -90,22 +89,28 @@
 <!-- Ende Navigationsleiste -->
 <!-- Kalenderansich -->
 <div class="panel panel-default">
-    <div class="panel-heading text-center"><h4>Karl Ender</h4></div>
+    <div class="panel-heading text-center">
+        <h4>Karl Ender</h4>
+        <h5 th:text="${datum}"></h5>
+    </div>
     <div class="row">
         <!--<div class="col-md-1"></div>-->
-        <div class="col-md-2 text-center">
-            <h5>Tag</h5>
+        <div class="col-md-5 col-md-offset-3 text-center">
             <div class="panel panel-default" id="panelMontag"></div>
             <table  class="table table-striped" border="1">
                 <thead>
                 <th>Start-Zeit</th>
+                <th>End-Zeit</th>
                 <th>Name</th>
+                <th>Ort</th>
                 </thead>
                 <tbody>
                 <tr th:each="termin : ${Tag}">
                     <td th:id="${termin.id}" hidden="hidden"></td>
                     <td th:text="${termin.startTime}"></td>
+                    <td th:text="${termin.endTime}"></td>
                     <td><a th:href="@{/edit(id=${termin.id})}" th:text="${termin.name}"></a></td>
+                    <td th:text="${termin.ort}"></td>
                 </tr>
                 </tbody>
             </table>

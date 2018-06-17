@@ -40,6 +40,97 @@ public class DashboardController {
         return "dashboard";
     }
 
+    @RequestMapping(value = "/dashboard/monat/dec", method = RequestMethod.GET)
+    public String decMonat(HttpServletRequest request,HttpServletResponse response, Model model){
+        Cookie[] cookies = request.getCookies();
+        boolean success = false;
+
+        for (int i = 0; i < cookies.length; i++) {
+            if (cookies[i].getName().equals("login")) {
+                success = true;
+            }
+        }
+
+        if (success) {
+            String calendar = request.getParameter("kalender");
+            TerminDao terminDao = DaoFactory.getTerminDao();
+            if (calendar != null) {
+                //use this Calendar // not implemented in Prototype
+            } else {  //use default calendar
+
+                calendarMonat.set(Calendar.MONTH, calendarMonat.get(Calendar.MONTH) - 1);
+
+                DateFormat dateFormat = new SimpleDateFormat("MMMMMMMM");
+                model.addAttribute("Monat",dateFormat.format(calendarMonat.getTime()));
+
+                int maxDay = calendarMonat.getActualMaximum(Calendar.DAY_OF_MONTH);
+
+                if(maxDay == 31) return "monat31";
+                if(maxDay == 30) return "monat30";
+                if(maxDay == 29) return "monat29";
+                if(maxDay == 28) return "monat29";
+
+            }
+
+            return "monat31";
+
+        } else {
+
+            try {
+                response.sendRedirect("/login");
+                return "login";
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return "monat";
+    }
+
+    @RequestMapping(value = "/dashboard/monat/add", method = RequestMethod.GET)
+    public String addMonat(HttpServletRequest request,HttpServletResponse response, Model model){
+        Cookie[] cookies = request.getCookies();
+        boolean success = false;
+
+        for (int i = 0; i < cookies.length; i++) {
+            if (cookies[i].getName().equals("login")) {
+                success = true;
+            }
+        }
+
+        if (success) {
+            String calendar = request.getParameter("kalender");
+            TerminDao terminDao = DaoFactory.getTerminDao();
+            if (calendar != null) {
+                //use this Calendar // not implemented in Prototype
+            } else {  //use default calendar
+
+                calendarMonat.set(Calendar.MONTH, calendarMonat.get(Calendar.MONTH) + 1);
+
+                DateFormat dateFormat = new SimpleDateFormat("MMMMMMMM");
+                model.addAttribute("Monat",dateFormat.format(calendarMonat.getTime()));
+
+                int maxDay = calendarMonat.getActualMaximum(Calendar.DAY_OF_MONTH);
+
+                if(maxDay == 31) return "monat31";
+                if(maxDay == 30) return "monat30";
+                if(maxDay == 29) return "monat29";
+                if(maxDay == 28) return "monat28";
+
+
+            }
+
+            return "monat";
+        } else {
+
+            try {
+                response.sendRedirect("/login");
+                return "login";
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return "monat";
+    }
 
     @RequestMapping(value = "/dashboard/monat", method = RequestMethod.GET)
     public String viewMonat(HttpServletRequest request, HttpServletResponse response, Model model) throws ParseException {
@@ -59,19 +150,40 @@ public class DashboardController {
                 //use this Calendar // not implemented in Prototype
             } else {  //use default calendar
 
+                calendarTag = getCurrentCalendar();
                 calendarMonat = getCurrentCalendar();
 
-                List<Termin> terminList = terminDao.getAllTermine();
+                String monat = request.getParameter("monat");
 
-                for (Termin t : terminList) {
+                if(monat == null){
+                    DateFormat dateFormat = new SimpleDateFormat("MMMMMMMM");
 
-                    if(calendarMonat.get(Calendar.MONTH) == Integer.parseInt(t.getStart().substring(2,3))){
-                        //addInModel(model,getWeekdayFromDate(t.getStart()),t);
-                    }
+                    model.addAttribute("Monat",dateFormat.format(calendarMonat.getTime()));
+
+                    int maxDay = calendarMonat.getActualMaximum(Calendar.DAY_OF_MONTH);
+
+                    if(maxDay == 31) return "monat31";
+                    if(maxDay == 30) return "monat30";
+                    if(maxDay == 29) return "monat29";
+                    if(maxDay == 28) return "monat28";
+                } else {
+                    calendarMonat.set(Calendar.MONTH, Integer.parseInt(monat) - 1);
+
+                    DateFormat dateFormat = new SimpleDateFormat("MMMMMMMM");
+
+                    model.addAttribute("Monat",dateFormat.format(calendarMonat.getTime()));
+
+                    int maxDay = calendarMonat.getActualMaximum(Calendar.DAY_OF_MONTH);
+
+                    if(maxDay == 31) return "monat31";
+                    if(maxDay == 30) return "monat30";
+                    if(maxDay == 29) return "monat29";
+                    if(maxDay == 28) return "monat28";
+
                 }
             }
 
-            return "monat";
+            return "monat31";
 
         } else {
 
@@ -82,14 +194,56 @@ public class DashboardController {
                 e.printStackTrace();
             }
         }
-        return "monat";
+        return "monat31";
     }
 
     @RequestMapping(value = "/dashboard/jahr", method = RequestMethod.GET)
     public String viewJahr (HttpServletRequest request, HttpServletResponse response, Model model){
-
         return "jahr";
     }
+
+
+    @RequestMapping(value = "/dashboard/tag", method = RequestMethod.GET)
+    public String getTag(HttpServletRequest request,Model model) throws ParseException {
+        Cookie[] cookies = request.getCookies();
+        boolean success = false;
+
+        for (int i = 0; i < cookies.length; i++) {
+            if (cookies[i].getName().equals("login")) {
+                success = true;
+            }
+        }
+        if(success){
+            String calendar = request.getParameter("kalender");
+            TerminDao terminDao = DaoFactory.getTerminDao();
+
+            if (calendar != null) {
+                //use this Calendar // not implemented in Prototype
+            } else {
+                DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                List<Termin> terminList;
+                String date = request.getParameter("datum");
+
+                if(date == null){
+                    calendarTag = getCurrentCalendar();
+                    model.addAttribute("datum", dateFormat.format(calendarTag.getTime()));
+                    terminList = terminDao.getDateTermine(dateFormat.format(calendarTag.getTime()));
+                } else {
+                    calendarTag.set(Calendar.DAY_OF_MONTH, Integer.parseInt(date));
+                    model.addAttribute("datum", dateFormat.format(calendarTag.getTime()));
+                    terminList = terminDao.getDateTermine(dateFormat.format(calendarTag.getTime()));
+                }
+
+                model.addAttribute("Tag", terminList);
+
+                return "tag";
+            }
+            return "tag";
+        }
+        return "tag";
+    }
+
+
 
     @RequestMapping(value = "/dashboard/tag/dec", method = RequestMethod.GET)
     public String decTag(HttpServletRequest request, HttpServletResponse response, Model model){
@@ -111,6 +265,7 @@ public class DashboardController {
                 DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                 calendarTag.add(Calendar.DAY_OF_MONTH,-1);
 
+                model.addAttribute("datum", dateFormat.format(calendarTag.getTime()));
                 List<Termin> terminList = terminDao.getDateTermine(dateFormat.format(calendarTag.getTime()));
 
                 model.addAttribute("Tag", terminList);
@@ -143,6 +298,7 @@ public class DashboardController {
                 DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                 calendarTag.add(Calendar.DAY_OF_MONTH,1);
 
+                model.addAttribute("datum", dateFormat.format(calendarTag.getTime()));
                 List<Termin> terminList = terminDao.getDateTermine(dateFormat.format(calendarTag.getTime()));
 
                 model.addAttribute("Tag", terminList);
@@ -152,43 +308,6 @@ public class DashboardController {
             return "tag";
         }
         return "tag";
-    }
-
-    @RequestMapping(value = "/dashboard/tag", method = RequestMethod.GET)
-    public String viewTag (HttpServletRequest request, HttpServletResponse response, Model model){
-        Cookie[] cookies = request.getCookies();
-        boolean success = false;
-
-        for (int i = 0; i < cookies.length; i++) {
-            if (cookies[i].getName().equals("login")) {
-                success = true;
-            }
-        }
-        if(success){
-            String calendar = request.getParameter("kalender");
-            TerminDao terminDao = DaoFactory.getTerminDao();
-
-            if (calendar != null) {
-                //use this Calendar // not implemented in Prototype
-            } else {
-                DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                calendarTag = getCurrentCalendar();
-
-                List<Termin> terminList = terminDao.getDateTermine(dateFormat.format(calendarTag.getTime()));
-
-                model.addAttribute("Tag", terminList);
-
-                return "tag";
-            }
-            return "tag";
-        }
-        return "tag";
-    }
-
-    @RequestMapping(value = "/dashboard/semester", method = RequestMethod.GET)
-    public String viewSemester (HttpServletRequest request, HttpServletResponse response, Model model){
-
-        return "semester";
     }
 
     @RequestMapping(value = "dashboard/woche/add", method = RequestMethod.GET)
@@ -201,6 +320,7 @@ public class DashboardController {
                 success = true;
             }
         }
+
         if (success) {
             String calendar = request.getParameter("kalender");
             TerminDao terminDao = DaoFactory.getTerminDao();
@@ -211,7 +331,7 @@ public class DashboardController {
 
                 calendarWoche.add(Calendar.DAY_OF_MONTH, 7);
 
-                List<List<Termin>> termine = sortByCurrentWeekDay(calendarWoche, terminDao.getAllTermine());
+                List<List<Termin>> termine = sortByCurrentWeekDay(calendarWoche, terminDao.getAllTermine(), "week");
 
                 model.addAttribute("Montag", termine.get(1));
 
@@ -259,10 +379,12 @@ public class DashboardController {
             if (calendar != null) {
                 //use this Calendar // not implemented in Prototype
             } else {  //use default calendar
+
                 DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
                 calendarWoche.add(Calendar.DAY_OF_MONTH, -7);
+                System.out.println(df.format(calendarWoche.getTime()));
 
-                List<List<Termin>> termine = sortByCurrentWeekDay(calendarWoche, terminDao.getAllTermine());
+                List<List<Termin>> termine = sortByCurrentWeekDay(calendarWoche, terminDao.getAllTermine(), "week");
 
                 model.addAttribute("Montag", termine.get(1));
 
@@ -314,7 +436,7 @@ public class DashboardController {
                 DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
                 calendarWoche = getCurrentCalendar();
 
-                List<List<Termin>> termine = sortByCurrentWeekDay(calendarWoche, terminDao.getAllTermine());
+                List<List<Termin>> termine = sortByCurrentWeekDay(calendarWoche, terminDao.getAllTermine(), "week");
 
                 model.addAttribute("Montag", termine.get(1));
 
@@ -344,7 +466,7 @@ public class DashboardController {
         return "woche";
     }
 
-    private List<List<Termin>> sortByCurrentWeekDay (Calendar c, List<Termin> listTermin) throws ParseException {
+    private List<List<Termin>> sortByCurrentWeekDay (Calendar c, List<Termin> listTermin, String time) throws ParseException {
         List<List<Termin>> termine = new LinkedList<List<Termin>>();
 
         for(int i = 0;i <= 7;i++){
@@ -353,7 +475,7 @@ public class DashboardController {
 
         for(Termin t: listTermin){
 
-            if(checkInMarkedWeek(c, t.getStart())){
+            if(checkInTime(c, t.getStart())){
 
                 String[] dateFormat = t.getStart().split("-");
                 String date = dateFormat[2] + "/" + dateFormat[1] + "/" + dateFormat[0];
@@ -375,26 +497,24 @@ public class DashboardController {
     }
 
 
-
-    private boolean checkInMarkedWeek (Calendar c, String inputDate) throws ParseException {
+    private boolean checkInTime (Calendar c, String inputDate) throws ParseException {
         DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
-
         Calendar calendar = getCurrentCalendar();
         calendar.setTime(c.getTime());
+
         inputDate = inputDate.replaceAll("-","/");
-
-
         Date dateToCheck = df.parse(inputDate);
 
         calendar.set(Calendar.DAY_OF_WEEK,Calendar.MONDAY);
 
         Date startDay = calendar.getTime();
-        calendar.add(Calendar.DATE,7);
+
+        calendar.add(Calendar.DATE,6);
 
         Date endDay = calendar.getTime();
 
-        return dateToCheck.compareTo(startDay) >= 0 && dateToCheck.compareTo(endDay) <= 0;
-
+        return (dateToCheck.after(startDay) || df.format(dateToCheck).equals(df.format(startDay)))&&
+                    (dateToCheck.before(endDay) || df.format(dateToCheck).equals(df.format(endDay)));
     }
 
     private GregorianCalendar getCurrentCalendar(){
