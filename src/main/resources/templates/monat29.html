@@ -103,8 +103,9 @@
 <!-- Kalenderansich -->
 <div class="row mt-10">
     <div class="panel panel-default">
-        <div class="panel-heading  text-center"><h4>Monatsansicht</h4>
-            <h3 th:text="${Jahr}"></h3>
+        <div class="panel-heading  text-center">
+            <h4>Monatsansicht</h4>
+            <h3 th:text="${Monat}"></h3>
         </div>
         <div class="panel-body">
             <div class="row mt-50">
@@ -114,42 +115,99 @@
                         <tbody>
                         <tr>
                             <td>
-                                <a class="btn btn-default cell" role="button" th:href="@{/dashboard/monat(monat=01)}">Januar</a>
+                                <a class="btn btn-default cell" role="button" th:href="@{/dashboard/tag(datum=01)}">1</a>
                             </td>
                             <td>
-                                <a class="btn btn-default cell" role="button" th:href="@{/dashboard/monat(monat=02)}">Februar</a>
+                                <a class="btn btn-default cell" role="button" th:href="@{/dashboard/tag(datum=02)}">2</a>
                             </td>
                             <td>
-                                <a class="btn btn-default cell" role="button" th:href="@{/dashboard/monat(monat=03)}">März</a>
+                                <a class="btn btn-default cell" role="button" th:href="@{/dashboard/tag(datum=03)}">3</a>
                             </td>
                             <td>
-                                <a class="btn btn-default cell" role="button" th:href="@{/dashboard/monat(monat=04)}">April</a>
+                                <a class="btn btn-default cell" role="button" th:href="@{/dashboard/tag(datum=04)}">4</a>
                             </td>
                             <td>
-                                <a class="btn btn-default cell" role="button" th:href="@{/dashboard/monat(monat=05)}">Mai</a>
+                                <a class="btn btn-default cell" role="button" th:href="@{/dashboard/tag(datum=05)}">5</a>
                             </td>
                             <td>
-                                <a class="btn btn-default cell" role="button" th:href="@{/dashboard/monat(monat=06)}">Juni</a>
+                                <a class="btn btn-default cell" role="button" th:href="@{/dashboard/tag(datum=06)}">6</a>
+                            </td>
+                            <td>
+                                <a class="btn btn-default cell" role="button" th:href="@{/dashboard/tag(datum=07)}">7</a>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <a class="btn btn-default cell" role="button" th:href="@{/dashboard/monat(monat=07)}">Juli</a>
+                                <a class="btn btn-default cell" role="button" th:href="@{/dashboard/tag(datum=08)}">8</a>
                             </td>
                             <td>
-                                <a class="btn btn-default cell" role="button" th:href="@{/dashboard/monat(monat=08)}">August</a>
+                                <a class="btn btn-default cell" role="button" th:href="@{/dashboard/tag(datum=09)}">9</a>
                             </td>
                             <td>
-                                <a class="btn btn-default cell" role="button" th:href="@{/dashboard/monat(monat=09)}">September</a>
+                                <a class="btn btn-default cell" role="button" th:href="@{/dashboard/tag(datum=10)}">10</a>
                             </td>
                             <td>
-                                <a class="btn btn-default cell" role="button" th:href="@{/dashboard/monat(monat=10)}">Oktober</a>
+                                <a class="btn btn-default cell" role="button" th:href="@{/dashboard/tag(datum=11)}">11</a>
                             </td>
                             <td>
-                                <a class="btn btn-default cell" role="button" th:href="@{/dashboard/monat(monat=11)}">November</a>
+                                <a class="btn btn-default cell" role="button" th:href="@{/dashboard/tag(datum=12)}">12</a>
                             </td>
                             <td>
-                                <a class="btn btn-default cell" role="button" th:href="@{/dashboard/monat(monat=12)}">Dezember</a>
+                                <a class="btn btn-default cell" role="button" th:href="@{/dashboard/tag(datum=13)}">13</a>
+                            </td>
+                            <td>
+                                <a class="btn btn-default cell" role="button" th:href="@{/dashboard/tag(datum=14)}">14</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a class="btn btn-default cell" role="button" th:href="@{/dashboard/tag(datum=15)}">15</a>
+                            </td>
+                            <td>
+                                <a class="btn btn-default cell" role="button" th:href="@{/dashboard/tag(datum=16)}">16</a>
+                            </td>
+                            <td>
+                                <a class="btn btn-default cell" role="button" th:href="@{/dashboard/tag(datum=17)}">17</a>
+                            </td>
+                            <td>
+                                <a class="btn btn-default cell" role="button" th:href="@{/dashboard/tag(datum=18)}">18</a>
+                            </td>
+                            <td>
+                                <a class="btn btn-default cell" role="button" th:href="@{/dashboard/tag(datum=19)}">19</a>
+                            </td>
+                            <td>
+                                <a class="btn btn-default cell" role="button" th:href="@{/dashboard/tag(datum=20)}">20</a>
+                            </td>
+                            <td>
+                                <a class="btn btn-default cell" role="button" th:href="@{/dashboard/tag(datum=21)}">21</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a class="btn btn-default cell" role="button" th:href="@{/dashboard/tag(datum=22)}">22</a>
+                            </td>
+                            <td>
+                                <a class="btn btn-default cell" role="button" th:href="@{/dashboard/tag(datum=23)}">23</a>
+                            </td>
+                            <td>
+                                <a class="btn btn-default cell" role="button" th:href="@{/dashboard/tag(datum=24)}">24</a>
+                            </td>
+                            <td>
+                                <a class="btn btn-default cell" role="button" th:href="@{/dashboard/tag(datum=25)}">25</a>
+                            </td>
+                            <td>
+                                <a class="btn btn-default cell" role="button" th:href="@{/dashboard/tag(datum=26)}">26</a>
+                            </td>
+                            <td>
+                                <a class="btn btn-default cell" role="button" th:href="@{/dashboard/tag(datum=27)}">27</a>
+                            </td>
+                            <td>
+                                <a class="btn btn-default cell" role="button" th:href="@{/dashboard/tag(datum=28)}">28</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a class="btn btn-default cell" role="button" th:href="@{/dashboard/tag(datum=29)}">29</a>
                             </td>
                         </tr>
                         </tbody>
