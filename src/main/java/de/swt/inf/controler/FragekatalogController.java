@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 import java.util.Calendar;
@@ -24,70 +25,99 @@ public class FragekatalogController {
     private final int KEY_AGE_PREF = 5;
     private final int KEY_SEMESTER_PREF = 6;
 
-    @RequestMapping(value = "/fragekatalog", method = RequestMethod.GET)
-    public String fragekatalog(Model model){
 
-        //TODO: Sobald der Login steht muss der User abgeholt werden
+    /**
+     * 1. Prüft ob User eingeloggt.
+     * 2. Überprüft ob beim User schon irgendwelche Preferenzen vorliegen und fügt sie dem Model hinzu, damit diese vorausgewählt werden.
+     * 3. Alle Enums werden geladen.
+     * @param request
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/fragekatalog", method = RequestMethod.GET)
+    public String fragekatalog(HttpServletRequest request, Model model){
+
         userPreference = (userPreference == null ? new UserPreferences() : userPreference);
 
+        Cookie[] cookies = request.getCookies();
+        boolean success = false;
 
-        // Falls der Fragekatalog schon einmal verwendet wurde, werden die alten Preferenzen vorausgewählt
-        if(userPreference.getMusicPreferencesEnum() != null){
-            MusicPreferencesEnum musicSelected = userPreference.getMusicPreferencesEnum();
-            model.addAttribute("musicSelected", musicSelected);
-        }
-        if(userPreference.getProvince() != null){
-            ProvinceEnum provinceSelected = userPreference.getProvince();
-            model.addAttribute("provinceSelected", provinceSelected);
-        }
-        if(userPreference.getCourseEnum() != null){
-            CourseEnum courseSelected = userPreference.getCourseEnum();
-            model.addAttribute("courseSelected", courseSelected);
-        }
-        if(userPreference.getGenderEnum() != null){
-            GenderEnum genderSelected = userPreference.getGenderEnum();
-            model.addAttribute("genderSelected", genderSelected);
-        }
-        if(userPreference.getUniversityEnum() != null){
-            UniversityEnum universitySelected = userPreference.getUniversityEnum();
-            model.addAttribute("universitySelected", universitySelected);
-        }
-        if(userPreference.getAge() != null){
-            String ageSelected = userPreference.getAge();
-            model.addAttribute("ageSelected", ageSelected);
-        }
-        if(userPreference.getSemester() != null){
-            String semesterSelected = userPreference.getSemester();
-            model.addAttribute("semesterSelected", semesterSelected);
+        for (int i = 0; i < cookies.length; i++) {
+            if (cookies[i].getName().equals("login")) {
+                success = true;
+            }
         }
 
+        if(success){
+            // Falls der Fragekatalog schon einmal verwendet wurde, werden die alten Preferenzen vorausgewählt
+            if(userPreference.getMusicPreferencesEnum() != null){
+                MusicPreferencesEnum musicSelected = userPreference.getMusicPreferencesEnum();
+                model.addAttribute("musicSelected", musicSelected);
+            }
+            if(userPreference.getProvince() != null){
+                ProvinceEnum provinceSelected = userPreference.getProvince();
+                model.addAttribute("provinceSelected", provinceSelected);
+            }
+            if(userPreference.getCourseEnum() != null){
+                CourseEnum courseSelected = userPreference.getCourseEnum();
+                model.addAttribute("courseSelected", courseSelected);
+            }
+            if(userPreference.getGenderEnum() != null){
+                GenderEnum genderSelected = userPreference.getGenderEnum();
+                model.addAttribute("genderSelected", genderSelected);
+            }
+            if(userPreference.getUniversityEnum() != null){
+                UniversityEnum universitySelected = userPreference.getUniversityEnum();
+                model.addAttribute("universitySelected", universitySelected);
+            }
+            if(userPreference.getAge() != null){
+                String ageSelected = userPreference.getAge();
+                model.addAttribute("ageSelected", ageSelected);
+            }
+            if(userPreference.getSemester() != null){
+                String semesterSelected = userPreference.getSemester();
+                model.addAttribute("semesterSelected", semesterSelected);
+            }
 
 
-        //Enums einlesen
-        List<MusicPreferencesEnum> musicEnums = Arrays.asList(MusicPreferencesEnum.values());
-        List<GenderEnum> genderEnums = Arrays.asList(GenderEnum.values());
-        List<CourseEnum> courseEnums = Arrays.asList(CourseEnum.values());
-        List<ProvinceEnum> provinceEnums = Arrays.asList(ProvinceEnum.values());
-        List<UniversityEnum> universityEnums = Arrays.asList(UniversityEnum.values());
 
-        //Alters- und Semestergruppierung einlesen
-        //Anschließend dem Model hinzufügen wenn nicht null
-        List<String> ageEnums = loadOtherPreferences(KEY_AGE_PREF);
-        List<String> semesterEnums = loadOtherPreferences(KEY_SEMESTER_PREF);
+            //Enums einlesen
+            List<MusicPreferencesEnum> musicEnums = Arrays.asList(MusicPreferencesEnum.values());
+            List<GenderEnum> genderEnums = Arrays.asList(GenderEnum.values());
+            List<CourseEnum> courseEnums = Arrays.asList(CourseEnum.values());
+            List<ProvinceEnum> provinceEnums = Arrays.asList(ProvinceEnum.values());
+            List<UniversityEnum> universityEnums = Arrays.asList(UniversityEnum.values());
 
-        model.addAttribute("age", ageEnums);
-        model.addAttribute("semester", semesterEnums);
+            //Alters- und Semestergruppierung einlesen
+            //Anschließend dem Model hinzufügen wenn nicht null
+            List<String> ageEnums = loadOtherPreferences(KEY_AGE_PREF);
+            List<String> semesterEnums = loadOtherPreferences(KEY_SEMESTER_PREF);
 
-        //Enums dem Model hinzufügen
-        model.addAttribute("music", musicEnums);
-        model.addAttribute("gender", genderEnums);
-        model.addAttribute("course", courseEnums);
-        model.addAttribute("province", provinceEnums);
-        model.addAttribute("university", universityEnums);
+            model.addAttribute("age", ageEnums);
+            model.addAttribute("semester", semesterEnums);
 
-        return "fragekatalog";
+            //Enums dem Model hinzufügen
+            model.addAttribute("music", musicEnums);
+            model.addAttribute("gender", genderEnums);
+            model.addAttribute("course", courseEnums);
+            model.addAttribute("province", provinceEnums);
+            model.addAttribute("university", universityEnums);
+
+            return "fragekatalog";
+        }else{
+            return "redictDashboard";
+        }
+
     }
 
+    /**
+     * 1. Liest die ausgewählten Preferenzen aus dem Fragekatalog aus.
+     * 2. Sammelt alle möglichen Termine mit Hilfe von <k>loadTermine(PREFERENZ_KONSTANT)</k>.
+     * 3. Alle Termine, die schon in der Datenbank vorhanden sind, werden aus der Liste wieder entfernt.
+     * @param request
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "/fragekatalog", method = RequestMethod.POST)
     public String addFragekatalog(HttpServletRequest request, Model model){
         TerminDao terminDao = DaoFactory.getTerminDao();
@@ -190,7 +220,11 @@ public class FragekatalogController {
         return "redictDashboard";
     }
 
-
+    /**
+     * Beinhaltet alle Termine, die durch den Fragekatalog erzeugt werden können.
+     * @param i Key der Konstanten, siehe oben
+     * @return eine Liste aller Termine der Preferenz <b>i</b>
+     */
     private List<Termin> loadTermine(int i){
         Termin temp;
         List<Termin> neueTermine = new LinkedList<Termin>();
@@ -542,6 +576,11 @@ public class FragekatalogController {
         return neueTermine;
     }
 
+    /**
+     * Beinhaltet die Alters- und Semesterpreferenz
+     * @param key Key der Konstanten, siehe oben
+     * @return eine Liste der unterschiedlichen Unterteilungen innerhalb einer Preferenz
+     */
     private List<String> loadOtherPreferences(int key){
         switch (key){
             case 5:
