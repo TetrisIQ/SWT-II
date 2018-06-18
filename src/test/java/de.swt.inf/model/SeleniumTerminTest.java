@@ -39,20 +39,20 @@ public class SeleniumTerminTest {
         element= driver.findElement(By.name("startT"));
         element.sendKeys("13:00");
         element= driver.findElement(By.name("start"));
-        element.sendKeys("2018-05-20");
+        element.sendKeys("2018-06-20");
         element = driver.findElement(By.name("ort"));
         element.sendKeys("Lübeck");
         element = driver.findElement(By.name("endT"));
         element.sendKeys("20:00");
         element = driver.findElement(By.name("end"));
-        element.sendKeys("2018-06-21");
+        element.sendKeys("2018-06-20");
 
         element = driver.findElement(By.name("speichern"));
         element.click();
 
         System.out.println("Name:" + driver.getCurrentUrl());
         System.out.println("Title is: " + driver.getTitle());
-        //assertTrue(driver.getCurrentUrl().contains("dashboard"));
+        assertTrue(driver.getCurrentUrl().contains("dashboard"));
         assertTrue(driver.getTitle().contains("Dashboard"));
         assertEquals("Vorlesung", driver.findElement(By.linkText("Vorlesung")).getText());
         assertTrue(driver.findElement(By.linkText("Vorlesung")).isDisplayed());
