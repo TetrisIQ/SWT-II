@@ -15,6 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class SeleniumWiederholungTest {
 
@@ -81,7 +82,7 @@ public class SeleniumWiederholungTest {
         //JUnit-Test, run WdhTestTagelich
         //assertEquals("http://localhost:8080/edit?id=1", driver.getCurrentUrl());
         //Junit-Test, run SeleniumWiederholungTest
-        assertEquals("http://localhost:8080/edit?id=7", driver.getCurrentUrl());
+        assertTrue(driver.getCurrentUrl().contains("http://localhost:8080/edit?id="));
         assertEquals("Termin Bearbeiten", driver.getTitle());
 
         String searchOption = new Select(driver.findElement(By.name("repeatTime"))).getFirstSelectedOption().getText();
@@ -140,7 +141,7 @@ public class SeleniumWiederholungTest {
         System.out.println("Title is: " + driver.getTitle());
 
         //JUnit-Test, ob der Termin richtig mit stündlich angelegt wurde
-        assertEquals("http://localhost:8080/edit?id=1", driver.getCurrentUrl());
+        assertTrue(driver.getCurrentUrl().contains("http://localhost:8080/edit?id="));
         assertEquals("Termin Bearbeiten", driver.getTitle());
         String searchOption = new Select(driver.findElement(By.name("repeatTime"))).getFirstSelectedOption().getText();
 
@@ -200,7 +201,7 @@ public class SeleniumWiederholungTest {
         //JUnit-Test, run wdhTestWoechentlich
         //assertEquals("http://localhost:8080/edit?id=1", driver.getCurrentUrl());
         //JUnit-Test, run SeleniumWiederholungTest
-        assertEquals("http://localhost:8080/edit?id=19", driver.getCurrentUrl());
+        assertTrue(driver.getCurrentUrl().contains("http://localhost:8080/edit?id="));
         assertEquals("Termin Bearbeiten", driver.getTitle());
         String searchOption = new Select(driver.findElement(By.name("repeatTime"))).getFirstSelectedOption().getText();
 
@@ -262,7 +263,7 @@ public class SeleniumWiederholungTest {
         //JUnit-Test, run WdhTestMonatlich
         //assertEquals("http://localhost:8080/edit?id=1", driver.getCurrentUrl());
         //JUnit-Test, run SeleniumWiederholungTest
-        assertEquals("http://localhost:8080/edit?id=25", driver.getCurrentUrl());
+        assertTrue(driver.getCurrentUrl().contains("http://localhost:8080/edit?id="));
         assertEquals("Termin Bearbeiten", driver.getTitle());
         String searchOption = new Select(driver.findElement(By.name("repeatTime"))).getFirstSelectedOption().getText();
 
@@ -321,9 +322,9 @@ public class SeleniumWiederholungTest {
 
         //JUnit-Test, ob der Termin richtig mit wöchentlich angelegt wurde
         //JUnit-Test, run WdhTestJaehrlich
-       // assertEquals("http://localhost:8080/edit?id=1", driver.getCurrentUrl());
+        //assertEquals("http://localhost:8080/edit?id=1", driver.getCurrentUrl());
         //JUnit-Test, run SeleniumWiederholungTest
-        assertEquals("http://localhost:8080/edit?id=13", driver.getCurrentUrl());
+        assertTrue(driver.getCurrentUrl().contains("http://localhost:8080/edit?id="));
         assertEquals("Termin Bearbeiten", driver.getTitle());
         String searchOption = new Select(driver.findElement(By.name("repeatTime"))).getFirstSelectedOption().getText();
 
