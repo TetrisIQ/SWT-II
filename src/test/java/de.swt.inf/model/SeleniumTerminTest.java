@@ -52,9 +52,8 @@ public class SeleniumTerminTest {
 
         System.out.println("Name:" + driver.getCurrentUrl());
         System.out.println("Title is: " + driver.getTitle());
-
-        assertEquals("http://localhost:8080/dashboard", driver.getCurrentUrl());
-        assertEquals("Dashboard", driver.getTitle());
+        assertTrue(driver.getCurrentUrl().contains("dashboard"));
+        assertTrue(driver.getTitle().contains("dashboard"));
         assertEquals("Vorlesung", driver.findElement(By.linkText("Vorlesung")).getText());
         assertTrue(driver.findElement(By.linkText("Vorlesung")).isDisplayed());
 
@@ -94,8 +93,8 @@ public class SeleniumTerminTest {
         System.out.println("Name:" + driver.getCurrentUrl());
         System.out.println("Title is: " + driver.getTitle());
 
-        assertEquals("http://localhost:8080/dashboard", driver.getCurrentUrl());
-        assertEquals("Dashboard", driver.getTitle());
+        assertTrue(driver.getCurrentUrl().contains("dashboard"));
+        assertTrue(driver.getTitle().contains("dashboard"));
         assertEquals("Vorlesung", driver.findElement(By.linkText("Vorlesung")).getText());
 
         System.out.println("Termin auf dem Dashboard vorhanden: "+driver.findElement(By.linkText("Vorlesung")).isDisplayed());
