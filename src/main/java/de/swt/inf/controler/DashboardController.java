@@ -229,7 +229,7 @@ public class DashboardController {
 
                 if(day == null){
                     DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                    calendarTag.add(Calendar.DAY_OF_MONTH,1);
+                    calendarTag = getCurrentCalendar();
 
                     model.addAttribute("datum", dateFormat.format(calendarTag.getTime()));
                     List<Termin> terminList = terminDao.getDateTermine(dateFormat.format(calendarTag.getTime()));

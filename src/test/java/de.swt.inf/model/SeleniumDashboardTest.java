@@ -15,6 +15,7 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import org.openqa.selenium.support.ui.Select;
 
 
 import java.text.DateFormat;
@@ -24,6 +25,12 @@ import java.util.Calendar;
 import static org.junit.Assert.assertEquals;
 
 public class SeleniumDashboardTest {
+    private Calendar c;
+    private DateFormat df;
+    private WebDriver driver;
+    private WebElement element;
+    private String day;
+    private String monat;
 
     @BeforeClass
     public static void beforeClass(){
@@ -36,18 +43,21 @@ public class SeleniumDashboardTest {
         DaoFactory.test = false;
     }
 
-    @Test
-    public void dashboardWocheSeleniumTest(){
-        Calendar c = Calendar.getInstance();
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+    @Before
+    public void addTermin(){
+        c = Calendar.getInstance();
+        df = new SimpleDateFormat("yyyy-MM-dd");
+        driver = new HtmlUnitDriver();
 
-        WebDriver driver = new HtmlUnitDriver();
+        day = df.format(c.getTime()).substring(8);
+        monat = df.format(c.getTime()).substring(5,7);
+
         driver.navigate().to("http://localhost:8080/dashboard");
 
         WebElement elementKlick = driver.findElement(By.linkText("Neuer Termin"));
         elementKlick.click();
 
-        WebElement element = driver.findElement(By.name("name"));
+        element = driver.findElement(By.name("name"));
         element.sendKeys("Vorlesung");
         element= driver.findElement(By.name("startT"));
         element.sendKeys("13:00");
@@ -65,9 +75,12 @@ public class SeleniumDashboardTest {
 
         assertEquals("http://localhost:8080/dashboard/woche", driver.getCurrentUrl());
         assertEquals("Vorlesung",driver.findElement(By.linkText("Vorlesung")).getText());
+    }
 
-        WebElement testElement = driver.findElement(By.linkText("Nächste Woche"));
-        testElement.click();
+    @Test
+    public void dashboardWocheSeleniumTest(){
+        element = driver.findElement(By.linkText("Nächste Woche"));
+        element.click();
 
         boolean present;
         try {
@@ -79,13 +92,13 @@ public class SeleniumDashboardTest {
 
         assertEquals(false, present);
 
-        testElement = driver.findElement(By.linkText("letzte Woche"));
-        testElement.click();
+        element = driver.findElement(By.linkText("letzte Woche"));
+        element.click();
 
         assertEquals("Vorlesung", driver.findElement(By.linkText("Vorlesung")).getText());
 
-        testElement = driver.findElement(By.linkText("letzte Woche"));
-        testElement.click();
+        element = driver.findElement(By.linkText("letzte Woche"));
+        element.click();
 
         try {
             driver.findElement(By.linkText("Vorlesung"));
@@ -96,8 +109,8 @@ public class SeleniumDashboardTest {
 
         assertEquals(false, present);
 
-        testElement = driver.findElement(By.linkText("Nächste Woche"));
-        testElement.click();
+        element = driver.findElement(By.linkText("Nächste Woche"));
+        element.click();
 
         assertEquals("Vorlesung", driver.findElement(By.linkText("Vorlesung")).getText());
     }
@@ -105,19 +118,42 @@ public class SeleniumDashboardTest {
 
     @Test
     public void dashboardMonatSeleniumTest(){
+        driver.navigate().to("http://localhost:8080/dashboard/monat");
+        assertEquals("http://localhost:8080/dashboard/monat", driver.getCurrentUrl());
 
+        element = driver.findElement(By.linkText(day));
+        element.click();
+
+        assertEquals("http://localhost:8080/dashboard/tag?datum=" + day, driver.getCurrentUrl());
+        assertEquals("Vorlesung",driver.findElement(By.linkText("Vorlesung")).getText());
     }
 
     @Test
     public void dashboardJahrSeleniumTest(){
+        driver.navigate().to("http://localhost:8080/dashboard/jahr");
 
+        assertEquals("http://localhost:8080/dashboard/jahr", driver.getCurrentUrl());
 
+        DateFormat dateFormat = new SimpleDateFormat("MMMMMMMM");
+        String month = dateFormat.format(c.getTime());
+
+        element = driver.findElement(By.linkText(month));
+        element.click();
+
+        assertEquals("http://localhost:8080/dashboard/monat?monat="+ Integer.parseInt(monat), driver.getCurrentUrl());
+
+        element = driver.findElement(By.linkText(day));
+        element.click();
+
+        assertEquals("http://localhost:8080/dashboard/tag?datum=" + day, driver.getCurrentUrl());
+        assertEquals("Vorlesung",driver.findElement(By.linkText("Vorlesung")).getText());
     }
 
     @Test
     public void dashboardTagSeleniumTest(){
+        driver.navigate().to("http://localhost:8080/dashboard/tag");
 
-        
+        assertEquals("http://localhost:8080/dashboard/tag", driver.getCurrentUrl());
+        assertEquals("Vorlesung",driver.findElement(By.linkText("Vorlesung")).getText());
     }
-
 }
